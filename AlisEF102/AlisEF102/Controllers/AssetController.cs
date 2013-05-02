@@ -19,7 +19,7 @@ namespace AlisEF102.Controllers
 
         public ViewResult Index()
         {
-            var assets = db.Assets.Include(a => a.Supplier).Include(a => a.AssetModel);
+            var assets = db.Assets.Include(a => a.Category).Include(a => a.Supplier).Include(a => a.AssetModel);
             return View(assets.ToList());
         }
 
@@ -37,6 +37,7 @@ namespace AlisEF102.Controllers
 
         public ActionResult Create()
         {
+            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
             ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "SupplierName");
             ViewBag.AssetModelID = new SelectList(db.AssetModels, "AssetModelID", "AssetModelName");
             return View();
@@ -55,6 +56,7 @@ namespace AlisEF102.Controllers
                 return RedirectToAction("Index");  
             }
 
+            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", asset.CategoryID);
             ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "SupplierName", asset.SupplierID);
             ViewBag.AssetModelID = new SelectList(db.AssetModels, "AssetModelID", "AssetModelName", asset.AssetModelID);
             return View(asset);
@@ -66,6 +68,7 @@ namespace AlisEF102.Controllers
         public ActionResult Edit(int id)
         {
             Asset asset = db.Assets.Find(id);
+            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", asset.CategoryID);
             ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "SupplierName", asset.SupplierID);
             ViewBag.AssetModelID = new SelectList(db.AssetModels, "AssetModelID", "AssetModelName", asset.AssetModelID);
             return View(asset);
@@ -83,6 +86,7 @@ namespace AlisEF102.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", asset.CategoryID);
             ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "SupplierName", asset.SupplierID);
             ViewBag.AssetModelID = new SelectList(db.AssetModels, "AssetModelID", "AssetModelName", asset.AssetModelID);
             return View(asset);

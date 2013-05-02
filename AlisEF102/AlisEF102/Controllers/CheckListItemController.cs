@@ -19,7 +19,8 @@ namespace AlisEF102.Controllers
 
         public ViewResult Index()
         {
-            return View(db.CheckListItems.ToList());
+            var checklistitems = db.CheckListItems.Include(c => c.Asset);
+            return View(checklistitems.ToList());
         }
 
         //
@@ -36,6 +37,7 @@ namespace AlisEF102.Controllers
 
         public ActionResult Create()
         {
+            ViewBag.AssetID = new SelectList(db.Assets, "AssetID", "BarCode");
             return View();
         } 
 
@@ -52,6 +54,7 @@ namespace AlisEF102.Controllers
                 return RedirectToAction("Index");  
             }
 
+            ViewBag.AssetID = new SelectList(db.Assets, "AssetID", "BarCode", checklistitem.AssetID);
             return View(checklistitem);
         }
         
@@ -61,6 +64,7 @@ namespace AlisEF102.Controllers
         public ActionResult Edit(int id)
         {
             CheckListItem checklistitem = db.CheckListItems.Find(id);
+            ViewBag.AssetID = new SelectList(db.Assets, "AssetID", "BarCode", checklistitem.AssetID);
             return View(checklistitem);
         }
 
@@ -76,6 +80,7 @@ namespace AlisEF102.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.AssetID = new SelectList(db.Assets, "AssetID", "BarCode", checklistitem.AssetID);
             return View(checklistitem);
         }
 

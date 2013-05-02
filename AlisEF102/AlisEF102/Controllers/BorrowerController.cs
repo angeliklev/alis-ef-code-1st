@@ -49,7 +49,7 @@ namespace AlisEF102.Controllers
             {
                 db.Borrowers.Add(borrower);
                 db.SaveChanges();
-                return RedirectToAction("Index");  
+                return RedirectToAction("Index");
             }
 
             return View(borrower);

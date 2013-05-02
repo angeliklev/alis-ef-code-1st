@@ -24,6 +24,14 @@
             @Html.ValidationMessageFor(model => model.CheckListItemName)
         </div>
 
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AssetID, "Asset")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("AssetID", String.Empty)
+            @Html.ValidationMessageFor(model => model.AssetID)
+        </div>
+
         <p>
             <input type="submit" value="Save" />
         </p>

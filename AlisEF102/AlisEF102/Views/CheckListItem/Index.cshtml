@@ -14,6 +14,9 @@
         <th>
             CheckListItemName
         </th>
+        <th>
+            Asset
+        </th>
         <th></th>
     </tr>
 
@@ -21,6 +24,9 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.CheckListItemName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Asset.BarCode)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.CheckListItemID }) |

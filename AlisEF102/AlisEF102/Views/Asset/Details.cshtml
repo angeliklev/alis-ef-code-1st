@@ -19,19 +19,14 @@
         @Html.DisplayFor(model => model.SerialNum)
     </div>
 
-    <div class="display-label">Supplier</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Supplier.SupplierName)
-    </div>
-
-    <div class="display-label">AssetModel</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.AssetModel.AssetModelName)
-    </div>
-
     <div class="display-label">DateRecieved</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.DateRecieved)
+    </div>
+
+    <div class="display-label">IsActive</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IsActive)
     </div>
 
     <div class="display-label">WarrantyExpires</div>
@@ -54,9 +49,24 @@
         @Html.DisplayFor(model => model.Notes)
     </div>
 
-    <div class="display-label">IsActive</div>
+    <div class="display-label">Category</div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.IsActive)
+        @Html.DisplayFor(model => model.Category.CategoryName)
+    </div>
+
+    <div class="display-label">Supplier</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Supplier.SupplierName)
+    </div>
+
+    <div class="display-label">AssetModel</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AssetModel.AssetModelName)
+    </div>
+
+    <div class="display-label">AssetName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AssetName)
     </div>
 </fieldset>
 <p>

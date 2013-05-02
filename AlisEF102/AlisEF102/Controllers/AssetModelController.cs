@@ -19,7 +19,7 @@ namespace AlisEF102.Controllers
 
         public ViewResult Index()
         {
-            var assetmodels = db.AssetModels.Include(a => a.Manufacturer).Include(a => a.Category);
+            var assetmodels = db.AssetModels.Include(a => a.Manufacturer);
             return View(assetmodels.ToList());
         }
 
@@ -38,7 +38,6 @@ namespace AlisEF102.Controllers
         public ActionResult Create()
         {
             ViewBag.ManufacturerID = new SelectList(db.Manufacturers, "ManufacturerID", "ManufacturerName");
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
             return View();
         } 
 
@@ -56,7 +55,6 @@ namespace AlisEF102.Controllers
             }
 
             ViewBag.ManufacturerID = new SelectList(db.Manufacturers, "ManufacturerID", "ManufacturerName", assetmodel.ManufacturerID);
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", assetmodel.CategoryID);
             return View(assetmodel);
         }
         
@@ -67,7 +65,6 @@ namespace AlisEF102.Controllers
         {
             AssetModel assetmodel = db.AssetModels.Find(id);
             ViewBag.ManufacturerID = new SelectList(db.Manufacturers, "ManufacturerID", "ManufacturerName", assetmodel.ManufacturerID);
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", assetmodel.CategoryID);
             return View(assetmodel);
         }
 
@@ -84,7 +81,6 @@ namespace AlisEF102.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.ManufacturerID = new SelectList(db.Manufacturers, "ManufacturerID", "ManufacturerName", assetmodel.ManufacturerID);
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", assetmodel.CategoryID);
             return View(assetmodel);
         }
 

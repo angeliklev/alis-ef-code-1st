@@ -13,6 +13,11 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.CheckListItemName)
     </div>
+
+    <div class="display-label">Asset</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Asset.BarCode)
+    </div>
 </fieldset>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.CheckListItemID }) |

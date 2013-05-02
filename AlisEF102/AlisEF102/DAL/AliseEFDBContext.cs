@@ -1,6 +1,5 @@
 ﻿using System.Data.Entity;
 using AlisEF102.Models;
-using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace AlisEF102.DAL
 {
@@ -46,19 +45,6 @@ namespace AlisEF102.DAL
         public DbSet<Loan> Loans { get; set; }
 
         public DbSet<Repair> Repairs { get; set; }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            modelBuilder.Entity<Asset>()
-                .HasMany(c => c.CheckListItems).WithMany(a => a.Assets)
-                .Map(t => t.MapLeftKey("AssetID")
-                    .MapRightKey("CheckListItemID")
-                    .ToTable("AssetCheckListItem"));
-
-            //base.OnModelCreating(modelBuilder);
-        }
 
     }
 }

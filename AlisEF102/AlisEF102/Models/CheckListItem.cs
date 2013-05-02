@@ -8,14 +8,10 @@ namespace AlisEF102.Models
 {
     public class CheckListItem
     {
-       public CheckListItem()
-       {
-           Assets = new List<Asset>();
-       }
-
         public int CheckListItemID { get; set; }
         public string CheckListItemName { get; set; }
+        public int AssetID { get; set; }
 
-        public virtual ICollection<Asset> Assets { get; set; }
+        public virtual Asset Asset { get; set; }
     }
 }

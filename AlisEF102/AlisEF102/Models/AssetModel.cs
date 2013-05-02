@@ -19,9 +19,6 @@ namespace AlisEF102.Models
         public int ManufacturerID { get; set; }
         public virtual Manufacturer Manufacturer { get; set; }
 
-        public int CategoryID { get; set; }
-        public virtual Category Category { get; set; }
-
         public virtual ICollection<Asset> Assets { get; set; }
 
         public override string ToString()

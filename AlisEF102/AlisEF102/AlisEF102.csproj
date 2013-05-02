@@ -95,6 +95,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\AMS\AMSAreaRegistration.cs" />
+    <Compile Include="Areas\AMS\Controllers\AssetCRUDController.cs" />
+    <Compile Include="Areas\AMS\Controllers\AssetListController.cs" />
+    <Compile Include="Areas\AMS\Controllers\EmployeeCRUDController.cs" />
+    <Compile Include="Areas\AMS\Controllers\LookupTableCRUDController.cs" />
+    <Compile Include="Areas\AMS\Controllers\ReportController.cs" />
+    <Compile Include="Areas\LMS\Controllers\AssetListController.cs" />
+    <Compile Include="Areas\LMS\Controllers\BorrowerCRUDController.cs" />
+    <Compile Include="Areas\LMS\Controllers\LoanCRUDController.cs" />
+    <Compile Include="Areas\LMS\Controllers\ReportController.cs" />
+    <Compile Include="Areas\LMS\LMSAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AssetConditionController.cs" />
     <Compile Include="Controllers\AssetController.cs" />
@@ -105,9 +116,11 @@
     <Compile Include="Controllers\BorrowerController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CheckListItemController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoanController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManufacturerController.cs" />
     <Compile Include="Controllers\RepairController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
@@ -190,6 +203,8 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Global.asax" />
+    <Content Include="Areas\AMS\Views\Web.config" />
+    <Content Include="Areas\LMS\Views\Web.config" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -253,6 +268,16 @@
     <Content Include="Views\Borrower\Create.cshtml" />
     <Content Include="Views\Borrower\Edit.cshtml" />
     <Content Include="Views\Borrower\Delete.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Category\Details.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Category\Delete.cshtml" />
+    <Content Include="Views\CheckListItem\Index.cshtml" />
+    <Content Include="Views\CheckListItem\Details.cshtml" />
+    <Content Include="Views\CheckListItem\Create.cshtml" />
+    <Content Include="Views\CheckListItem\Edit.cshtml" />
+    <Content Include="Views\CheckListItem\Delete.cshtml" />
     <Content Include="Views\Loan\Index.cshtml" />
     <Content Include="Views\Loan\Details.cshtml" />
     <Content Include="Views\Loan\Create.cshtml" />
@@ -273,16 +298,6 @@
     <Content Include="Views\Repair\Create.cshtml" />
     <Content Include="Views\Repair\Edit.cshtml" />
     <Content Include="Views\Repair\Delete.cshtml" />
-    <Content Include="Views\AssetModel\Index.cshtml" />
-    <Content Include="Views\AssetModel\Details.cshtml" />
-    <Content Include="Views\AssetModel\Create.cshtml" />
-    <Content Include="Views\AssetModel\Edit.cshtml" />
-    <Content Include="Views\AssetModel\Delete.cshtml" />
-    <Content Include="Views\Category\Index.cshtml" />
-    <Content Include="Views\Category\Details.cshtml" />
-    <Content Include="Views\Category\Create.cshtml" />
-    <Content Include="Views\Category\Edit.cshtml" />
-    <Content Include="Views\Category\Delete.cshtml" />
     <Content Include="Views\Supplier\Index.cshtml" />
     <Content Include="Views\Supplier\Details.cshtml" />
     <Content Include="Views\Supplier\Create.cshtml" />
@@ -293,14 +308,18 @@
     <Content Include="Views\Asset\Create.cshtml" />
     <Content Include="Views\Asset\Edit.cshtml" />
     <Content Include="Views\Asset\Delete.cshtml" />
-    <Content Include="Views\CheckListItem\Index.cshtml" />
-    <Content Include="Views\CheckListItem\Details.cshtml" />
-    <Content Include="Views\CheckListItem\Create.cshtml" />
-    <Content Include="Views\CheckListItem\Edit.cshtml" />
-    <Content Include="Views\CheckListItem\Delete.cshtml" />
+    <Content Include="Views\AssetModel\Index.cshtml" />
+    <Content Include="Views\AssetModel\Details.cshtml" />
+    <Content Include="Views\AssetModel\Create.cshtml" />
+    <Content Include="Views\AssetModel\Edit.cshtml" />
+    <Content Include="Views\AssetModel\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\AMS\Models\" />
+    <Folder Include="Areas\AMS\Views\Shared\" />
+    <Folder Include="Areas\LMS\Models\" />
+    <Folder Include="Areas\LMS\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -321,7 +340,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>49640</DevelopmentServerPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:50172/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

@@ -18,10 +18,7 @@
             SerialNum
         </th>
         <th>
-            Supplier
-        </th>
-        <th>
-            AssetModel
+            AssetName
         </th>
         <th>
             DateRecieved
@@ -36,10 +33,7 @@
             IsLoanable
         </th>
         <th>
-            Notes
-        </th>
-        <th>
-            IsActive
+            Supplier
         </th>
         <th></th>
     </tr>
@@ -53,10 +47,7 @@
             @Html.DisplayFor(modelItem => item.SerialNum)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Supplier.SupplierName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AssetModel.AssetModelName)
+            @Html.DisplayFor(modelItem => item.AssetName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DateRecieved)
@@ -71,10 +62,7 @@
             @Html.DisplayFor(modelItem => item.IsLoanable)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Notes)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsActive)
+            @Html.DisplayFor(modelItem => item.Supplier.SupplierName)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.AssetID }) |

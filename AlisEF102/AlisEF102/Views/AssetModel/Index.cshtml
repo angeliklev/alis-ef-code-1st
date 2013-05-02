@@ -17,9 +17,6 @@
         <th>
             Manufacturer
         </th>
-        <th>
-            Category
-        </th>
         <th></th>
     </tr>
 
@@ -30,9 +27,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Manufacturer.ManufacturerName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category.CategoryName)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.AssetModelID }) |

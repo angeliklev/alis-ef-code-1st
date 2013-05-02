@@ -31,27 +31,19 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.SupplierID, "Supplier")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("SupplierID", String.Empty)
-            @Html.ValidationMessageFor(model => model.SupplierID)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.AssetModelID, "AssetModel")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("AssetModelID", String.Empty)
-            @Html.ValidationMessageFor(model => model.AssetModelID)
-        </div>
-
-        <div class="editor-label">
             @Html.LabelFor(model => model.DateRecieved)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.DateRecieved)
             @Html.ValidationMessageFor(model => model.DateRecieved)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IsActive)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IsActive)
+            @Html.ValidationMessageFor(model => model.IsActive)
         </div>
 
         <div class="editor-label">
@@ -87,11 +79,27 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.IsActive)
+            @Html.LabelFor(model => model.CategoryID, "Category")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.IsActive)
-            @Html.ValidationMessageFor(model => model.IsActive)
+            @Html.DropDownList("CategoryID", String.Empty)
+            @Html.ValidationMessageFor(model => model.CategoryID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SupplierID, "Supplier")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("SupplierID", String.Empty)
+            @Html.ValidationMessageFor(model => model.SupplierID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AssetModelID, "AssetModel")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("AssetModelID", String.Empty)
+            @Html.ValidationMessageFor(model => model.AssetModelID)
         </div>
 
         <p>
