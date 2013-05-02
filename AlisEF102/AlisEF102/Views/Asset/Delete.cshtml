@@ -1,0 +1,68 @@
+﻿@model AlisEF102.Models.Asset
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Asset</legend>
+
+    <div class="display-label">BarCode</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BarCode)
+    </div>
+
+    <div class="display-label">SerialNum</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SerialNum)
+    </div>
+
+    <div class="display-label">Supplier</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Supplier.SupplierName)
+    </div>
+
+    <div class="display-label">AssetModel</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AssetModel.AssetModelName)
+    </div>
+
+    <div class="display-label">DateRecieved</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateRecieved)
+    </div>
+
+    <div class="display-label">WarrantyExpires</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.WarrantyExpires)
+    </div>
+
+    <div class="display-label">PurchaseCost</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PurchaseCost)
+    </div>
+
+    <div class="display-label">IsLoanable</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IsLoanable)
+    </div>
+
+    <div class="display-label">Notes</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Notes)
+    </div>
+
+    <div class="display-label">IsActive</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IsActive)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

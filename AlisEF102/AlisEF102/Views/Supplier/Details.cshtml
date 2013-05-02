@@ -1,0 +1,20 @@
+﻿@model AlisEF102.Models.Supplier
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Supplier</legend>
+
+    <div class="display-label">SupplierName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SupplierName)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.SupplierID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

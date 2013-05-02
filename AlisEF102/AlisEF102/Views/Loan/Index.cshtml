@@ -1,0 +1,57 @@
+﻿@model IEnumerable<AlisEF102.Models.Loan>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            LoanDate
+        </th>
+        <th>
+            DueDate
+        </th>
+        <th>
+            ReturnDate
+        </th>
+        <th>
+            Asset
+        </th>
+        <th>
+            Borrower
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoanDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DueDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReturnDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Asset.BarCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Borrower.BarCode)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.LoanID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.LoanID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.LoanID })
+        </td>
+    </tr>
+}
+
+</table>

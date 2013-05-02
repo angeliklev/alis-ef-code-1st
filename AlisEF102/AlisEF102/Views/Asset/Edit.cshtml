@@ -1,0 +1,107 @@
+﻿@model AlisEF102.Models.Asset
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Asset</legend>
+
+        @Html.HiddenFor(model => model.AssetID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BarCode)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BarCode)
+            @Html.ValidationMessageFor(model => model.BarCode)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SerialNum)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SerialNum)
+            @Html.ValidationMessageFor(model => model.SerialNum)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SupplierID, "Supplier")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("SupplierID", String.Empty)
+            @Html.ValidationMessageFor(model => model.SupplierID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AssetModelID, "AssetModel")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("AssetModelID", String.Empty)
+            @Html.ValidationMessageFor(model => model.AssetModelID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DateRecieved)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DateRecieved)
+            @Html.ValidationMessageFor(model => model.DateRecieved)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.WarrantyExpires)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.WarrantyExpires)
+            @Html.ValidationMessageFor(model => model.WarrantyExpires)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PurchaseCost)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PurchaseCost)
+            @Html.ValidationMessageFor(model => model.PurchaseCost)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IsLoanable)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IsLoanable)
+            @Html.ValidationMessageFor(model => model.IsLoanable)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Notes)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Notes)
+            @Html.ValidationMessageFor(model => model.Notes)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IsActive)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IsActive)
+            @Html.ValidationMessageFor(model => model.IsActive)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

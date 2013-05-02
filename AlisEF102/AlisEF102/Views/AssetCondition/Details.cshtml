@@ -1,0 +1,30 @@
+﻿@model AlisEF102.Models.AssetCondition
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>AssetCondition</legend>
+
+    <div class="display-label">Description</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">IssuedDate</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IssuedDate)
+    </div>
+
+    <div class="display-label">Asset</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Asset.BarCode)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.AssetConditionID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

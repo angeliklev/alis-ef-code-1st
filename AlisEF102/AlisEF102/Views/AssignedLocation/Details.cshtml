@@ -1,0 +1,30 @@
+﻿@model AlisEF102.Models.AssignedLocation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>AssignedLocation</legend>
+
+    <div class="display-label">AssignedLocationDate</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AssignedLocationDate)
+    </div>
+
+    <div class="display-label">Asset</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Asset.BarCode)
+    </div>
+
+    <div class="display-label">Location</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Location.LocationName)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.AssignedLocationID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

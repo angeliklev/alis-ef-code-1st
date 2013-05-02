@@ -1,0 +1,33 @@
+﻿@model AlisEF102.Models.AssetModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>AssetModel</legend>
+
+    <div class="display-label">AssetModelName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AssetModelName)
+    </div>
+
+    <div class="display-label">Manufacturer</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Manufacturer.ManufacturerName)
+    </div>
+
+    <div class="display-label">Category</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Category.CategoryName)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

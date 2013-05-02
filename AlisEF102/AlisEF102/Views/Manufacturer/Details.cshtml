@@ -1,0 +1,20 @@
+﻿@model AlisEF102.Models.Manufacturer
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Manufacturer</legend>
+
+    <div class="display-label">ManufacturerName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ManufacturerName)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ManufacturerID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,38 @@
+﻿@model AlisEF102.Models.AssignedTo
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>AssignedTo</legend>
+
+    <div class="display-label">AssignedDate</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AssignedDate)
+    </div>
+
+    <div class="display-label">ReturnDate</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ReturnDate)
+    </div>
+
+    <div class="display-label">Borrower</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Borrower.BarCode)
+    </div>
+
+    <div class="display-label">Asset</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Asset.BarCode)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

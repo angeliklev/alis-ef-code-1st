@@ -1,0 +1,35 @@
+﻿@model AlisEF102.Models.AssignedTo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>AssignedTo</legend>
+
+    <div class="display-label">AssignedDate</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AssignedDate)
+    </div>
+
+    <div class="display-label">ReturnDate</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ReturnDate)
+    </div>
+
+    <div class="display-label">Borrower</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Borrower.BarCode)
+    </div>
+
+    <div class="display-label">Asset</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Asset.BarCode)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.AssignedToID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

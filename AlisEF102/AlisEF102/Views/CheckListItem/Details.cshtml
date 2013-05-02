@@ -1,0 +1,20 @@
+﻿@model AlisEF102.Models.CheckListItem
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>CheckListItem</legend>
+
+    <div class="display-label">CheckListItemName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CheckListItemName)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.CheckListItemID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

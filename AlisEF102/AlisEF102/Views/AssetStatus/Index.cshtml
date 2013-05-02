@@ -1,0 +1,33 @@
+﻿@model IEnumerable<AlisEF102.Models.AssetStatus>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            AssetStatusName
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssetStatusName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.AssetStatusID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.AssetStatusID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.AssetStatusID })
+        </td>
+    </tr>
+}
+
+</table>
