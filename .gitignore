@@ -2,6 +2,9 @@
 [Bb]in/
 [Oo]bj/
 
+#App data folder
+App_Data/
+
 # mstest test results
 TestResults
 
