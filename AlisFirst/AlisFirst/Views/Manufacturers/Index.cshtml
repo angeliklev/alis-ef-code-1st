@@ -1,0 +1,41 @@
+@model IEnumerable<AlisFirst.Models.Manufacturer>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            ManufacturerName
+        </th>
+        <th>
+            AssetModels
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ManufacturerID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ManufacturerID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ManufacturerID })
+        </td>
+        <td>
+			@item.ManufacturerName
+        </td>
+        <td>
+			@(item.AssetModels == null ? "None" : item.AssetModels.Count.ToString())
+        </td>
+    </tr>
+}
+
+</table>
+
+

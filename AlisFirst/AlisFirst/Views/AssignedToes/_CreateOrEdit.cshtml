@@ -1,0 +1,42 @@
+@model AlisFirst.Models.AssignedTo
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.AssignedDate)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.AssignedDate)
+    @Html.ValidationMessageFor(model => model.AssignedDate)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.ReturnDate)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.ReturnDate)
+    @Html.ValidationMessageFor(model => model.ReturnDate)
+</div>
+
+<div class="editor-label">
+    Borrower
+</div>
+<div class="editor-field">
+    @Html.DropDownListFor(model => model.BorrowerID, ((IEnumerable<AlisFirst.Models.Borrower>)ViewBag.PossibleBorrowers).Select(option => new SelectListItem {
+        Text = (option == null ? "None" : option.Surname), 
+        Value = option.BorrowerID.ToString(),
+        Selected = (Model != null) && (option.BorrowerID == Model.BorrowerID)
+    }), "Choose...")
+    @Html.ValidationMessageFor(model => model.BorrowerID)
+</div>
+<div class="editor-label">
+    Asset
+</div>
+<div class="editor-field">
+    @Html.DropDownListFor(model => model.AssetID, ((IEnumerable<AlisFirst.Models.Asset>)ViewBag.PossibleAssets).Select(option => new SelectListItem {
+        Text = Html.DisplayTextFor(_ => option).ToString(), 
+        Value = option.AssetID.ToString(),
+        Selected = (Model != null) && (option.AssetID == Model.AssetID)
+    }), "Choose...")
+    @Html.ValidationMessageFor(model => model.AssetID)
+</div>

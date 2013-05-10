@@ -1,0 +1,41 @@
+@model IEnumerable<AlisFirst.Models.Location>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            LocationName
+        </th>
+        <th>
+            AssignedLocations
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.LocationID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.LocationID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.LocationID })
+        </td>
+        <td>
+			@item.LocationName
+        </td>
+        <td>
+			@(item.AssignedLocations == null ? "None" : item.AssignedLocations.Count.ToString())
+        </td>
+    </tr>
+}
+
+</table>
+
+

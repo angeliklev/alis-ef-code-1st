@@ -10,5 +10,7 @@ namespace AlisFirst.Models
     {
         public int AssetStatusID { get; set; }
         public string AssetStatusName { get; set; }
+
+        public ICollection<AssignedStatus> AssignedStatuses { get; set; }
     }
 }

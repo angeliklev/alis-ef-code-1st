@@ -1,0 +1,23 @@
+@model AlisFirst.Models.Location
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Location</legend>
+
+    <div class="display-label">LocationName</div>
+    <div class="display-field">@Model.LocationName</div>
+
+    <div class="display-label">AssignedLocations</div>
+    <div class="display-field">@(Model.AssignedLocations == null ? "None" : Model.AssignedLocations.Count.ToString())</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.LocationID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

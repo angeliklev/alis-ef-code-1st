@@ -1,0 +1,41 @@
+@model IEnumerable<AlisFirst.Models.CheckListItem>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            CheckListItemName
+        </th>
+        <th>
+            Assets
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CheckListItemID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CheckListItemID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CheckListItemID })
+        </td>
+        <td>
+			@item.CheckListItemName
+        </td>
+        <td>
+			@(item.Assets == null ? "None" : item.Assets.Count.ToString())
+        </td>
+    </tr>
+}
+
+</table>
+
+
