@@ -1,0 +1,23 @@
+@model AlisFirst.Models.AssetStatus
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>AssetStatus</legend>
+
+    <div class="display-label">AssetStatusName</div>
+    <div class="display-field">@Model.AssetStatusName</div>
+
+    <div class="display-label">AssignedStatuses</div>
+    <div class="display-field">@(Model.AssignedStatuses == null ? "None" : Model.AssignedStatuses.Count.ToString())</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.AssetStatusID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

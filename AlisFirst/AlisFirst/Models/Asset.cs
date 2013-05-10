@@ -38,6 +38,7 @@ namespace AlisFirst.Models
         public virtual ICollection<Repair> Repairs { get; set; }
         public virtual ICollection<Loan> Loans { get; set; }
         public virtual ICollection<AssignedTo> AssignedToes { get; set; }
+        public virtual ICollection<AssignedLocation> AssignedLocations { get; set; }
 
         //public string AssetName
         //{

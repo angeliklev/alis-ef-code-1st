@@ -1,0 +1,29 @@
+@model AlisFirst.Models.AssetModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>AssetModel</legend>
+
+    <div class="display-label">AssetModelName</div>
+    <div class="display-field">@Model.AssetModelName</div>
+
+    <div class="display-label">Manufacturer</div>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Manufacturer).ToString()</div>
+
+    <div class="display-label">Category</div>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Category).ToString()</div>
+
+    <div class="display-label">Assets</div>
+    <div class="display-field">@(Model.Assets == null ? "None" : Model.Assets.Count.ToString())</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.AssetModelID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

@@ -1,0 +1,125 @@
+@model IEnumerable<AlisFirst.Models.Asset>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            BarCode
+        </th>
+        <th>
+            SerialNum
+        </th>
+        <th>
+            Supplier
+        </th>
+        <th>
+            AssetModel
+        </th>
+        <th>
+            DateRecieved
+        </th>
+        <th>
+            WarrantyExpires
+        </th>
+        <th>
+            PurchaseCost
+        </th>
+        <th>
+            IsLoanable
+        </th>
+        <th>
+            Notes
+        </th>
+        <th>
+            IsActive
+        </th>
+        <th>
+            AssetConditions
+        </th>
+        <th>
+            CheckListItems
+        </th>
+        <th>
+            Repairs
+        </th>
+        <th>
+            Loans
+        </th>
+        <th>
+            AssignedToes
+        </th>
+        <th>
+            AssignedLocations
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.AssetID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.AssetID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.AssetID })
+        </td>
+        <td>
+			@item.BarCode
+        </td>
+        <td>
+			@item.SerialNum
+        </td>
+        <td>
+			@Html.DisplayTextFor(_ => item.Supplier).ToString()
+        </td>
+        <td>
+			@Html.DisplayTextFor(_ => item.AssetModel).ToString()
+        </td>
+        <td>
+			@String.Format("{0:g}", item.DateRecieved)
+        </td>
+        <td>
+			@String.Format("{0:g}", item.WarrantyExpires)
+        </td>
+        <td>
+			@String.Format("{0:F}", item.PurchaseCost)
+        </td>
+        <td>
+			@item.IsLoanable
+        </td>
+        <td>
+			@item.Notes
+        </td>
+        <td>
+			@item.IsActive
+        </td>
+        <td>
+			@(item.AssetConditions == null ? "None" : item.AssetConditions.Count.ToString())
+        </td>
+        <td>
+			@(item.CheckListItems == null ? "None" : item.CheckListItems.Count.ToString())
+        </td>
+        <td>
+			@(item.Repairs == null ? "None" : item.Repairs.Count.ToString())
+        </td>
+        <td>
+			@(item.Loans == null ? "None" : item.Loans.Count.ToString())
+        </td>
+        <td>
+			@(item.AssignedToes == null ? "None" : item.AssignedToes.Count.ToString())
+        </td>
+        <td>
+			@(item.AssignedLocations == null ? "None" : item.AssignedLocations.Count.ToString())
+        </td>
+    </tr>
+}
+
+</table>
+
+

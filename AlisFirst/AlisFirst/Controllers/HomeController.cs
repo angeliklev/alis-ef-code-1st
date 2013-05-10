@@ -1,5 +1,7 @@
-﻿using System;
+﻿using AlisFirst.Models;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -8,9 +10,11 @@ namespace AlisFirst.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(AlisFirstContext context)
         {
-            ViewBag.Message = "Welcome to ASP.NET MVC!";
+
+            //string sqlscript = (context as IObjectContextAdapter).ObjectContext.CreateDatabaseScript();
+            ViewBag.Message = "Welcome to ALIS!";
 
             return View();
         }

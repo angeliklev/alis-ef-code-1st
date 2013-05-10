@@ -1,0 +1,29 @@
+@model AlisFirst.Models.Repair
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Repair</legend>
+
+    <div class="display-label">IssuedDate</div>
+    <div class="display-field">@String.Format("{0:g}", Model.IssuedDate)</div>
+
+    <div class="display-label">TechnicianName</div>
+    <div class="display-field">@Model.TechnicianName</div>
+
+    <div class="display-label">Result</div>
+    <div class="display-field">@Model.Result</div>
+
+    <div class="display-label">Asset</div>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Asset).ToString()</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.RepairID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

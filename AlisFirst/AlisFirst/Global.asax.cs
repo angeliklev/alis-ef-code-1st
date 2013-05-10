@@ -35,7 +35,7 @@ namespace AlisFirst
         protected void Application_Start()
 
         {
-            Database.SetInitializer<AlisFirstDBContext>(new AlisFirstDBInitializer());
+            Database.SetInitializer<AlisFirstContext>(new AlisFirstDBInitializer());
 
             AreaRegistration.RegisterAllAreas();
 

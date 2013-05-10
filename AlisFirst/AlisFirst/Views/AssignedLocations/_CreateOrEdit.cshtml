@@ -1,0 +1,34 @@
+@model AlisFirst.Models.AssignedLocation
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.AssignedLocationDate)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.AssignedLocationDate)
+    @Html.ValidationMessageFor(model => model.AssignedLocationDate)
+</div>
+
+<div class="editor-label">
+    Asset
+</div>
+<div class="editor-field">
+    @Html.DropDownListFor(model => model.AssetID, ((IEnumerable<AlisFirst.Models.Asset>)ViewBag.PossibleAssets).Select(option => new SelectListItem {
+        Text = Html.DisplayTextFor(_ => option).ToString(), 
+        Value = option.AssetID.ToString(),
+        Selected = (Model != null) && (option.AssetID == Model.AssetID)
+    }), "Choose...")
+    @Html.ValidationMessageFor(model => model.AssetID)
+</div>
+<div class="editor-label">
+    Location
+</div>
+<div class="editor-field">
+    @Html.DropDownListFor(model => model.LocationID, ((IEnumerable<AlisFirst.Models.Location>)ViewBag.PossibleLocations).Select(option => new SelectListItem {
+        Text = Html.DisplayTextFor(_ => option).ToString(), 
+        Value = option.LocationID.ToString(),
+        Selected = (Model != null) && (option.LocationID == Model.LocationID)
+    }), "Choose...")
+    @Html.ValidationMessageFor(model => model.LocationID)
+</div>
