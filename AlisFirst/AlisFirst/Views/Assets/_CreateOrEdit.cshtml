@@ -1,0 +1,90 @@
+@model AlisFirst.Models.Asset
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.BarCode)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.BarCode)
+    @Html.ValidationMessageFor(model => model.BarCode)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.SerialNum)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.SerialNum)
+    @Html.ValidationMessageFor(model => model.SerialNum)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.DateRecieved)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.DateRecieved)
+    @Html.ValidationMessageFor(model => model.DateRecieved)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.WarrantyExpires)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.WarrantyExpires)
+    @Html.ValidationMessageFor(model => model.WarrantyExpires)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.PurchaseCost)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.PurchaseCost)
+    @Html.ValidationMessageFor(model => model.PurchaseCost)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.IsLoanable)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.IsLoanable)
+    @Html.ValidationMessageFor(model => model.IsLoanable)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Notes)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Notes)
+    @Html.ValidationMessageFor(model => model.Notes)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.IsActive)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.IsActive)
+    @Html.ValidationMessageFor(model => model.IsActive)
+</div>
+
+<div class="editor-label">
+    Supplier
+</div>
+<div class="editor-field">
+    @Html.DropDownListFor(model => model.SupplierID, ((IEnumerable<AlisFirst.Models.Supplier>)ViewBag.PossibleSuppliers).Select(option => new SelectListItem {
+        Text = Html.DisplayTextFor(_ => option).ToString(), 
+        Value = option.SupplierID.ToString(),
+        Selected = (Model != null) && (option.SupplierID == Model.SupplierID)
+    }), "Choose...")
+    @Html.ValidationMessageFor(model => model.SupplierID)
+</div>
+<div class="editor-label">
+    AssetModel
+</div>
+<div class="editor-field">
+    @Html.DropDownListFor(model => model.AssetModelID, ((IEnumerable<AlisFirst.Models.AssetModel>)ViewBag.PossibleAssetModels).Select(option => new SelectListItem {
+        Text = Html.DisplayTextFor(_ => option).ToString(), 
+        Value = option.AssetModelID.ToString(),
+        Selected = (Model != null) && (option.AssetModelID == Model.AssetModelID)
+    }), "Choose...")
+    @Html.ValidationMessageFor(model => model.AssetModelID)
+</div>

@@ -11,8 +11,8 @@ namespace AlisFirst.Models
         public int AssignedToID { get; set; }
         public DateTime? AssignedDate { get; set; }
         public DateTime? ReturnDate { get; set; }
-        public int BorrowerID { get; set; }
-        public int AssetID { get; set; }
+        public int? BorrowerID { get; set; }
+        public int? AssetID { get; set; }
 
         public virtual Asset Asset { get; set; }
         public virtual Borrower Borrower { get; set; }

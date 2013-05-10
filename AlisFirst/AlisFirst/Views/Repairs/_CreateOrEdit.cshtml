@@ -1,0 +1,39 @@
+@model AlisFirst.Models.Repair
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.IssuedDate)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.IssuedDate)
+    @Html.ValidationMessageFor(model => model.IssuedDate)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.TechnicianName)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.TechnicianName)
+    @Html.ValidationMessageFor(model => model.TechnicianName)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Result)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Result)
+    @Html.ValidationMessageFor(model => model.Result)
+</div>
+
+<div class="editor-label">
+    Asset
+</div>
+<div class="editor-field">
+    @Html.DropDownListFor(model => model.AssetID, ((IEnumerable<AlisFirst.Models.Asset>)ViewBag.PossibleAssets).Select(option => new SelectListItem {
+        Text = Html.DisplayTextFor(_ => option).ToString(), 
+        Value = option.AssetID.ToString(),
+        Selected = (Model != null) && (option.AssetID == Model.AssetID)
+    }), "Choose...")
+    @Html.ValidationMessageFor(model => model.AssetID)
+</div>

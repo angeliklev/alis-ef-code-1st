@@ -1,0 +1,23 @@
+@model AlisFirst.Models.Category
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Category</legend>
+
+    <div class="display-label">CategoryName</div>
+    <div class="display-field">@Model.CategoryName</div>
+
+    <div class="display-label">AssetModels</div>
+    <div class="display-field">@(Model.AssetModels == null ? "None" : Model.AssetModels.Count.ToString())</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.CategoryID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

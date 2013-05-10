@@ -1,0 +1,12 @@
+@model AlisFirst.Models.Category
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.CategoryName)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.CategoryName)
+    @Html.ValidationMessageFor(model => model.CategoryName)
+</div>
+

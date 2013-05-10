@@ -1,0 +1,12 @@
+@model AlisFirst.Models.Location
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.LocationName)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.LocationName)
+    @Html.ValidationMessageFor(model => model.LocationName)
+</div>
+
