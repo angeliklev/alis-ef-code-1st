@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\AMS\AMSAreaRegistration.cs" />
+    <Compile Include="Areas\LMS\Controllers\BorrowerController.cs" />
     <Compile Include="Areas\LMS\LMSAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AssetConditionsController.cs" />
@@ -215,6 +216,11 @@
     <Content Include="Global.asax" />
     <Content Include="Areas\AMS\Views\Web.config" />
     <Content Include="Areas\LMS\Views\Web.config" />
+    <Content Include="Areas\LMS\Views\Borrower\Index.cshtml" />
+    <Content Include="Areas\LMS\Views\Borrower\Details.cshtml" />
+    <Content Include="Areas\LMS\Views\Borrower\Create.cshtml" />
+    <Content Include="Areas\LMS\Views\Borrower\Edit.cshtml" />
+    <Content Include="Areas\LMS\Views\Borrower\Delete.cshtml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -349,7 +355,6 @@
     <Folder Include="Areas\AMS\Controllers\" />
     <Folder Include="Areas\AMS\Models\" />
     <Folder Include="Areas\AMS\Views\Shared\" />
-    <Folder Include="Areas\LMS\Controllers\" />
     <Folder Include="Areas\LMS\Models\" />
     <Folder Include="Areas\LMS\Views\Shared\" />
   </ItemGroup>
