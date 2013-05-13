@@ -122,8 +122,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\AlisFirstContext.cs" />
-    <Compile Include="DAL\AlisFirstDBContext.cs" />
+    <Compile Include="DAL\AlisFirstContext.cs" />
     <Compile Include="DAL\AlisFirstDBInitializer.cs" />
     <Compile Include="Models\Asset.cs" />
     <Compile Include="Models\AssetCondition.cs" />

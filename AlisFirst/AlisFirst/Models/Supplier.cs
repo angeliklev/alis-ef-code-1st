@@ -18,5 +18,10 @@ namespace AlisFirst.Models
 
         public virtual ICollection<Asset> Assets { get; set; }
 
+        public override string ToString()
+        {
+            return string.Format("{0}", SupplierName);
+        }
+
     }
 }
