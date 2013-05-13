@@ -7,7 +7,8 @@ using System.Linq.Expressions;
 using System.Web;
 using AlisFirst.Models;
 
-namespace AlisFirst.Models
+
+namespace AlisFirst.DAL
 { 
     public class SupplierRepository : ISupplierRepository
     {

@@ -96,6 +96,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\AMS\AMSAreaRegistration.cs" />
+    <Compile Include="Areas\AMS\Controllers\AssetController.cs" />
+    <Compile Include="Areas\AMS\Controllers\MyAssetController.cs" />
     <Compile Include="Areas\LMS\LMSAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AssetConditionsController.cs" />
@@ -114,10 +116,6 @@
     <Compile Include="Controllers\ManufacturersController.cs" />
     <Compile Include="Controllers\RepairsController.cs" />
     <Compile Include="Controllers\SuppliersController.cs" />
-    <Compile Include="DAL\NotUsed\AssetRepository.cs" />
-    <Compile Include="DAL\NotUsed\BorrowerRepository.cs" />
-    <Compile Include="DAL\NotUsed\IAssetRepository.cs" />
-    <Compile Include="DAL\NotUsed\IBorrowerRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -129,7 +127,7 @@
     <Compile Include="DAL\AssetConditionRepository.cs" />
     <Compile Include="Models\AssetModel.cs" />
     <Compile Include="DAL\AssetModelRepository.cs" />
-    <Compile Include="Models\AssetRepository.cs" />
+    <Compile Include="DAL\AssetRepository.cs" />
     <Compile Include="Models\AssetStatus.cs" />
     <Compile Include="DAL\AssetStatusRepository.cs" />
     <Compile Include="Models\AssignedLocation.cs" />
@@ -214,6 +212,18 @@
     <Content Include="Global.asax" />
     <Content Include="Areas\AMS\Views\Web.config" />
     <Content Include="Areas\LMS\Views\Web.config" />
+    <Content Include="Areas\AMS\Views\Asset\_CreateOrEdit.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\Create.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\Delete.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\Details.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\Edit.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\Index.cshtml" />
+    <Content Include="Areas\AMS\Views\MyAsset\Create.cshtml" />
+    <Content Include="Areas\AMS\Views\MyAsset\Edit.cshtml" />
+    <Content Include="Areas\AMS\Views\MyAsset\Delete.cshtml" />
+    <Content Include="Areas\AMS\Views\MyAsset\Details.cshtml" />
+    <Content Include="Areas\AMS\Views\MyAsset\Index.cshtml" />
+    <Content Include="Areas\AMS\Views\MyAsset\_CreateOrEdit.cshtml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -345,7 +355,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\AMS\Controllers\" />
     <Folder Include="Areas\AMS\Models\" />
     <Folder Include="Areas\AMS\Views\Shared\" />
     <Folder Include="Areas\LMS\Controllers\" />
