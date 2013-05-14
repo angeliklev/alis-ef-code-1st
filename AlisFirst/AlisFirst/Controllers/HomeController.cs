@@ -5,6 +5,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AlisFirst.DAL;
 
 namespace AlisFirst.Controllers
 {

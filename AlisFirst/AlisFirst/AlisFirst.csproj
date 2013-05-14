@@ -114,23 +114,18 @@
     <Compile Include="Controllers\ManufacturersController.cs" />
     <Compile Include="Controllers\RepairsController.cs" />
     <Compile Include="Controllers\SuppliersController.cs" />
-    <Compile Include="DAL\NotUsed\AssetRepository.cs" />
-    <Compile Include="DAL\NotUsed\BorrowerRepository.cs" />
-    <Compile Include="DAL\NotUsed\IAssetRepository.cs" />
-    <Compile Include="DAL\NotUsed\IBorrowerRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\AlisFirstContext.cs" />
-    <Compile Include="DAL\AlisFirstDBContext.cs" />
+    <Compile Include="DAL\AlisFirstContext.cs" />
     <Compile Include="DAL\AlisFirstDBInitializer.cs" />
     <Compile Include="Models\Asset.cs" />
     <Compile Include="Models\AssetCondition.cs" />
     <Compile Include="DAL\AssetConditionRepository.cs" />
     <Compile Include="Models\AssetModel.cs" />
     <Compile Include="DAL\AssetModelRepository.cs" />
-    <Compile Include="Models\AssetRepository.cs" />
+    <Compile Include="DAL\AssetRepository.cs" />
     <Compile Include="Models\AssetStatus.cs" />
     <Compile Include="DAL\AssetStatusRepository.cs" />
     <Compile Include="Models\AssignedLocation.cs" />

@@ -5,8 +5,9 @@ using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
+using AlisFirst.Models;
 
-namespace AlisFirst.Models
+namespace AlisFirst.DAL
 { 
     public class AssignedStatusRepository : IAssignedStatusRepository
     {
