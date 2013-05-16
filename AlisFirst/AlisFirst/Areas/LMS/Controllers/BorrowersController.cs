@@ -35,7 +35,9 @@ namespace AlisFirst.Areas.LMS.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            Borrower NewBorrower = new Borrower();
+            NewBorrower.BorrowerExpiryDate = DateTime.Now;
+            return View( NewBorrower );
         } 
 
         //
