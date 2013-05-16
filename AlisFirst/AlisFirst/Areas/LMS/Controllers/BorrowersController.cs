@@ -11,14 +11,14 @@ namespace AlisFirst.Areas.LMS.Controllers
 {   
     public class BorrowersController : Controller
     {
-        private AlisFirstContext context = new AlisFirstContext();
+        private BorrowerRepository context = new BorrowerRepository();
 
         //
         // GET: /Borrowers/
 
         public ViewResult Index()
         {
-            return View(context.Borrowers.Include(borrower => borrower.Loans).Include(borrower => borrower.AssignedTos).ToList());
+            return View(context.All.Include(borrower => borrower.Loans).Include(borrower => borrower.AssignedTos).ToList());
         }
 
         //
@@ -26,7 +26,7 @@ namespace AlisFirst.Areas.LMS.Controllers
 
         public ViewResult Details(int id)
         {
-            Borrower borrower = context.Borrowers.Single(x => x.BorrowerID == id);
+            Borrower borrower = context.All.Single(x => x.BorrowerID == id);
             return View(borrower);
         }
 
@@ -46,8 +46,8 @@ namespace AlisFirst.Areas.LMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.Borrowers.Add(borrower);
-                context.SaveChanges();
+                context.InsertOrUpdate(borrower);
+                context.Save();
                 return RedirectToAction("Index");  
             }
 
@@ -59,7 +59,7 @@ namespace AlisFirst.Areas.LMS.Controllers
  
         public ActionResult Edit(int id)
         {
-            Borrower borrower = context.Borrowers.Single(x => x.BorrowerID == id);
+            Borrower borrower = context.Find( id );
             return View(borrower);
         }
 
@@ -71,8 +71,8 @@ namespace AlisFirst.Areas.LMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.Entry(borrower).State = EntityState.Modified;
-                context.SaveChanges();
+                context.InsertOrUpdate(borrower);
+                context.Save();
                 return RedirectToAction("Index");
             }
             return View(borrower);
@@ -83,7 +83,7 @@ namespace AlisFirst.Areas.LMS.Controllers
  
         public ActionResult Delete(int id)
         {
-            Borrower borrower = context.Borrowers.Single(x => x.BorrowerID == id);
+            Borrower borrower = context.Find(id);
             return View(borrower);
         }
 
@@ -93,9 +93,9 @@ namespace AlisFirst.Areas.LMS.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Borrower borrower = context.Borrowers.Single(x => x.BorrowerID == id);
-            context.Borrowers.Remove(borrower);
-            context.SaveChanges();
+            Borrower borrower = context.Find(id);
+            context.Delete( id );
+            context.Save();
             return RedirectToAction("Index");
         }
 
