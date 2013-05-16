@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
-using AlisFirst.DAL;
+using AlisFirst.Models;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
-namespace AlisFirst.Models
+namespace AlisFirst.DAL
 {
     public class AlisFirstContext : DbContext
     {

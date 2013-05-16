@@ -4,8 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using AlisFirst.Models;
 
-namespace AlisFirst.Models
+namespace AlisFirst.DAL
 {
     public class AlisFirstDBInitializer : DropCreateDatabaseAlways<AlisFirstContext>
     {
