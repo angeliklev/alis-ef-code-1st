@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using System.ComponentModel.DataAnnotations;
 
 namespace AlisFirst.Models
 {
@@ -12,7 +13,7 @@ namespace AlisFirst.Models
         public string Surname { get; set; }
         public string BarCode { get; set; }
         public string GivenName { get; set; }
-        
+        [DataType(DataType.Date)]
         public DateTime? BorrowerExpiryDate { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
