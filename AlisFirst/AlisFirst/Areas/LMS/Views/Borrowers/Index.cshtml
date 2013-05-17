@@ -1,0 +1,83 @@
+@model IEnumerable<AlisFirst.Models.Borrower>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            Surname
+        </th>
+        <th>
+            BarCode
+        </th>
+        <th>
+            GivenName
+        </th>
+        <th>
+            BorrowerExpiryDate
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            PhoneNumber
+        </th>
+        <th>
+            IsEmployee
+        </th>
+        <th>
+            Loans
+        </th>
+        <th>
+            AssignedTos
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.BorrowerID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.BorrowerID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.BorrowerID })
+        </td>
+        <td>
+			@item.Surname
+        </td>
+        <td>
+			@item.BarCode
+        </td>
+        <td>
+			@item.GivenName
+        </td>
+        <td>
+			@String.Format("{0:g}", item.BorrowerExpiryDate)
+        </td>
+        <td>
+			@item.Email
+        </td>
+        <td>
+			@item.PhoneNumber
+        </td>
+        <td>
+			@item.IsEmployee
+        </td>
+        <td>
+			@(item.Loans == null ? "None" : item.Loans.Count.ToString())
+        </td>
+        <td>
+			@(item.AssignedTos == null ? "None" : item.AssignedTos.Count.ToString())
+        </td>
+    </tr>
+}
+
+</table>
+
+
