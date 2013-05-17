@@ -21,14 +21,3 @@
     }), "Choose...")
     @Html.ValidationMessageFor(model => model.ManufacturerID)
 </div>
-<div class="editor-label">
-    Category
-</div>
-<div class="editor-field">
-    @Html.DropDownListFor(model => model.CategoryID, ((IEnumerable<AlisFirst.Models.Category>)ViewBag.PossibleCategories).Select(option => new SelectListItem {
-        Text = Html.DisplayTextFor(_ => option).ToString(), 
-        Value = option.CategoryID.ToString(),
-        Selected = (Model != null) && (option.CategoryID == Model.CategoryID)
-    }), "Choose...")
-    @Html.ValidationMessageFor(model => model.CategoryID)
-</div>
