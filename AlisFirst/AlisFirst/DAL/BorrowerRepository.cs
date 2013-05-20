@@ -49,6 +49,22 @@ namespace AlisFirst.DAL
             context.Borrowers.Remove(borrower);
         }
 
+        /*Check if the supplied email does not exist in the database, method created to maintain 
+         *business rule defined in use case ALIS-LMS-UC01 (Create Borrower), that created users 
+         *must have unique emails*/
+        public bool CheckEmailUnique( string srcEmail )
+        {
+            foreach( Borrower t in All )
+            {
+                if ( srcEmail == t.Email )
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         public void Save()
         {
             context.SaveChanges();

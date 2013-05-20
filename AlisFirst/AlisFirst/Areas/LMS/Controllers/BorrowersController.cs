@@ -49,12 +49,20 @@ namespace AlisFirst.Areas.LMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.InsertOrUpdate(borrower);
-                context.Save();
-                return RedirectToAction("Index");  
+                if (context.CheckEmailUnique(borrower.Email))
+                {
+                    context.InsertOrUpdate(borrower);
+                    context.Save();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View(borrower);
+                }
+ 
             }
 
-            return View(borrower);
+            return RedirectToAction("Index", "Home");
         }
         
         //
@@ -78,7 +86,7 @@ namespace AlisFirst.Areas.LMS.Controllers
                 context.Save();
                 return RedirectToAction("Index");
             }
-            return View(borrower);
+            return RedirectToAction("Index", "Home");
         }
 
         //

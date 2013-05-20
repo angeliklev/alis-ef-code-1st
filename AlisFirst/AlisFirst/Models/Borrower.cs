@@ -9,6 +9,7 @@ namespace AlisFirst.Models
 {
     public class Borrower
     {
+        [Required]
         public int BorrowerID { get; set; }
         public string Surname { get; set; }
         public string BarCode { get; set; }
