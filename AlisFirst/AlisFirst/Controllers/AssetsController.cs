@@ -11,17 +11,19 @@ namespace AlisFirst.Controllers
     public class AssetsController : Controller
     {
 		private readonly ISupplierRepository supplierRepository;
+        private readonly ICategoryRepository categoryRepository;
 		private readonly IAssetModelRepository assetmodelRepository;
 		private readonly IAssetRepository assetRepository;
 
 		// If you are using Dependency Injection, you can delete the following constructor
-        public AssetsController() : this(new SupplierRepository(), new AssetModelRepository(), new AssetRepository())
+        public AssetsController() : this(new SupplierRepository(), new CategoryRepository(), new AssetModelRepository(), new AssetRepository())
         {
         }
 
-        public AssetsController(ISupplierRepository supplierRepository, IAssetModelRepository assetmodelRepository, IAssetRepository assetRepository)
+        public AssetsController(ISupplierRepository supplierRepository, ICategoryRepository categoryRepository, IAssetModelRepository assetmodelRepository, IAssetRepository assetRepository)
         {
 			this.supplierRepository = supplierRepository;
+			this.categoryRepository = categoryRepository;
 			this.assetmodelRepository = assetmodelRepository;
 			this.assetRepository = assetRepository;
         }
@@ -31,7 +33,7 @@ namespace AlisFirst.Controllers
 
         public ViewResult Index()
         {
-            return View(assetRepository.AllIncluding(asset => asset.Supplier, asset => asset.AssetModel, asset => asset.AssetConditions, asset => asset.CheckListItems, asset => asset.Repairs, asset => asset.Loans, asset => asset.AssignedToes, asset => asset.AssignedLocations));
+            return View(assetRepository.AllIncluding(asset => asset.Supplier, asset => asset.Category, asset => asset.AssetModel, asset => asset.AssetConditions, asset => asset.CheckListItems, asset => asset.Repairs, asset => asset.Loans, asset => asset.AssignedToes, asset => asset.AssignedLocations));
         }
 
         //
@@ -48,7 +50,8 @@ namespace AlisFirst.Controllers
         public ActionResult Create()
         {
 			ViewBag.PossibleSuppliers = supplierRepository.All;
-			ViewBag.PossibleAssetModels = assetmodelRepository.All;
+            ViewBag.PossibleCategories = categoryRepository.All;
+            ViewBag.PossibleAssetModels = assetmodelRepository.All;
             return View();
         } 
 
@@ -64,6 +67,7 @@ namespace AlisFirst.Controllers
                 return RedirectToAction("Index");
             } else {
 				ViewBag.PossibleSuppliers = supplierRepository.All;
+                ViewBag.PossibleCategories = categoryRepository.All;
 				ViewBag.PossibleAssetModels = assetmodelRepository.All;
 				return View();
 			}
@@ -75,6 +79,7 @@ namespace AlisFirst.Controllers
         public ActionResult Edit(int id)
         {
 			ViewBag.PossibleSuppliers = supplierRepository.All;
+            ViewBag.PossibleCategories = categoryRepository.All;
 			ViewBag.PossibleAssetModels = assetmodelRepository.All;
              return View(assetRepository.Find(id));
         }
@@ -91,6 +96,7 @@ namespace AlisFirst.Controllers
                 return RedirectToAction("Index");
             } else {
 				ViewBag.PossibleSuppliers = supplierRepository.All;
+                ViewBag.PossibleCategories = categoryRepository.All;
 				ViewBag.PossibleAssetModels = assetmodelRepository.All;
 				return View();
 			}
@@ -120,6 +126,7 @@ namespace AlisFirst.Controllers
         {
             if (disposing) {
                 supplierRepository.Dispose();
+                categoryRepository.Dispose();
                 assetmodelRepository.Dispose();
                 assetRepository.Dispose();
             }
