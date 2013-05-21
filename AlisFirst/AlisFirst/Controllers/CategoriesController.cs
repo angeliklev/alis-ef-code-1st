@@ -27,7 +27,7 @@ namespace AlisFirst.Controllers
 
         public ViewResult Index()
         {
-            return View(categoryRepository.AllIncluding(category => category.AssetModels));
+            return View(categoryRepository.AllIncluding(category => category.Assets));
         }
 
         //
@@ -113,4 +113,3 @@ namespace AlisFirst.Controllers
         }
     }
 }
-
