@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using AlisFirst.Models;
 using AlisFirst.DAL;
+using AlisFirst.ViewModels;
 
 namespace AlisFirst
 {
@@ -45,6 +46,14 @@ namespace AlisFirst
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+
+            //Mapping information for viewmodel/model conversion (discuss where to move this junk to, it certainly shouldn't be in here)
+            AutoMapper.Mapper.CreateMap<Borrower, CreateBorrowerViewModel>();
+            AutoMapper.Mapper.CreateMap<CreateBorrowerViewModel, Borrower>();
+            AutoMapper.Mapper.CreateMap<Borrower, EditBorrowerViewModel>();
+            AutoMapper.Mapper.CreateMap<EditBorrowerViewModel, Borrower>();
+            AutoMapper.Mapper.CreateMap<Borrower, DeleteBorrowerViewModel>();
+            AutoMapper.Mapper.CreateMap<DeleteBorrowerViewModel, Borrower>();
         }
     }
 }

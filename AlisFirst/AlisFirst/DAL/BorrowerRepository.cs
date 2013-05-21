@@ -11,7 +11,17 @@ namespace AlisFirst.DAL
 { 
     public class BorrowerRepository : IBorrowerRepository
     {
-        AlisFirstContext context = new AlisFirstContext();
+        AlisFirstContext context;
+
+        public BorrowerRepository()
+        {
+            context = new AlisFirstContext();
+        }
+
+        public BorrowerRepository(AlisFirstContext src_Context)
+        {
+            context = src_Context;
+        }
 
         public IQueryable<Borrower> All
         {
