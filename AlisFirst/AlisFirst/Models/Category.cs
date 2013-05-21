@@ -10,13 +10,13 @@ namespace AlisFirst.Models
     {
         public Category()
         {
-            AssetModels = new List<AssetModel>();
+            Assets = new List<Asset>();
         }
 
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }
 
-        public virtual ICollection<AssetModel> AssetModels { get; set; }
+        public virtual ICollection<Asset> Assets { get; set; }
 
         public override string ToString()
         {

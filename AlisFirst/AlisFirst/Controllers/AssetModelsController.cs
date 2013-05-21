@@ -11,18 +11,16 @@ namespace AlisFirst.Controllers
     public class AssetModelsController : Controller
     {
 		private readonly IManufacturerRepository manufacturerRepository;
-		private readonly ICategoryRepository categoryRepository;
 		private readonly IAssetModelRepository assetmodelRepository;
 
 		// If you are using Dependency Injection, you can delete the following constructor
-        public AssetModelsController() : this(new ManufacturerRepository(), new CategoryRepository(), new AssetModelRepository())
+        public AssetModelsController() : this(new ManufacturerRepository(), new AssetModelRepository())
         {
         }
 
-        public AssetModelsController(IManufacturerRepository manufacturerRepository, ICategoryRepository categoryRepository, IAssetModelRepository assetmodelRepository)
+        public AssetModelsController(IManufacturerRepository manufacturerRepository, IAssetModelRepository assetmodelRepository)
         {
 			this.manufacturerRepository = manufacturerRepository;
-			this.categoryRepository = categoryRepository;
 			this.assetmodelRepository = assetmodelRepository;
         }
 
@@ -31,7 +29,7 @@ namespace AlisFirst.Controllers
 
         public ViewResult Index()
         {
-            return View(assetmodelRepository.AllIncluding(assetmodel => assetmodel.Manufacturer, assetmodel => assetmodel.Category, assetmodel => assetmodel.Assets));
+            return View(assetmodelRepository.AllIncluding(assetmodel => assetmodel.Manufacturer, assetmodel => assetmodel.Assets));
         }
 
         //
@@ -48,7 +46,6 @@ namespace AlisFirst.Controllers
         public ActionResult Create()
         {
 			ViewBag.PossibleManufacturers = manufacturerRepository.All;
-			ViewBag.PossibleCategories = categoryRepository.All;
             return View();
         } 
 
@@ -64,7 +61,6 @@ namespace AlisFirst.Controllers
                 return RedirectToAction("Index");
             } else {
 				ViewBag.PossibleManufacturers = manufacturerRepository.All;
-				ViewBag.PossibleCategories = categoryRepository.All;
 				return View();
 			}
         }
@@ -75,7 +71,6 @@ namespace AlisFirst.Controllers
         public ActionResult Edit(int id)
         {
 			ViewBag.PossibleManufacturers = manufacturerRepository.All;
-			ViewBag.PossibleCategories = categoryRepository.All;
              return View(assetmodelRepository.Find(id));
         }
 
@@ -91,7 +86,6 @@ namespace AlisFirst.Controllers
                 return RedirectToAction("Index");
             } else {
 				ViewBag.PossibleManufacturers = manufacturerRepository.All;
-				ViewBag.PossibleCategories = categoryRepository.All;
 				return View();
 			}
         }
@@ -120,7 +114,6 @@ namespace AlisFirst.Controllers
         {
             if (disposing) {
                 manufacturerRepository.Dispose();
-                categoryRepository.Dispose();
                 assetmodelRepository.Dispose();
             }
             base.Dispose(disposing);

@@ -16,7 +16,7 @@
             CategoryName
         </th>
         <th>
-            AssetModels
+            Assets
         </th>
     </tr>
 
@@ -31,11 +31,9 @@
 			@item.CategoryName
         </td>
         <td>
-			@(item.AssetModels == null ? "None" : item.AssetModels.Count.ToString())
+			@(item.Assets == null ? "None" : item.Assets.Count.ToString())
         </td>
     </tr>
 }
 
 </table>
-
-
