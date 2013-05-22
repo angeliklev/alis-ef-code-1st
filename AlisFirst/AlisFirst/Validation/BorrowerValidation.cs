@@ -21,14 +21,9 @@ namespace AlisFirst.Validation
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            foreach (Borrower t in borrowerRepo.All)
-            {
-                if (t.Email.Equals((string)value))
-                {
-                    return new ValidationResult( "Email is not unique" );
-                }
-            }
-            return ValidationResult.Success;
+            if (borrowerRepo.CheckEmailUnique((string)value))
+                return ValidationResult.Success;
+            return new ValidationResult("Email must be unique");
         }
     }
 }

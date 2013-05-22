@@ -12,7 +12,7 @@ namespace AlisFirst.ViewModels
         public string Surname { get; set; }
         public string BarCode { get; set; }
         public string GivenName { get; set; }
-        [DataType(DataType.Date)]
+        [DataType(DataType.Date)][Required]
         public DateTime? BorrowerExpiryDate { get; set; }
         [UniqueEmailAttribute]
         public string Email { get; set; }
@@ -27,7 +27,8 @@ namespace AlisFirst.ViewModels
         public string Surname { get; set; }
         public string BarCode { get; set; }
         public string GivenName { get; set; }
-        [DataType(DataType.Date)]
+
+        [DataType(DataType.Date)][Required]
         public DateTime? BorrowerExpiryDate { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
