@@ -99,6 +99,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\AMS\AMSAreaRegistration.cs" />
+    <Compile Include="Areas\AMS\Controllers\AssetListController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Areas\AMS\ViewModels\AssetsViewModel.cs" />
     <Compile Include="Areas\LMS\Controllers\BorrowersController.cs" />
     <Compile Include="Areas\LMS\LMSAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -220,7 +224,6 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="Global.asax" />
-    <Content Include="Areas\AMS\Views\Web.config" />
     <Content Include="Areas\LMS\Views\Web.config" />
     <Content Include="Areas\LMS\Views\_ViewStart.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\Create.cshtml" />
@@ -229,6 +232,13 @@
     <Content Include="Areas\LMS\Views\Borrowers\Details.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\Index.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\_CreateOrEdit.cshtml" />
+    <Content Include="Areas\AMS\Views\AssetList\Create.cshtml" />
+    <Content Include="Areas\AMS\Views\AssetList\Delete.cshtml" />
+    <Content Include="Areas\AMS\Views\AssetList\Details.cshtml" />
+    <Content Include="Areas\AMS\Views\AssetList\Edit.cshtml" />
+    <Content Include="Areas\AMS\Views\AssetList\Index.cshtml" />
+    <Content Include="Areas\AMS\Views\Web.config" />
+    <Content Include="Areas\AMS\Views\_ViewStart.cshtml" />
     <None Include="Scripts\jquery-2.0.0.intellisense.js" />
     <Content Include="Scripts\EditorHookup.js" />
     <Content Include="Scripts\jquery-2.0.0.js" />
@@ -363,7 +373,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\AMS\Controllers\" />
     <Folder Include="Areas\AMS\Models\" />
     <Folder Include="Areas\AMS\Views\Shared\" />
     <Folder Include="Areas\LMS\Models\" />
