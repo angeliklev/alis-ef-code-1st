@@ -28,7 +28,7 @@ namespace AlisFirst.Areas.LMS.Controllers
 
         public ViewResult Details(int id)
         {
-            Borrower borrower = context.All.Single(x => x.BorrowerID == id);
+            Borrower borrower = context.Find(id);
             return View(borrower);
         }
 
@@ -67,7 +67,7 @@ namespace AlisFirst.Areas.LMS.Controllers
  
         public ActionResult Edit(int id)
         {
-            Borrower borrower = context.All.Single(x => x.BorrowerID == id);
+            Borrower borrower = context.Find(id);
             return View(AutoMapper.Mapper.Map<Borrower, EditBorrowerViewModel>(borrower));
         }
 
@@ -102,7 +102,7 @@ namespace AlisFirst.Areas.LMS.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Borrower borrower = context.All.Single(x => x.BorrowerID == id);
+            Borrower borrower = context.Find(id);
             context.Delete(borrower.BorrowerID);
             context.Save();
             return RedirectToAction("Index");
