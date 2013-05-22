@@ -9,22 +9,22 @@
 <fieldset>
     <legend>Asset</legend>
 
-    <div class="display-label">BarCode</div>
+    <div class="display-label">Bar Code</div>
     <div class="display-field">@Model.BarCode</div>
 
-    <div class="display-label">SerialNum</div>
+    <div class="display-label">Serial Number</div>
     <div class="display-field">@Model.SerialNum</div>
 
     <div class="display-label">Supplier</div>
     <div class="display-field">@Html.DisplayTextFor(_ => Model.Supplier).ToString()</div>
 
-    <div class="display-label">AssetModel</div>
+    <div class="display-label">Model</div>
     <div class="display-field">@Html.DisplayTextFor(_ => Model.AssetModel).ToString()</div>
 
-    <div class="display-label">DateRecieved</div>
+    <div class="display-label">Date Recieved</div>
     <div class="display-field">@String.Format("{0:g}", Model.DateRecieved)</div>
 
-    <div class="display-label">WarrantyExpires</div>
+    <div class="display-label">Warranty Expires</div>
     <div class="display-field">@String.Format("{0:g}", Model.WarrantyExpires)</div>
 
     <div class="display-label">PurchaseCost</div>
@@ -35,9 +35,6 @@
 
     <div class="display-label">Notes</div>
     <div class="display-field">@Model.Notes</div>
-
-    <div class="display-label">IsActive</div>
-    <div class="display-field">@Model.IsActive</div>
 
     <div class="display-label">AssetConditions</div>
     <div class="display-field">@(Model.AssetConditions == null ? "None" : Model.AssetConditions.Count.ToString())</div>
@@ -61,5 +58,3 @@
     @Html.ActionLink("Edit", "Edit", new { id=Model.AssetID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
-
-

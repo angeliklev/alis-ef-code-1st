@@ -19,9 +19,6 @@
             Manufacturer
         </th>
         <th>
-            Category
-        </th>
-        <th>
             Assets
         </th>
     </tr>
@@ -40,14 +37,9 @@
 			@Html.DisplayTextFor(_ => item.Manufacturer).ToString()
         </td>
         <td>
-			@Html.DisplayTextFor(_ => item.Category).ToString()
-        </td>
-        <td>
 			@(item.Assets == null ? "None" : item.Assets.Count.ToString())
         </td>
     </tr>
 }
 
 </table>
-
-

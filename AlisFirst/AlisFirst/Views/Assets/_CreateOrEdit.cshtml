@@ -78,7 +78,18 @@
     @Html.ValidationMessageFor(model => model.SupplierID)
 </div>
 <div class="editor-label">
-    AssetModel
+    Category
+</div>
+<div class="editor-field">
+    @Html.DropDownListFor(model => model.CategoryID, ((IEnumerable<AlisFirst.Models.Category>)ViewBag.PossibleCategories).Select(option => new SelectListItem {
+        Text = Html.DisplayTextFor(_ => option).ToString(), 
+        Value = option.CategoryID.ToString(),
+        Selected = (Model != null) && (option.CategoryID == Model.CategoryID)
+    }), "Choose...")
+    @Html.ValidationMessageFor(model => model.CategoryID)
+</div>
+<div class="editor-label">
+    Model
 </div>
 <div class="editor-field">
     @Html.DropDownListFor(model => model.AssetModelID, ((IEnumerable<AlisFirst.Models.AssetModel>)ViewBag.PossibleAssetModels).Select(option => new SelectListItem {
