@@ -62,9 +62,18 @@ namespace AlisFirst.Models
         public virtual ICollection<AssignedTo> AssignedToes { get; set; }
         public virtual ICollection<AssignedLocation> AssignedLocations { get; set; }
 
+        //public string Name
+        //{
+        //    get { return string.Format("{0} {1} {2}", AssetModel.Manufacturer.ToString(), Category.ToString(), AssetModel.ToString()); }
+        //}   
         public string Name
         {
-            get { return string.Format("{0} {1} {2}", AssetModel.Manufacturer.ToString(), Category.ToString(), AssetModel.ToString()); }
-        }   
+            get { return string.Format("{0} {1} {2}", AssetModel.Manufacturer, Category, AssetModel); }
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0}", Name);
+        }
     }
 }
