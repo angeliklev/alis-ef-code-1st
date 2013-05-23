@@ -191,20 +191,30 @@ namespace AlisFirst.DAL
                     BarCode = "ALVA-0030", SerialNum = "112G1880", IsLoanable = true,
                     SupplierID = 3, CategoryID = 4, AssetModelID = 7
                 }
-            }; asset.ForEach(a => context.Assets.Add(a));
+            }; 
+            asset.ForEach(a => context.Assets.Add(a));
             context.SaveChanges();
              
             var checkListItems = new List<CheckListItem>
             {
-                new CheckListItem { CheckListItemName = "Leather bag"},
-                new CheckListItem { CheckListItemName = "Recharger"},
-                new CheckListItem { CheckListItemName = "Memory stick"},
-                new CheckListItem { CheckListItemName = "Power adapter"},
-                new CheckListItem { CheckListItemName = "Flash Unit"},
-                new CheckListItem { CheckListItemName = "Remote Control"},
-                new CheckListItem { CheckListItemName = "Lenses"},
+                new CheckListItem { CheckListItemName = "Leather bag", Assets = new List<Asset>()},
+                new CheckListItem { CheckListItemName = "Recharger", Assets = new List<Asset>()},
+                new CheckListItem { CheckListItemName = "Memory stick", Assets = new List<Asset>()},
+                new CheckListItem { CheckListItemName = "Power adapter", Assets = new List<Asset>()},
+                new CheckListItem { CheckListItemName = "Flash Unit", Assets = new List<Asset>()},
+                new CheckListItem { CheckListItemName = "Remote Control", Assets = new List<Asset>()},
+                new CheckListItem { CheckListItemName = "Lenses", Assets = new List<Asset>()},
             };
-            asset.ForEach(c => context.Assets.Add(c));
+            checkListItems.ForEach(c => context.CheckListItems.Add(c));
+            context.SaveChanges();
+
+            checkListItems[0].Assets.Add(asset[5]);
+            checkListItems[0].Assets.Add(asset[6]);
+            checkListItems[0].Assets.Add(asset[7]);
+            checkListItems[1].Assets.Add(asset[8]);
+            checkListItems[1].Assets.Add(asset[7]);
+            checkListItems[3].Assets.Add(asset[6]);
+            checkListItems[3].Assets.Add(asset[7]);
             context.SaveChanges();
 
             var assignedLocations = new List<AssignedLocation>
@@ -258,13 +268,6 @@ namespace AlisFirst.DAL
             repairs.ForEach(r => context.Repairs.Add(r));
             context.SaveChanges();
 
-            var assignedTo = new List<AssignedTo>
-            {
-                new AssignedTo { AssetID = 1, AssignedToID = 2, AssignedDate = DateTime.ParseExact("28022013", "ddMMyyyy", System.Globalization.CultureInfo.CurrentCulture)},
-            };
-            assignedTo.ForEach(a => context.AssignedToes.Add(a));
-            context.SaveChanges();
-
             var borrower = new List<Borrower>
             {
                 new Borrower 
@@ -305,6 +308,13 @@ namespace AlisFirst.DAL
             borrower.ForEach(b => context.Borrowers.Add(b));
             context.SaveChanges();
 
+            var assignedTo = new List<AssignedTo>
+            {
+                new AssignedTo { AssetID = 1, BorrowerID = 2, AssignedDate = DateTime.ParseExact("28022013", "ddMMyyyy", System.Globalization.CultureInfo.CurrentCulture)},
+            };
+            assignedTo.ForEach(a => context.AssignedToes.Add(a));
+            context.SaveChanges();
+
             var loan = new List<Loan>
             {
                 new Loan{LoanID =1, BorrowerID =1, AssetID = 9, LoanDate = DateTime.Now, DueDate = DateTime.Now.AddDays(7)}
@@ -317,7 +327,6 @@ namespace AlisFirst.DAL
 
             //public void getSQL()
             //{
-
             //}
         }
     }
