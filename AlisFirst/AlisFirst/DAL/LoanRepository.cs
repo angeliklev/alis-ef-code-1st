@@ -6,12 +6,14 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
 using AlisFirst.Models;
+using AlisFirst.DAL;
 
 namespace AlisFirst.DAL
 { 
     public class LoanRepository : ILoanRepository
     {
         AlisFirstContext context = new AlisFirstContext();
+        AssetConditionRepository assetConRepo = new AssetConditionRepository();
 
         public IQueryable<Loan> All
         {
@@ -58,6 +60,68 @@ namespace AlisFirst.DAL
         {
             context.Dispose();
         }
+
+        public int getBorrowerID(string BorrowerBarCode)
+        {
+            var borrowerID = from b in context.Borrowers
+                             where b.BarCode == BorrowerBarCode
+                             select b.BorrowerID;
+
+            if (borrowerID.FirstOrDefault() != 0)
+                return Convert.ToInt16(borrowerID.FirstOrDefault());
+
+            return -1;
+        }
+
+        public int getAssetID(string AssetBarCode)
+        { 
+             var assetID = from a in context.Assets
+                           where a.BarCode == AssetBarCode.Trim()
+                           select a.AssetID;
+
+            if(assetID.FirstOrDefault() != 0)
+                return Convert.ToInt16(assetID.FirstOrDefault());
+            return -1;
+        }
+
+        public Boolean IsOnLoan(int assetID)
+        {
+            var lastLoan = from ll in context.Loans
+                           where ll.AssetID == assetID && ll.ReturnDate == null
+                           select ll.LoanID;
+            if (lastLoan.FirstOrDefault() != 0)
+                return true;
+            
+            return false;            
+        }
+
+        public Boolean IsLoanable(int assetID)
+        {
+            var loanableAssetID = from a in context.Assets
+                                  where a.AssetID == assetID && a.IsLoanable == true
+                                  select a.AssetID;
+            if (loanableAssetID.FirstOrDefault() !=0)
+                return false;
+            return true;
+        }
+
+        public DateTime getBorrowerExpiryDate(int borrowerID)
+        {
+            var borrowerExpiryDate = from bed in context.Borrowers
+                                     where bed.BorrowerID == borrowerID
+                                     select bed.BorrowerExpiryDate;
+
+            return (DateTime)borrowerExpiryDate.SingleOrDefault();
+        }
+
+        //public AssetCondition newCondition(string des)
+        //{
+        //    AssetCondition AssetCon = new AssetCondition();
+        //    AssetCon.Description = des;
+        //    AssetCon.IssuedDate = DateTime.Now;
+
+        //    return AssetCon;
+        //}
     }
 
     public interface ILoanRepository : IDisposable
@@ -68,5 +132,10 @@ namespace AlisFirst.DAL
         void InsertOrUpdate(Loan loan);
         void Delete(int id);
         void Save();
+        int getBorrowerID(string BorrowerBarCode);
+        int getAssetID(string AssetBarCode);
+        Boolean IsOnLoan(int assetID);
+        Boolean IsLoanable(int assetID);
+        //AssetCondition newCondition(string des);
     }
 }
