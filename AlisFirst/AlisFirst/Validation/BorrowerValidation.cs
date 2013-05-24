@@ -20,7 +20,7 @@ namespace AlisFirst.Validation
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            if(value == null)
+            if (String.IsNullOrEmpty((string)value))
                 return ValidationResult.Success;
             if (!borrowerRepo.CheckEmailUnique((string)value))
                 return new ValidationResult("Email must be unique");
@@ -41,7 +41,7 @@ namespace AlisFirst.Validation
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            if (value == null || (string)value == "")
+            if (String.IsNullOrEmpty((string)value))
                 return new ValidationResult("Bar code is required");
             if (!borrowerRepo.CheckBarcodeUnique((string)value))
                 return new ValidationResult("Bar code must be unique");
