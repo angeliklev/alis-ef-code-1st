@@ -233,10 +233,8 @@
     <Content Include="Areas\LMS\Views\Borrowers\Delete.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\Details.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\Index.cshtml" />
-<<<<<<< HEAD
     <Content Include="Areas\LMS\Views\Borrowers\_Edit.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\_Create.cshtml" />
-=======
     <Content Include="Areas\LMS\Views\Borrowers\_CreateOrEdit.cshtml" />
     <Content Include="Areas\AMS\Views\AssetList\Create.cshtml" />
     <Content Include="Areas\AMS\Views\AssetList\Delete.cshtml" />
@@ -245,7 +243,6 @@
     <Content Include="Areas\AMS\Views\AssetList\Index.cshtml" />
     <Content Include="Areas\AMS\Views\Web.config" />
     <Content Include="Areas\AMS\Views\_ViewStart.cshtml" />
->>>>>>> master
     <None Include="Scripts\jquery-2.0.0.intellisense.js" />
     <Content Include="Scripts\EditorHookup.js" />
     <Content Include="Scripts\GoBack.js" />
