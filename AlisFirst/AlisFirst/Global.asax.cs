@@ -47,8 +47,20 @@ namespace AlisFirst
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
 
+<<<<<<< HEAD
             AutoMapper.Mapper.CreateMap<ListEmployeeViewModel, Borrower>();
             AutoMapper.Mapper.CreateMap<Borrower, ListEmployeeViewModel>();
+=======
+            //Mapping information for viewmodel/model conversion (discuss where to move this junk to, it certainly shouldn't be in here)
+            AutoMapper.Mapper.CreateMap<Borrower, CreateBorrowerViewModel>();
+            AutoMapper.Mapper.CreateMap<CreateBorrowerViewModel, Borrower>();
+            AutoMapper.Mapper.CreateMap<Borrower, EditBorrowerViewModel>();
+            AutoMapper.Mapper.CreateMap<EditBorrowerViewModel, Borrower>();
+            AutoMapper.Mapper.CreateMap<Borrower, DeleteBorrowerViewModel>();
+            AutoMapper.Mapper.CreateMap<DeleteBorrowerViewModel, Borrower>();
+            AutoMapper.Mapper.CreateMap<Borrower, ListBorrowerViewModel>();
+            AutoMapper.Mapper.CreateMap<ListBorrowerViewModel, Borrower>();
+>>>>>>> master
         }
     }
 }

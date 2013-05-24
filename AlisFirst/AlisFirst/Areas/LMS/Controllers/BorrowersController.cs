@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using AlisFirst.Models;
 using AlisFirst.DAL;
+using AlisFirst.ViewModels;
 
 namespace AlisFirst.Areas.LMS.Controllers
 {   
@@ -19,7 +20,7 @@ namespace AlisFirst.Areas.LMS.Controllers
 
         public ViewResult Index()
         {
-            return View(context.All.Include(borrower => borrower.Loans).Include(borrower => borrower.AssignedTos).ToList());
+            return View(AutoMapper.Mapper.Map<IEnumerable<Borrower>, IEnumerable<ListBorrowerViewModel>>(context.All));
         }
 
         //
@@ -27,7 +28,7 @@ namespace AlisFirst.Areas.LMS.Controllers
 
         public ViewResult Details(int id)
         {
-            Borrower borrower = context.All.Single(x => x.BorrowerID == id);
+            Borrower borrower = context.Find(id);
             return View(borrower);
         }
 
@@ -38,23 +39,27 @@ namespace AlisFirst.Areas.LMS.Controllers
         {
             Borrower EmptyBorrower = new Borrower();
             EmptyBorrower.BorrowerExpiryDate = DateTime.Now;
-            return View( EmptyBorrower );
+            return View(AutoMapper.Mapper.Map<Borrower, CreateBorrowerViewModel>(EmptyBorrower));
         } 
 
         //
         // POST: /Borrowers/Create
 
         [HttpPost]
-        public ActionResult Create(Borrower borrower)
+        public ActionResult Create(CreateBorrowerViewModel borrowermodel)
         {
+            Borrower borrower = AutoMapper.Mapper.Map<CreateBorrowerViewModel, Borrower>(borrowermodel);
             if (ModelState.IsValid)
             {
                 context.InsertOrUpdate(borrower);
                 context.Save();
-                return RedirectToAction("Index");  
+                return RedirectToAction("Index");
+ 
             }
-
-            return View(borrower);
+            else
+            {
+                return View(borrowermodel);
+            }
         }
         
         //
@@ -62,23 +67,24 @@ namespace AlisFirst.Areas.LMS.Controllers
  
         public ActionResult Edit(int id)
         {
-            Borrower borrower = context.All.Single(x => x.BorrowerID == id);
-            return View(borrower);
+            Borrower borrower = context.Find(id);
+            return View(AutoMapper.Mapper.Map<Borrower, EditBorrowerViewModel>(borrower));
         }
 
         //
         // POST: /Borrowers/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Borrower borrower)
+        public ActionResult Edit(EditBorrowerViewModel borrowerModel)
         {
+            Borrower borrower = AutoMapper.Mapper.Map<EditBorrowerViewModel, Borrower>(borrowerModel);
             if (ModelState.IsValid)
             {
                 context.InsertOrUpdate(borrower);
                 context.Save();
                 return RedirectToAction("Index");
             }
-            return View(borrower);
+            return View(borrowerModel);
         }
 
         //
@@ -87,7 +93,7 @@ namespace AlisFirst.Areas.LMS.Controllers
         public ActionResult Delete(int id)
         {
             Borrower borrower = context.All.Single(x => x.BorrowerID == id);
-            return View(borrower);
+            return View(AutoMapper.Mapper.Map<Borrower, DeleteBorrowerViewModel>(borrower));
         }
 
         //
@@ -96,7 +102,7 @@ namespace AlisFirst.Areas.LMS.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Borrower borrower = context.All.Single(x => x.BorrowerID == id);
+            Borrower borrower = context.Find(id);
             context.Delete(borrower.BorrowerID);
             context.Save();
             return RedirectToAction("Index");

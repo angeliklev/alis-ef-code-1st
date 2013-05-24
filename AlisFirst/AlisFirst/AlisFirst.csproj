@@ -100,6 +100,10 @@
   <ItemGroup>
     <Compile Include="Areas\AMS\AMSAreaRegistration.cs" />
     <Compile Include="Areas\AMS\Controllers\EmployeeController.cs" />
+    <Compile Include="Areas\AMS\Controllers\AssetListController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Areas\AMS\ViewModels\AssetsViewModel.cs" />
     <Compile Include="Areas\LMS\Controllers\BorrowersController.cs" />
     <Compile Include="Areas\LMS\LMSAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -157,6 +161,8 @@
     <Compile Include="DAL\SupplierRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\EmployeeModel.cs" />
+    <Compile Include="Validation\BorrowerValidation.cs" />
+    <Compile Include="ViewModels\BorrowerModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
@@ -222,7 +228,6 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="Global.asax" />
-    <Content Include="Areas\AMS\Views\Web.config" />
     <Content Include="Areas\LMS\Views\Web.config" />
     <Content Include="Areas\LMS\Views\_ViewStart.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\Create.cshtml" />
@@ -230,10 +235,20 @@
     <Content Include="Areas\LMS\Views\Borrowers\Delete.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\Details.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\Index.cshtml" />
+    <Content Include="Areas\LMS\Views\Borrowers\_Edit.cshtml" />
+    <Content Include="Areas\LMS\Views\Borrowers\_Create.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\_CreateOrEdit.cshtml" />
     <Content Include="Areas\AMS\Views\Employee\Index.cshtml" />
+    <Content Include="Areas\AMS\Views\AssetList\Create.cshtml" />
+    <Content Include="Areas\AMS\Views\AssetList\Delete.cshtml" />
+    <Content Include="Areas\AMS\Views\AssetList\Details.cshtml" />
+    <Content Include="Areas\AMS\Views\AssetList\Edit.cshtml" />
+    <Content Include="Areas\AMS\Views\AssetList\Index.cshtml" />
+    <Content Include="Areas\AMS\Views\Web.config" />
+    <Content Include="Areas\AMS\Views\_ViewStart.cshtml" />
     <None Include="Scripts\jquery-2.0.0.intellisense.js" />
     <Content Include="Scripts\EditorHookup.js" />
+    <Content Include="Scripts\GoBack.js" />
     <Content Include="Scripts\jquery-2.0.0.js" />
     <Content Include="Scripts\jquery-2.0.0.min.js" />
     <Content Include="Scripts\jquery-2.0.0.min.map" />
@@ -390,7 +405,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>59354</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:49350/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
