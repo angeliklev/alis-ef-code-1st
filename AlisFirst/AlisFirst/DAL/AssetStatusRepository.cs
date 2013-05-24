@@ -15,12 +15,12 @@ namespace AlisFirst.DAL
 
         public IQueryable<AssetStatus> All
         {
-            get { return context.AssetStatus; }
+            get { return context.AssetStatuses; }
         }
 
         public IQueryable<AssetStatus> AllIncluding(params Expression<Func<AssetStatus, object>>[] includeProperties)
         {
-            IQueryable<AssetStatus> query = context.AssetStatus;
+            IQueryable<AssetStatus> query = context.AssetStatuses;
             foreach (var includeProperty in includeProperties) {
                 query = query.Include(includeProperty);
             }
@@ -29,14 +29,14 @@ namespace AlisFirst.DAL
 
         public AssetStatus Find(int id)
         {
-            return context.AssetStatus.Find(id);
+            return context.AssetStatuses.Find(id);
         }
 
         public void InsertOrUpdate(AssetStatus assetstatus)
         {
             if (assetstatus.AssetStatusID == default(int)) {
                 // New entity
-                context.AssetStatus.Add(assetstatus);
+                context.AssetStatuses.Add(assetstatus);
             } else {
                 // Existing entity
                 context.Entry(assetstatus).State = EntityState.Modified;
@@ -45,8 +45,8 @@ namespace AlisFirst.DAL
 
         public void Delete(int id)
         {
-            var assetstatus = context.AssetStatus.Find(id);
-            context.AssetStatus.Remove(assetstatus);
+            var assetstatus = context.AssetStatuses.Find(id);
+            context.AssetStatuses.Remove(assetstatus);
         }
 
         public void Save()
