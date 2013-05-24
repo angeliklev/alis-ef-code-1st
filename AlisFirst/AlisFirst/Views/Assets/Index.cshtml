@@ -35,6 +35,9 @@
         <th>
              Loanable
         </th>
+        <th>
+		    Check List Items
+        </th>
         <th></th>
     </tr>
 
@@ -47,7 +50,7 @@
             @Html.DisplayFor(modelItem => item.SerialNum)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.SupplierID)
+            @Html.DisplayFor(modelItem => item.Supplier.SupplierName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
@@ -63,6 +66,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.IsLoanable)
+        </td>
+        <td>
+			@(item.CheckListItems == null ? "None" : item.CheckListItems.Count.ToString())
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.AssetID }) |
