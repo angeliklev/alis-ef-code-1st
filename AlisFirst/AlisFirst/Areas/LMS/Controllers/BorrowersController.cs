@@ -13,14 +13,14 @@ namespace AlisFirst.Areas.LMS.Controllers
 {   
     public class BorrowersController : Controller
     {
-        private BorrowerRepository context = new BorrowerRepository();
+        private BorrowerRepository borRepo = new BorrowerRepository();
 
         //
         // GET: /Borrowers/
 
         public ViewResult Index()
         {
-            return View(AutoMapper.Mapper.Map<IEnumerable<Borrower>, IEnumerable<ListBorrowerViewModel>>(context.All));
+            return View(AutoMapper.Mapper.Map<IEnumerable<Borrower>, IEnumerable<ListBorrowerViewModel>>(borRepo.All));
         }
 
         //
@@ -28,7 +28,7 @@ namespace AlisFirst.Areas.LMS.Controllers
 
         public ViewResult Details(int id)
         {
-            Borrower borrower = context.Find(id);
+            Borrower borrower = borRepo.Find(id);
             return View(borrower);
         }
 
@@ -51,8 +51,8 @@ namespace AlisFirst.Areas.LMS.Controllers
             Borrower borrower = AutoMapper.Mapper.Map<CreateBorrowerViewModel, Borrower>(borrowermodel);
             if (ModelState.IsValid)
             {
-                context.InsertOrUpdate(borrower);
-                context.Save();
+                borRepo.InsertOrUpdate(borrower);
+                borRepo.Save();
                 return RedirectToAction("Index");
  
             }
@@ -67,8 +67,9 @@ namespace AlisFirst.Areas.LMS.Controllers
  
         public ActionResult Edit(int id)
         {
-            Borrower borrower = context.Find(id);
-            return View(AutoMapper.Mapper.Map<Borrower, EditBorrowerViewModel>(borrower));
+            EditBorrowerViewModel viewModel = AutoMapper.Mapper.Map<Borrower, EditBorrowerViewModel>(borRepo.Find(id));
+            viewModel.Loans = borRepo.GetBorrowerLoans(id);
+            return View(viewModel);
         }
 
         //
@@ -80,8 +81,8 @@ namespace AlisFirst.Areas.LMS.Controllers
             Borrower borrower = AutoMapper.Mapper.Map<EditBorrowerViewModel, Borrower>(borrowerModel);
             if (ModelState.IsValid)
             {
-                context.InsertOrUpdate(borrower);
-                context.Save();
+                borRepo.InsertOrUpdate(borrower);
+                borRepo.Save();
                 return RedirectToAction("Index");
             }
             return View(borrowerModel);
@@ -92,7 +93,7 @@ namespace AlisFirst.Areas.LMS.Controllers
  
         public ActionResult Delete(int id)
         {
-            Borrower borrower = context.All.Single(x => x.BorrowerID == id);
+            Borrower borrower = borRepo.All.Single(x => x.BorrowerID == id);
             return View(AutoMapper.Mapper.Map<Borrower, DeleteBorrowerViewModel>(borrower));
         }
 
@@ -102,16 +103,16 @@ namespace AlisFirst.Areas.LMS.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Borrower borrower = context.Find(id);
-            context.Delete(borrower.BorrowerID);
-            context.Save();
+            Borrower borrower = borRepo.Find(id);
+            borRepo.Delete(borrower.BorrowerID);
+            borRepo.Save();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing) {
-                context.Dispose();
+                borRepo.Dispose();
             }
             base.Dispose(disposing);
         }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using AlisFirst.Validation;
-
+using AlisFirst.Models;
 namespace AlisFirst.ViewModels
 {
     public class CreateBorrowerViewModel
@@ -41,6 +41,7 @@ namespace AlisFirst.ViewModels
         public string PhoneNumber { get; set; }
         [Display(Name = "Employee")]
         public bool IsEmployee { get; set; }
+        public IEnumerable<Loan> Loans { get; set; }
     }
 
     public class DeleteBorrowerViewModel

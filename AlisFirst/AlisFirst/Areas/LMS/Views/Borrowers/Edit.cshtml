@@ -18,8 +18,44 @@
             <input type="submit" value="Save" />
         </p>
     </fieldset>
+
+    <div>
+        <a href="javascript:goBack()" class="button_green">Cancel</a>
+    </div>
+    
+    <table>
+        <tr>
+            <th>
+                Loan Date
+            </th>
+            <th>
+                Due Date
+            </th>
+            <th>
+                Return Date
+            </th>
+            <th>
+                Asset ID
+            </th>
+        </tr>
+        @foreach (var item in Model.Loans)
+        {
+            <tr>
+                <td>
+                    @item.LoanDate
+                </td>
+                <td>
+                    @item.DueDate
+                </td>
+                <td>
+                    @item.ReturnDate
+                </td>
+                <td>
+                    @item.AssetID
+                </td>
+            </tr>
+        }
+    </table>
 }
 
-<div>
-    <a href="javascript:goBack()" class="button_green">Cancel</a>
-</div>
+
