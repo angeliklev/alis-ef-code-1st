@@ -67,6 +67,7 @@ namespace AlisFirst.Areas.AMS.Controllers
         public ActionResult Create()
         {
             ViewBag.PossibleSuppliers = supplierRepository.All;
+            ViewBag.PossibleCategories = categoryRepository.All;
             ViewBag.PossibleAssetModels = assetmodelRepository.All;
             return View();
         }
