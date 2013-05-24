@@ -25,28 +25,34 @@ namespace AlisFirst.Areas.AMS.Controllers
         }
 
         //
-        // GET: /Employee/Details/5
-
-        public ViewResult Details(int id)
-        {
-            return View();
-        }
-
-        //
         // GET: /Employee/Create
 
         public ActionResult Create()
         {
-            return View();
+            Borrower bor = new Borrower();
+            CreateEmployeeViewModel viewModel =
+                AutoMapper.Mapper.Map<Borrower, CreateEmployeeViewModel>(bor);
+            return View(viewModel);
         } 
 
         //
         // POST: /Employee/Create
 
         [HttpPost]
-        public ActionResult Create(ListEmployeeViewModel viewModel)
+        public ActionResult Create(CreateEmployeeViewModel viewModel)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                Borrower borrower =
+                    AutoMapper.Mapper.Map<CreateEmployeeViewModel, Borrower>(viewModel);
+                borrower.IsEmployee = true;
+                borrower.BorrowerID = 0;
+                empRepo.InsertOrUpdate(borrower);
+                empRepo.Save();
+                return RedirectToAction("Index");
+            }
+
+            return View(viewModel);
         }
         
         //
@@ -54,16 +60,28 @@ namespace AlisFirst.Areas.AMS.Controllers
  
         public ActionResult Edit(int id)
         {
-            return View();
+            Borrower borrower = empRepo.Find(id);
+            EditEmployeeViewModel viewModel =
+                AutoMapper.Mapper.Map<Borrower, EditEmployeeViewModel>(borrower);
+            return View(viewModel);
         }
 
         //
         // POST: /Employee/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(ListEmployeeViewModel viewModel)
+        public ActionResult Edit(EditEmployeeViewModel viewModel)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                Borrower borrower =
+                    AutoMapper.Mapper.Map<EditEmployeeViewModel, Borrower>(viewModel);
+                borrower.IsEmployee = true;
+                empRepo.InsertOrUpdate(borrower);
+                empRepo.Save();
+                return RedirectToAction("Index");
+            }
+            return View(viewModel);
         }
 
         //
@@ -71,7 +89,10 @@ namespace AlisFirst.Areas.AMS.Controllers
  
         public ActionResult Delete(int id)
         {
-            return View();
+            Borrower borrower = empRepo.Find(id);
+            DeleteEmployeeViewModel viewModel =
+                AutoMapper.Mapper.Map<Borrower, DeleteEmployeeViewModel>(borrower);
+            return View(viewModel);
         }
 
         //
@@ -80,7 +101,10 @@ namespace AlisFirst.Areas.AMS.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            return View();
+            empRepo.Delete(id);
+            empRepo.Save();
+
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
