@@ -99,10 +99,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\AMS\AMSAreaRegistration.cs" />
+    <Compile Include="Areas\AMS\Controllers\AssetController.cs" />
     <Compile Include="Areas\AMS\Controllers\AssetListController.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Areas\AMS\ViewModels\AssetsViewModel.cs" />
+    <Compile Include="Areas\AMS\ViewModels\SelectedCheckListItemsData.cs" />
     <Compile Include="Areas\LMS\Controllers\BorrowersController.cs" />
     <Compile Include="Areas\LMS\LMSAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -239,6 +241,10 @@
     <Content Include="Areas\AMS\Views\AssetList\Index.cshtml" />
     <Content Include="Areas\AMS\Views\Web.config" />
     <Content Include="Areas\AMS\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\Index.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\Edit.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\Create.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\_CreateOrEdit.cshtml" />
     <None Include="Scripts\jquery-2.0.0.intellisense.js" />
     <Content Include="Scripts\EditorHookup.js" />
     <Content Include="Scripts\jquery-2.0.0.js" />
