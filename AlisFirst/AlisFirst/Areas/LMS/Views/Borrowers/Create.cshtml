@@ -1,4 +1,4 @@
-@model AlisFirst.Models.Borrower
+@model AlisFirst.ViewModels.CreateBorrowerViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -11,7 +11,7 @@
     <fieldset>
         <legend>Borrower</legend>
 
-		@Html.Partial("_CreateOrEdit", Model)
+		@Html.Partial("_Create", Model)
 
         <p>
             <input type="submit" value="Create" />
@@ -20,7 +20,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <a href="javascript:goBack()" class="button_green">Cancel</a>
 </div>
 
 
