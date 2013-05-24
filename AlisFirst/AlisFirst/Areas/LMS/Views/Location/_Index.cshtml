@@ -1,0 +1,32 @@
+﻿@model IEnumerable<AlisFirst.ViewModels.ListLocationViewModel>
+
+<table>
+    <tr>
+        <th>
+            LocationID
+        </th>
+        <th>
+            LocationName
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            item.LocationID
+        </td>
+        <td>
+            @item.LocationName
+        </td>
+        <td>
+            @Html.ActionLink("[Edit]", "../Location/Edit", new { id=item.LocationID })
+            @Html.ActionLink("[X]", "../Location/Delete", new { id=item.LocationID })
+        </td>
+    </tr>
+}
+
+</table>
+@Html.ActionLink("Create New", "../Location/Create")

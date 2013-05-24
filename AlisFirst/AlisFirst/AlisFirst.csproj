@@ -103,7 +103,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Areas\AMS\ViewModels\AssetsViewModel.cs" />
+    <Compile Include="Areas\LMS\Controllers\AssetStatusController.cs" />
     <Compile Include="Areas\LMS\Controllers\BorrowersController.cs" />
+    <Compile Include="Areas\LMS\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\LMS\Controllers\LocationController.cs" />
+    <Compile Include="Areas\LMS\Controllers\LookupTableController.cs" />
+    <Compile Include="Areas\LMS\Controllers\ManufacturerController.cs" />
+    <Compile Include="Areas\LMS\Controllers\AssetModelController.cs" />
+    <Compile Include="Areas\LMS\Controllers\SupplierController.cs" />
     <Compile Include="Areas\LMS\LMSAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AssetConditionsController.cs" />
@@ -159,6 +166,13 @@
     <Compile Include="Models\Supplier.cs" />
     <Compile Include="DAL\SupplierRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AssetStatusModel.cs" />
+    <Compile Include="ViewModels\CategoryModel.cs" />
+    <Compile Include="ViewModels\LocationModel.cs" />
+    <Compile Include="ViewModels\LookupModel.cs" />
+    <Compile Include="ViewModels\ManufacturerModel.cs" />
+    <Compile Include="ViewModels\AssetModelModel.cs" />
+    <Compile Include="ViewModels\SupplierModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
@@ -231,7 +245,6 @@
     <Content Include="Areas\LMS\Views\Borrowers\Delete.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\Details.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\Index.cshtml" />
-    <Content Include="Areas\LMS\Views\Borrowers\_CreateOrEdit.cshtml" />
     <Content Include="Areas\AMS\Views\AssetList\Create.cshtml" />
     <Content Include="Areas\AMS\Views\AssetList\Delete.cshtml" />
     <Content Include="Areas\AMS\Views\AssetList\Details.cshtml" />
@@ -239,6 +252,31 @@
     <Content Include="Areas\AMS\Views\AssetList\Index.cshtml" />
     <Content Include="Areas\AMS\Views\Web.config" />
     <Content Include="Areas\AMS\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\LMS\Views\Category\_Index.cshtml" />
+    <Content Include="Areas\LMS\Views\Category\Edit.cshtml" />
+    <Content Include="Areas\LMS\Views\Category\Create.cshtml" />
+    <Content Include="Areas\LMS\Views\Category\Delete.cshtml" />
+    <Content Include="Areas\LMS\Views\LookupTable\Index.cshtml" />
+    <Content Include="Areas\LMS\Views\Location\_Index.cshtml" />
+    <Content Include="Areas\LMS\Views\Location\Create.cshtml" />
+    <Content Include="Areas\LMS\Views\Location\Edit.cshtml" />
+    <Content Include="Areas\LMS\Views\Location\Delete.cshtml" />
+    <Content Include="Areas\LMS\Views\Supplier\_Index.cshtml" />
+    <Content Include="Areas\LMS\Views\Supplier\Create.cshtml" />
+    <Content Include="Areas\LMS\Views\Supplier\Edit.cshtml" />
+    <Content Include="Areas\LMS\Views\Supplier\Delete.cshtml" />
+    <Content Include="Areas\LMS\Views\Manufacturer\Edit.cshtml" />
+    <Content Include="Areas\LMS\Views\Manufacturer\Delete.cshtml" />
+    <Content Include="Areas\LMS\Views\Manufacturer\Create.cshtml" />
+    <Content Include="Areas\LMS\Views\Manufacturer\_Index.cshtml" />
+    <Content Include="Areas\LMS\Views\AssetModel\_Index.cshtml" />
+    <Content Include="Areas\LMS\Views\AssetModel\Create.cshtml" />
+    <Content Include="Areas\LMS\Views\AssetModel\Edit.cshtml" />
+    <Content Include="Areas\LMS\Views\AssetModel\Delete.cshtml" />
+    <Content Include="Areas\LMS\Views\AssetStatus\_Index.cshtml" />
+    <Content Include="Areas\LMS\Views\AssetStatus\Create.cshtml" />
+    <Content Include="Areas\LMS\Views\AssetStatus\Edit.cshtml" />
+    <Content Include="Areas\LMS\Views\AssetStatus\Delete.cshtml" />
     <None Include="Scripts\jquery-2.0.0.intellisense.js" />
     <Content Include="Scripts\EditorHookup.js" />
     <Content Include="Scripts\jquery-2.0.0.js" />
@@ -250,6 +288,7 @@
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\TabHookup.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

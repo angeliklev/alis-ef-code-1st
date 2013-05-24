@@ -1,0 +1,32 @@
+﻿@model IEnumerable<AlisFirst.ViewModels.ListManufacturerViewModel>
+
+<table>
+    <tr>
+        <th>
+            Manufacturer ID
+        </th>
+        <th>
+            Manufacturer Name
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+		    @item.ManufacturerID
+        </td>
+        <td>
+		    @item.ManufacturerName
+        </td>
+        <td>
+            @Html.ActionLink("[X]", "../Manufacturer/Delete", new { id = item.ManufacturerID })
+            @Html.ActionLink("[Edit]", "../Manufacturer/Edit", new { id = item.ManufacturerID })
+        </td>
+    </tr>
+}
+</table>
+@Html.ActionLink("Create New", "../Manufacturer/Create")
+

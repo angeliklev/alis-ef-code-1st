@@ -1,0 +1,32 @@
+﻿@model IEnumerable<AlisFirst.ViewModels.ListCategoryViewModel>
+
+<table>
+    <tr>
+        <th>
+            Category ID
+        </th>
+        <th>
+            Category Name
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+		    @item.CategoryID
+        </td>
+        <td>
+		    @item.CategoryName
+        </td>
+        <td>
+            @Html.ActionLink("[X]", "../Category/Delete", new { id = item.CategoryID })
+            @Html.ActionLink("[Edit]", "../Category/Edit", new { id = item.CategoryID })
+        </td>
+    </tr>
+}
+</table>
+@Html.ActionLink("Create New", "../Category/Create")
+

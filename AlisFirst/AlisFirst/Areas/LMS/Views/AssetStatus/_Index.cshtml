@@ -1,0 +1,32 @@
+﻿@model IEnumerable<AlisFirst.ViewModels.ListAssetStatusViewModel>
+
+<table>
+    <tr>
+        <th>
+            AssetStatus ID
+        </th>
+        <th>
+            AssetStatus Name
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+		    @item.AssetStatusID
+        </td>
+        <td>
+		    @item.AssetStatusName
+        </td>
+        <td>
+            @Html.ActionLink("[X]", "../AssetStatus/Delete", new { id = item.AssetStatusID })
+            @Html.ActionLink("[Edit]", "../AssetStatus/Edit", new { id = item.AssetStatusID })
+        </td>
+    </tr>
+}
+</table>
+@Html.ActionLink("Create New", "../AssetStatus/Create")
+

@@ -1,0 +1,33 @@
+﻿@model AlisFirst.ViewModels.EditManufacturerViewModel
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Manufacturer</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ManufacturerID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ManufacturerID) @*This needs to be made readonly*@
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ManufacturerName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ManufacturerName)
+            @Html.ValidationMessageFor(model => model.ManufacturerName)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

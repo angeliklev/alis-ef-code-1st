@@ -1,0 +1,34 @@
+﻿@model AlisFirst.ViewModels.LookupModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">Category</a></li>
+        <li><a href="#tabs-2">Location</a></li>
+        <li><a href="#tabs-3">Supplier</a></li>
+        <li><a href="#tabs-4">Manufacturer</a></li>
+        <li><a href="#tabs-5">Asset Model</a></li>
+        <li><a href="#tabs-6">Asset Status</a></li>
+    </ul>
+    <div id="tabs-1">
+        @Html.Partial("../Category/_Index", Model.lcvm)
+    </div>
+    <div id="tabs-2">
+        @Html.Partial("../Location/_Index", Model.llvm)
+    </div>
+    <div id="tabs-3">
+        @Html.Partial("../Supplier/_Index", Model.lsvm)
+    </div>
+    <div id="tabs-4">
+        @Html.Partial("../Manufacturer/_Index", Model.lmvm)
+    </div>
+    <div id="tabs-5">
+        @Html.Partial("../AssetModel/_Index", Model.lamvm)
+    </div>
+    <div id="tabs-6">
+        @Html.Partial("../AssetStatus/_Index", Model.lasvm)
+    </div>
+</div>

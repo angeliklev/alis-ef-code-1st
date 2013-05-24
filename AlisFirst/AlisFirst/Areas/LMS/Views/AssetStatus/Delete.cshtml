@@ -1,0 +1,28 @@
+﻿@model AlisFirst.ViewModels.DeleteAssetStatusViewModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>DeleteAssetStatusViewModel</legend>
+
+    <div class="display-label">AssetStatusID</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AssetStatusID)
+    </div>
+
+    <div class="display-label">AssetStatusName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AssetStatusName)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "../LookupTable/Index")
+    </p>
+}

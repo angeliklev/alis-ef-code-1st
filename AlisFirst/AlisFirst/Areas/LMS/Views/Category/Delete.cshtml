@@ -1,0 +1,28 @@
+﻿@model AlisFirst.ViewModels.DeleteCategoryViewModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Delete Category View Model</legend>
+
+    <div class="display-label">CategoryID</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CategoryID)
+    </div>
+
+    <div class="display-label">CategoryName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CategoryName)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "../LookupTable/Index")
+    </p>
+}
