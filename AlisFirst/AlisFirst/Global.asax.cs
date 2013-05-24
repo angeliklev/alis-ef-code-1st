@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using AlisFirst.Models;
 using AlisFirst.DAL;
+using AlisFirst.ViewModels;
 
 namespace AlisFirst
 {
@@ -45,6 +46,9 @@ namespace AlisFirst
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+
+            AutoMapper.Mapper.CreateMap<ListEmployeeViewModel, Borrower>();
+            AutoMapper.Mapper.CreateMap<Borrower, ListEmployeeViewModel>();
         }
     }
 }
