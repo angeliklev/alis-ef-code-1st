@@ -20,7 +20,7 @@ namespace AlisFirst.Areas.LMS.Controllers
 
         public ViewResult Index()
         {
-            return View(context.All.Include(borrower => borrower.Loans).Include(borrower => borrower.AssignedTos).ToList());
+            return View(AutoMapper.Mapper.Map<IEnumerable<Borrower>, IEnumerable<ListBorrowerViewModel>>(context.All));
         }
 
         //

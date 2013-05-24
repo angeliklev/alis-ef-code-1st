@@ -11,19 +11,42 @@ namespace AlisFirst.Validation
     [AttributeUsage(AttributeTargets.Property, AllowMultiple=false, Inherited=true)]
     public class UniqueEmailAttribute : ValidationAttribute
     {
+        BorrowerRepository borrowerRepo;
         public UniqueEmailAttribute()
-            : base("Email must be unique")
+            : base("Unknown Error")
         {
             borrowerRepo = new BorrowerRepository();
         }
 
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            if(value == null)
+                return ValidationResult.Success;
+            if (!borrowerRepo.CheckEmailUnique((string)value))
+                return new ValidationResult("Email must be unique");
+
+            return ValidationResult.Success;
+            
+        }
+    }
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
+    public class UniqueBarcodeAttribute : ValidationAttribute
+    {
         BorrowerRepository borrowerRepo;
+        public UniqueBarcodeAttribute()
+            : base("Unknown Error")
+        {
+            borrowerRepo = new BorrowerRepository();
+        }
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            if (borrowerRepo.CheckEmailUnique((string)value))
-                return ValidationResult.Success;
-            return new ValidationResult("Email must be unique");
+            if (value == null || (string)value == "")
+                return new ValidationResult("Bar code is required");
+            if (!borrowerRepo.CheckBarcodeUnique((string)value))
+                return new ValidationResult("Bar code must be unique");
+
+            return ValidationResult.Success;
         }
     }
 }

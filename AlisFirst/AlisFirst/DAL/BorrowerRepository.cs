@@ -59,9 +59,7 @@ namespace AlisFirst.DAL
             context.Borrowers.Remove(borrower);
         }
 
-        /*Check if the supplied email does not exist in the database, method created to maintain 
-         *business rule defined in use case ALIS-LMS-UC01 (Create Borrower), that created users 
-         *must have unique emails*/
+        //Check if email is unique, this should use linq at some point, instead of program side iteration.
         public bool CheckEmailUnique( string srcEmail )
         {
             foreach( Borrower t in All )
@@ -74,6 +72,18 @@ namespace AlisFirst.DAL
 
             return true;
         }
+        //Likewise as above, but check barcode instead.
+        internal bool CheckBarcodeUnique(string src)
+        {
+            foreach (Borrower t in All)
+            {
+                if (src == t.BarCode)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
 
         public void Save()
         {
@@ -84,6 +94,8 @@ namespace AlisFirst.DAL
         {
             context.Dispose();
         }
+
+
     }
 
     public interface IBorrowerRepository : IDisposable

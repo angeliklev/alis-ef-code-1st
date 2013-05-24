@@ -54,6 +54,8 @@ namespace AlisFirst
             AutoMapper.Mapper.CreateMap<EditBorrowerViewModel, Borrower>();
             AutoMapper.Mapper.CreateMap<Borrower, DeleteBorrowerViewModel>();
             AutoMapper.Mapper.CreateMap<DeleteBorrowerViewModel, Borrower>();
+            AutoMapper.Mapper.CreateMap<Borrower, ListBorrowerViewModel>();
+            AutoMapper.Mapper.CreateMap<ListBorrowerViewModel, Borrower>();
         }
     }
 }
