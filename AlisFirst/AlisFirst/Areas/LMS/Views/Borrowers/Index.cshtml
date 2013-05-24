@@ -1,4 +1,4 @@
-@model IEnumerable<AlisFirst.Models.Borrower>
+@model IEnumerable<AlisFirst.ViewModels.ListBorrowerViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -16,28 +16,22 @@
             Surname
         </th>
         <th>
-            BarCode
+            Bar Code
         </th>
         <th>
-            GivenName
+            Given Name
         </th>
         <th>
-            BorrowerExpiryDate
+            Borrower Expiry Date
         </th>
         <th>
             Email
         </th>
         <th>
-            PhoneNumber
+            Phone Number
         </th>
         <th>
-            IsEmployee
-        </th>
-        <th>
-            Loans
-        </th>
-        <th>
-            AssignedTos
+            Employee
         </th>
     </tr>
 
@@ -68,12 +62,6 @@
         </td>
         <td>
 			@item.IsEmployee
-        </td>
-        <td>
-			@(item.Loans == null ? "None" : item.Loans.Count.ToString())
-        </td>
-        <td>
-			@(item.AssignedTos == null ? "None" : item.AssignedTos.Count.ToString())
         </td>
     </tr>
 }

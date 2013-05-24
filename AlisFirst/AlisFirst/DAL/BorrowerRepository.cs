@@ -11,7 +11,17 @@ namespace AlisFirst.DAL
 { 
     public class BorrowerRepository : IBorrowerRepository
     {
-        AlisFirstContext context = new AlisFirstContext();
+        AlisFirstContext context;
+
+        public BorrowerRepository()
+        {
+            context = new AlisFirstContext();
+        }
+
+        public BorrowerRepository(AlisFirstContext src_Context)
+        {
+            context = src_Context;
+        }
 
         public IQueryable<Borrower> All
         {
@@ -49,6 +59,32 @@ namespace AlisFirst.DAL
             context.Borrowers.Remove(borrower);
         }
 
+        //Check if email is unique, this should use linq at some point, instead of program side iteration.
+        public bool CheckEmailUnique( string srcEmail )
+        {
+            foreach( Borrower t in All )
+            {
+                if ( srcEmail == t.Email )
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        //Likewise as above, but check barcode instead.
+        internal bool CheckBarcodeUnique(string src)
+        {
+            foreach (Borrower t in All)
+            {
+                if (src == t.BarCode)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         public void Save()
         {
             context.SaveChanges();
@@ -58,6 +94,8 @@ namespace AlisFirst.DAL
         {
             context.Dispose();
         }
+
+
     }
 
     public interface IBorrowerRepository : IDisposable

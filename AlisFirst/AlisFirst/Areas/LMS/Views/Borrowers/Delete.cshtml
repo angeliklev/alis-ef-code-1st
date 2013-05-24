@@ -1,4 +1,4 @@
-@model AlisFirst.Models.Borrower
+@model AlisFirst.ViewModels.DeleteBorrowerViewModel
 
 @{
     ViewBag.Title = "Delete";
@@ -30,17 +30,11 @@
 
     <div class="display-label">IsEmployee</div>
     <div class="display-field">@Model.IsEmployee</div>
-
-    <div class="display-label">Loans</div>
-    <div class="display-field">@(Model.Loans == null ? "None" : Model.Loans.Count.ToString())</div>
-
-    <div class="display-label">AssignedTos</div>
-    <div class="display-field">@(Model.AssignedTos == null ? "None" : Model.AssignedTos.Count.ToString())</div>
 </fieldset>
 @using (Html.BeginForm()) {
     <p>
         <input type="submit" value="Delete" /> |
-        @Html.ActionLink("Back to List", "Index")
+        <a href="javascript:goBack()" class="button_green">Cancel</a>
     </p>
 }
 
