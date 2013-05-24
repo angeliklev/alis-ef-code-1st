@@ -82,28 +82,28 @@ namespace AlisFirst.Validation
     //    }
     //}
 
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-    public class LoanDateValidation : ValidationAttribute
-    {
+    //[AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+    //public class LoanDateValidation : ValidationAttribute
+    //{
 
-        LoanRepository LoanRepo = new LoanRepository();
-        public LoanDateValidation()
-            : base("Incorrect Format")
-        {
-        }
+    //    LoanRepository LoanRepo = new LoanRepository();
+    //    public LoanDateValidation()
+    //        : base("Incorrect Format")
+    //    {
+    //    }
 
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext, string test)
-        {
-            //EditLoanViewModel elvm = (EditLoanViewModel)value;
-            //elvm.BorrowerBarcode;
-            if (value == null)
-                return new ValidationResult("Please input loan date");
+    //    protected override ValidationResult IsValid(object value, ValidationContext validationContext, string test)
+    //    {
+    //        //EditLoanViewModel elvm = (EditLoanViewModel)value;
+    //        //elvm.BorrowerBarcode;
+    //        if (value == null)
+    //            return new ValidationResult("Please input loan date");
 
             
 
-            return ValidationResult.Success;
-        }
-    }
+    //        return ValidationResult.Success;
+    //    }
+    //}
 
     //[AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
     //public class DueDateValidation : ValidationAttribute

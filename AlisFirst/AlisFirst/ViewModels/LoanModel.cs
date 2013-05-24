@@ -22,7 +22,7 @@ namespace AlisFirst.ViewModels
         public DateTime? DueDate { get; set; }        
     }
 
-    [LoanDateValidation]
+    //[LoanDateValidation]
     public class EditLoanViewModel
     {
         public int LoanID { get; set; }
@@ -32,7 +32,7 @@ namespace AlisFirst.ViewModels
         public string BorrowerBarcode { get; set; }
 
         [DataType(DataType.Date)]
-        [LoanDateValidation]
+        //[LoanDateValidation]
         public DateTime LoanDate { get; set; }
 
         [DataType(DataType.Date)]
