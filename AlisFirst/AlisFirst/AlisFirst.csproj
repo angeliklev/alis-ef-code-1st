@@ -229,6 +229,7 @@
     <Content Include="Areas\LMS\Views\Borrowers\Details.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\Index.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\_CreateOrEdit.cshtml" />
+    <Content Include="Areas\AMS\Views\_ViewStart.cshtml" />
     <None Include="Scripts\jquery-2.0.0.intellisense.js" />
     <Content Include="Scripts\EditorHookup.js" />
     <Content Include="Scripts\jquery-2.0.0.js" />
