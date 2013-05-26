@@ -105,8 +105,10 @@ namespace AlisFirst.DAL
             return true;
         }
 
-        public DateTime getBorrowerExpiryDate(int borrowerID)
+        public DateTime getBorrowerExpiryDate(string borrowerBarcode)
         {
+            int borrowerID = getBorrowerID(borrowerBarcode);
+
             var borrowerExpiryDate = from bed in context.Borrowers
                                      where bed.BorrowerID == borrowerID
                                      select bed.BorrowerExpiryDate;
@@ -114,14 +116,6 @@ namespace AlisFirst.DAL
             return (DateTime)borrowerExpiryDate.SingleOrDefault();
         }
 
-        //public AssetCondition newCondition(string des)
-        //{
-        //    AssetCondition AssetCon = new AssetCondition();
-        //    AssetCon.Description = des;
-        //    AssetCon.IssuedDate = DateTime.Now;
-
-        //    return AssetCon;
-        //}
     }
 
     public interface ILoanRepository : IDisposable
@@ -136,6 +130,5 @@ namespace AlisFirst.DAL
         int getAssetID(string AssetBarCode);
         Boolean IsOnLoan(int assetID);
         Boolean IsLoanable(int assetID);
-        //AssetCondition newCondition(string des);
     }
 }

@@ -37,7 +37,6 @@
         <div class="editor-field">
             @Html.HiddenFor(model => model.LoanDate)
             @Html.DisplayFor(model => model.LoanDate)
-            @*@Html.Display("LoanDate")*@
             @Html.ValidationMessageFor(model => model.LoanDate)
         </div>
 
@@ -54,17 +53,17 @@
             @Html.LabelFor(model => model.ReturnDate)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.ReturnDate)
+            @Html.TextBoxFor(model => model.ReturnDate)
             @Html.ValidationMessageFor(model => model.ReturnDate)
         </div>
 
-        @*<div class="editor-label">
+        <div class="editor-label">
             @Html.LabelFor(model => model.NewCondition)
         </div>
         <div class="editor-field">
             @Html.TextAreaFor(model => model.NewCondition)
             @Html.ValidationMessageFor(model => model.NewCondition)
-        </div>*@
+        </div>
      
 
         <p>

@@ -7,6 +7,8 @@ using AlisFirst.Validation;
 
 namespace AlisFirst.ViewModels
 {
+    [DueDateValidation]
+    [LoanDateValidation]
     public class CreateLoanViewModel
     {
         [AssetBarcodeValidation]
@@ -22,7 +24,7 @@ namespace AlisFirst.ViewModels
         public DateTime? DueDate { get; set; }        
     }
 
-    //[LoanDateValidation]
+    [ReturnLoanValidation]
     public class EditLoanViewModel
     {
         public int LoanID { get; set; }
@@ -32,7 +34,6 @@ namespace AlisFirst.ViewModels
         public string BorrowerBarcode { get; set; }
 
         [DataType(DataType.Date)]
-        //[LoanDateValidation]
         public DateTime LoanDate { get; set; }
 
         [DataType(DataType.Date)]
@@ -41,12 +42,7 @@ namespace AlisFirst.ViewModels
         [DataType(DataType.Date)]
         public DateTime ReturnDate { get; set; }
 
-        //public string? NewCondition { get; set; }
+        public string NewCondition { get; set; }
 
-        //public int AssetConditionID { get; set; }
-        //public string Description { get; set; }
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/mm/yyyy}")]
-        //public DateTime? IssuedDate { get; set; }
-        //public int AssetID { get; set; }
     }
 }

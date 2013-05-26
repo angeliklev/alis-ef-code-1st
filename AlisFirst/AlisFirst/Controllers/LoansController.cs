@@ -15,16 +15,18 @@ namespace AlisFirst.Controllers
 		private readonly IAssetRepository assetRepository;
 		private readonly IBorrowerRepository borrowerRepository;
 		private readonly ILoanRepository loanRepository;
+        private readonly IAssetConditionRepository assetConditionRepository;
 		// If you are using Dependency Injection, you can delete the following constructor
-        public LoansController() : this(new AssetRepository(), new BorrowerRepository(), new LoanRepository())
+        public LoansController() : this(new AssetRepository(), new BorrowerRepository(), new LoanRepository(), new AssetConditionRepository())
         {
         }
 
-        public LoansController(IAssetRepository assetRepository, IBorrowerRepository borrowerRepository, ILoanRepository loanRepository)
+        public LoansController(IAssetRepository assetRepository, IBorrowerRepository borrowerRepository, ILoanRepository loanRepository, IAssetConditionRepository assetConditionRepository)
         {
 			this.assetRepository = assetRepository;
 			this.borrowerRepository = borrowerRepository;
 			this.loanRepository = loanRepository;
+            this.assetConditionRepository = assetConditionRepository;
         }
 
         //
@@ -97,11 +99,22 @@ namespace AlisFirst.Controllers
         {
             if (ModelState.IsValid)
             {
+               
                 Loan insertReturn = AutoMapper.Mapper.Map<EditLoanViewModel, Loan>(returnLoan);
                 insertReturn.BorrowerID = loanRepository.getBorrowerID(returnLoan.BorrowerBarcode);
                 insertReturn.AssetID = loanRepository.getAssetID(returnLoan.AssetBarcode);
                 loanRepository.InsertOrUpdate(insertReturn);
                 loanRepository.Save();
+
+                if (returnLoan.NewCondition != null)
+                {
+                    AssetCondition AssetCon = new AssetCondition();
+                    AssetCon.AssetID = loanRepository.getAssetID(returnLoan.AssetBarcode);
+                    AssetCon.IssuedDate = DateTime.Now;
+                    AssetCon.Description = returnLoan.NewCondition;
+                    assetConditionRepository.InsertOrUpdate(AssetCon);
+                    assetConditionRepository.Save();
+                }
 
 
                 return RedirectToAction("Index");

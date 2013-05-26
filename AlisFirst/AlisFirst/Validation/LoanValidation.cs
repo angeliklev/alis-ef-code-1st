@@ -64,65 +64,82 @@ namespace AlisFirst.Validation
             return ValidationResult.Success;
         }
     }
-    //[AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-    //public class NewConditionValidation : ValidationAttribute
-    //{
-    //    LoanRepository LoanRepo = new LoanRepository();
-    //    public NewConditionValidation()
-    //        : base("Unknown Error")
-    //    { }
 
-    //    protected override ValidationResult IsValid(object value, ValidationContext validationContext)
-    //    {
-    //        string newCondition = (string)value;
-    //        if (newCondition != null)
-    //            LoanRepo.newCondition(newCondition);
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+    public class LoanDateValidation : ValidationAttribute
+    {
 
-    //        return ValidationResult.Success;
-    //    }
-    //}
+        LoanRepository LoanRepo = new LoanRepository();
+        public LoanDateValidation()
+            : base("Incorrect Format")
+        {
+        }
 
-    //[AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-    //public class LoanDateValidation : ValidationAttribute
-    //{
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            CreateLoanViewModel clvm = (CreateLoanViewModel)value;
 
-    //    LoanRepository LoanRepo = new LoanRepository();
-    //    public LoanDateValidation()
-    //        : base("Incorrect Format")
-    //    {
-    //    }
+            DateTime bed = LoanRepo.getBorrowerExpiryDate(clvm.BorrowerBarcode);
+            if(bed.CompareTo(clvm.LoanDate) < 0)
+                return new ValidationResult("Borrower Expiry Date must be before Loan Date");
 
-    //    protected override ValidationResult IsValid(object value, ValidationContext validationContext, string test)
-    //    {
-    //        //EditLoanViewModel elvm = (EditLoanViewModel)value;
-    //        //elvm.BorrowerBarcode;
-    //        if (value == null)
-    //            return new ValidationResult("Please input loan date");
+            return ValidationResult.Success;
+        }
+    }
 
-            
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+    public class DueDateValidation: ValidationAttribute
+    {
+        LoanRepository LoanRepo = new LoanRepository();
 
-    //        return ValidationResult.Success;
-    //    }
-    //}
+        public DueDateValidation()
+            : base("Incorrect Format")
+        {
+        }
 
-    //[AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-    //public class DueDateValidation : ValidationAttribute
-    //{
-    //    LoanRepository LoanRepo = new LoanRepository();
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
 
-    //    public DueDateValidation()
-    //        : base("Incorrect Format")
-    //    { }
+            CreateLoanViewModel clvm = (CreateLoanViewModel)value;
 
-    //    protected override ValidationResult IsValid(object value, ValidationContext validationContext)
-    //    {
-    //        if (value != null)
-    //        {
-    //            DateTime duteDate = (DateTime)value;
 
-    //        }
-    //        return ValidationResult.Success;
-    //    }
-    //}
+            if (clvm.DueDate != null)
+            {
+                DateTime dueDate = (DateTime)clvm.DueDate;
+                DateTime loanDate = (DateTime)clvm.LoanDate;
+                if (dueDate.CompareTo(loanDate) < 0)
+                    return new ValidationResult("Due Date must be before Loan Date");
+           
+            }
+
+            return ValidationResult.Success;
+        }
+    }
+
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+    public class ReturnLoanValidation : ValidationAttribute
+    {
+        LoanRepository LoanRepo = new LoanRepository();
+        public ReturnLoanValidation()
+            :base("Unknow Error")
+        {}
+
+         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            EditLoanViewModel elvm = (EditLoanViewModel)value;
+
+            if (elvm.ReturnDate.CompareTo(elvm.LoanDate) < 0)
+                return new ValidationResult("Return Date cannot be before Loan Date");
+
+             //If an asset is returned late, we still need to put it into system, so I leave empty for now
+
+             //if(elvm.DueDate != null)
+             //{
+             //    if(elvm.ReturnDate.CompareTo(elvm.DueDate) >0)
+             //       return new ValidationResult(""
+             //}
+            return ValidationResult.Success;
+        }
+    }
 
 }
