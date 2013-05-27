@@ -5,7 +5,7 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 using AlisFirst.Validation;
 using AlisFirst.Models;
-namespace AlisFirst.ViewModels
+namespace AlisFirst.Areas.LMS.ViewModels
 {
     public class CreateBorrowerViewModel
     {

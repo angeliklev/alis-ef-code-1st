@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using AlisFirst.Models;
 using AlisFirst.DAL;
-using AlisFirst.ViewModels;
+using AlisFirst.Areas.LMS.ViewModels;
 
 namespace AlisFirst.Areas.LMS.Controllers
 {   
