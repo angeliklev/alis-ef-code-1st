@@ -40,17 +40,18 @@ namespace AlisFirst.Areas.AMS.Controllers
         //
         // GET: /Asset/
 
-        public ViewResult Index()
+        public ActionResult Index()
         {
-            var assets = assetRepository.AllIncluding(asset => asset.Supplier,
-                asset => asset.AssetModel,
-                asset => asset.AssetConditions,
-                asset => asset.CheckListItems,
-                asset => asset.Repairs,
-                asset => asset.Loans,
-                asset => asset.AssignedToes,
-                asset => asset.AssignedLocations);
-            return View(assets);
+            //var assets = assetRepository.AllIncluding(asset => asset.Supplier,
+            //    asset => asset.AssetModel,
+            //    asset => asset.AssetConditions,
+            //    asset => asset.CheckListItems,
+            //    asset => asset.Repairs,
+            //    asset => asset.Loans,
+            //    asset => asset.AssignedToes,
+            //    asset => asset.AssignedLocations);
+            //return View(assets);
+            return RedirectToAction("Index", "AssetList");
         }
 
         //

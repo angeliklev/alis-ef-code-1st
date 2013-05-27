@@ -287,8 +287,8 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Assets\Create.cshtml" />
     <Content Include="Views\Assets\Edit.cshtml" />
-    <Content Include="Views\Assets\Delete.cshtml" />
-    <Content Include="Views\Assets\Details.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\Delete.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\Details.cshtml" />
     <Content Include="Views\Assets\Index.cshtml" />
     <Content Include="Views\Assets\_CreateOrEdit.cshtml" />
     <Content Include="Views\AssetModels\Create.cshtml" />
@@ -376,6 +376,8 @@
     <Content Include="Views\Suppliers\Index.cshtml" />
     <Content Include="Views\Suppliers\_CreateOrEdit.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\date.cshtml" />
+    <Content Include="Views\Assets\Delete.cshtml" />
+    <Content Include="Views\Assets\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
