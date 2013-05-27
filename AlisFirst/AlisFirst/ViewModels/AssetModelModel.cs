@@ -8,7 +8,7 @@ namespace AlisFirst.ViewModels
     public class ListAssetModelViewModel
     {
         public int AssetModelID { get; set; }
-        public string AssetModellName { get; set; }
+        public string AssetModelName { get; set; }
     }
     public class EditAssetModelViewModel
     {
