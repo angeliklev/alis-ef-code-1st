@@ -111,6 +111,14 @@ namespace AlisFirst.Areas.AMS.Controllers
         {
             empRepo.Dispose();
         }
+
+        public ActionResult AssignToEmployee(int id)
+        {
+            AssignedToRepository assToRepo = new AssignedToRepository();
+            AssignToEmployeeViewModel viewModel = new AssignToEmployeeViewModel();
+            viewModel.History = assToRepo.GetAssignedToByAssetID(id);
+            return View(viewModel);
+        }
     }
 }
 
