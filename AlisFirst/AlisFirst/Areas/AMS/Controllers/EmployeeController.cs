@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using AlisFirst.ViewModels;
+using AlisFirst.Areas.AMS.ViewModels;
 using AlisFirst.DAL;
 using AlisFirst.Models;
 

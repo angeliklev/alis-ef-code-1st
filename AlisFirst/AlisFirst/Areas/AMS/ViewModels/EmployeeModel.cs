@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 
-namespace AlisFirst.ViewModels
+namespace AlisFirst.Areas.AMS.ViewModels
 {
     public class ListEmployeeViewModel
     {
