@@ -16,11 +16,23 @@ namespace AlisFirst.Areas.AMS.Controllers
         //
         // GET: /Employee/
 
-        public ViewResult Index()
+        public ViewResult Index( String SearchFor)
         {
             IEnumerable<Borrower> AllEmployees = empRepo.AllEmployees;
-            IEnumerable<ListEmployeeViewModel> viewModel =
-                AutoMapper.Mapper.Map<IEnumerable<Borrower>, IEnumerable<ListEmployeeViewModel>>(AllEmployees);
+            ListEmployeeViewModel viewModel = new ListEmployeeViewModel();
+
+            if (String.IsNullOrEmpty(SearchFor))
+            {
+                viewModel.ListOfEmployees =
+                    AutoMapper.Mapper.Map<IEnumerable<Borrower>, IEnumerable<EditEmployeeViewModel>>(empRepo.AllEmployees);
+            }
+            else
+            {
+                viewModel.ListOfEmployees =
+                    AutoMapper.Mapper.Map<IEnumerable<Borrower>, IEnumerable<EditEmployeeViewModel>>(empRepo.All.Where(m => m.BarCode == SearchFor));
+            }
+
+            viewModel.SearchKey = "";
             return View(viewModel);
         }
 

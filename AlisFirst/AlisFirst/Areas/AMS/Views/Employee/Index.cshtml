@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AlisFirst.Areas.AMS.ViewModels.ListEmployeeViewModel>
+﻿@model AlisFirst.Areas.AMS.ViewModels.ListEmployeeViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -8,6 +8,7 @@
 
 <p>
     @Html.ActionLink("Create New", "Create")
+    @Html.EditorFor( i => i.SearchKey)
 </p>
 <table>
     <tr>
@@ -35,7 +36,7 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.ListOfEmployees) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.BorrowerID)
