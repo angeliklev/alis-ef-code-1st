@@ -8,7 +8,7 @@ using AlisFirst.Models;
 
 namespace AlisFirst.DAL
 {
-    public class AlisFirstDBInitializer : DropCreateDatabaseAlways<AlisFirstContext>
+    public class AlisFirstDBInitializer : DropCreateDatabaseIfModelChanges<AlisFirstContext>
     {
         
         protected override void Seed(AlisFirstContext context)

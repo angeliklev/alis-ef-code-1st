@@ -1,0 +1,16 @@
+﻿@model AlisFirst.Areas.AMS.ViewModels.AssetRepairHistory.AssetRepair
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+
+        @Html.EditorForModel()
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+
+

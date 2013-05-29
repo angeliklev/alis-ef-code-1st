@@ -9,6 +9,7 @@ using System.Web.Routing;
 using AlisFirst.Models;
 using AlisFirst.DAL;
 using AlisFirst.ViewModels;
+using AlisFirst.Areas.AMS.ViewModels;
 
 namespace AlisFirst
 {
@@ -56,6 +57,12 @@ namespace AlisFirst
             AutoMapper.Mapper.CreateMap<DeleteBorrowerViewModel, Borrower>();
             AutoMapper.Mapper.CreateMap<Borrower, ListBorrowerViewModel>();
             AutoMapper.Mapper.CreateMap<ListBorrowerViewModel, Borrower>();
+
+            // Mapping for Asset - Asset view models
+            AutoMapper.Mapper.CreateMap<Asset, AssetEdit>();
+            AutoMapper.Mapper.CreateMap<AssetEdit, Asset>();
+            AutoMapper.Mapper.CreateMap<Repair, AssetRepairHistory.AssetRepair>();
+            AutoMapper.Mapper.CreateMap<AssetRepairHistory.AssetRepair, Repair>();
         }
     }
 }

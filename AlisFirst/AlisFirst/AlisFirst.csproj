@@ -103,6 +103,7 @@
     <Compile Include="Areas\AMS\Controllers\AssetListController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Areas\AMS\ViewModels\AssetMaintain.cs" />
     <Compile Include="Areas\AMS\ViewModels\AssetsViewModel.cs" />
     <Compile Include="Areas\AMS\ViewModels\SelectedCheckListItemsData.cs" />
     <Compile Include="Areas\LMS\Controllers\BorrowersController.cs" />
@@ -246,9 +247,13 @@
     <Content Include="Areas\AMS\Views\Web.config" />
     <Content Include="Areas\AMS\Views\_ViewStart.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\Index.cshtml" />
-    <Content Include="Areas\AMS\Views\Asset\Edit.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\EditChecklist.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\Create.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\_CreateOrEdit.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\Edit.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\_AssetEdit.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\_AssetRepairHistory.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\_AssetRepairCreate.cshtml" />
     <None Include="Scripts\jquery-2.0.0.intellisense.js" />
     <Content Include="Scripts\EditorHookup.js" />
     <Content Include="Scripts\GoBack.js" />
