@@ -10,10 +10,10 @@
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 
-<div class="related-items">
+<div id="edit-asset" class="related-items">
 @Html.Partial("_AssetEdit",Model.AssetToEdit)
     </div>
-<div class="related-items">
+<div id="repair-history" class="related-items">
 @Html.Partial("_AssetRepairHistory", Model.AssetRepairs)
     </div>
 

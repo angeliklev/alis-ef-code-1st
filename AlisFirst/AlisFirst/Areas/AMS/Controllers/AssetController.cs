@@ -18,9 +18,7 @@ namespace AlisFirst.Areas.AMS.Controllers
         private readonly IAssetModelRepository assetmodelRepository;
         private readonly IAssetRepository assetRepository;
         private readonly ICheckListItemRepository checkListItemRepository;
-        private readonly IRepairRepository repairRepository;
-
-
+        private readonly IRepairRepository repairRepo;
 
         // If you are using Dependency Injection, you can delete the following constructor
         public AssetController()
@@ -38,7 +36,7 @@ namespace AlisFirst.Areas.AMS.Controllers
             this.assetmodelRepository = assetmodelRepository;
             this.assetRepository = assetRepository;
             this.checkListItemRepository = checkListItemRepository;
-            this.repairRepository = repairRepository;
+            this.repairRepo = repairRepository;
         }
 
         //
@@ -46,6 +44,7 @@ namespace AlisFirst.Areas.AMS.Controllers
 
         public ActionResult Index()
         {
+            // this code is to use this controller's Index:
             var assets = assetRepository.AllIncluding(asset => asset.Supplier,
                 asset => asset.AssetModel,
                 asset => asset.AssetConditions,
@@ -55,6 +54,8 @@ namespace AlisFirst.Areas.AMS.Controllers
                 asset => asset.AssignedToes,
                 asset => asset.AssignedLocations);
             return View(assets);
+
+            // next line is for final app when AssetList will work
             //return RedirectToAction("Index", "AssetList");
         }
 
@@ -110,29 +111,50 @@ namespace AlisFirst.Areas.AMS.Controllers
             var assetToMaintain = new AssetMaintain();
             assetToMaintain.AssetID = id;
             assetToMaintain.AssetToEdit = AutoMapper.Mapper.Map<Asset, AssetEdit>(assetToEdit);
-            assetToMaintain.AssetRepairs = PopulateRepairHistory(id);
+            assetToMaintain.AssetRepairs = new AssetRepairsEdit(id);
 
             PopulateChosenCheckListItemsData(assetToEdit);
 
             return View(assetToMaintain);
         }
 
-        private AssetRepairHistory PopulateRepairHistory(int id)
+        // 
+        // POST from partial _AssetRepairCreate
+
+        [HttpPost]
+        public ActionResult CreateRepair(AssetRepairsEdit.AssetRepair repairToCreate)
         {
-            var repairs = this.assetRepository.Find(id).Repairs;
-
-            var repairModel = new AssetRepairHistory();
-            repairModel.RepairHistory = AutoMapper.Mapper.Map<IEnumerable<Repair>, IEnumerable<AssetRepairHistory.AssetRepair>>(repairs); 
-
-            repairModel.RepairToCreate = new AssetRepairHistory.AssetRepair
+            if (ModelState.IsValid)
             {
-                AssetID = id,
-                IssuedDate = DateTime.Today,
-                TechnicianName = "",
-                Result = ""             
-            };
+                repairRepo.InsertOrUpdate(AutoMapper.Mapper.Map<AssetRepairsEdit.AssetRepair, 
+                                                                Repair>(repairToCreate));
+                repairRepo.Save();
+                if (Request.IsAjaxRequest())
+                {
+                    // this doesn't change textfields values
+                    return PartialView("_AssetRepairHistory", new AssetRepairsEdit(repairToCreate.AssetID));
+                }
+                else
+                {
+                    // this works correct
+                    return RedirectToAction("Edit", new { id = repairToCreate.AssetID });
+                }
+            }
+            else
+            {
+                if (Request.IsAjaxRequest())
+                {
+                    //this works correct
+                    return PartialView("_AssetRepairCreate",repairToCreate);
+                }
+                else
+                {
+                    // this doesn't work. can work only if to provide whole data from the form.
+                    // should catch exception and tell to turn on Javascript!
+                    return View("Edit");
+                }
+            }
 
-            return repairModel;
         }
 
         //
@@ -140,6 +162,9 @@ namespace AlisFirst.Areas.AMS.Controllers
 
         [HttpPost]
         public ActionResult Edit(Asset asset, string[] selectedCheckListItems)
+
+        // this  method signature was used in draft branch, when developing edit checklistitems list
+        //public ActionResult Edit(Asset asset, string[] selectedCheckListItems)
         {
 
             if (ModelState.IsValid)
@@ -240,6 +265,7 @@ namespace AlisFirst.Areas.AMS.Controllers
     }
 }
 
+// this commented code is from the controller scaffolded with using EF context.
 //        private AlisFirstContext db = new AlisFirstContext();
 
 //        //

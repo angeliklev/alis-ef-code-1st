@@ -61,8 +61,8 @@ namespace AlisFirst
             // Mapping for Asset - Asset view models
             AutoMapper.Mapper.CreateMap<Asset, AssetEdit>();
             AutoMapper.Mapper.CreateMap<AssetEdit, Asset>();
-            AutoMapper.Mapper.CreateMap<Repair, AssetRepairHistory.AssetRepair>();
-            AutoMapper.Mapper.CreateMap<AssetRepairHistory.AssetRepair, Repair>();
+            AutoMapper.Mapper.CreateMap<Repair, AssetRepairsEdit.AssetRepair>();
+            AutoMapper.Mapper.CreateMap<AssetRepairsEdit.AssetRepair, Repair>();
         }
     }
 }
