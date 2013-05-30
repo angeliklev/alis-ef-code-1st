@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using AlisFirst.Models;
 using AlisFirst.DAL;
 using AlisFirst.Areas.LMS.ViewModels;
+using System.Text.RegularExpressions;
 
 namespace AlisFirst.Areas.LMS.Controllers
 {   
@@ -18,9 +19,21 @@ namespace AlisFirst.Areas.LMS.Controllers
         //
         // GET: /Borrowers/
 
-        public ViewResult Index()
+        public ViewResult Index(string SearchFor)
         {
-            return View(AutoMapper.Mapper.Map<IEnumerable<Borrower>, IEnumerable<ListBorrowerViewModel>>(borRepo.All));
+            ListBorrowerViewModel viewModel = new ListBorrowerViewModel();
+            if (String.IsNullOrEmpty(SearchFor))
+            {
+                viewModel.ListOfBorrowers = AutoMapper.Mapper.Map<IEnumerable<Borrower>, IEnumerable<EditBorrowerViewModel>>(borRepo.All);
+            }
+            else
+            {
+                viewModel.ListOfBorrowers = AutoMapper.Mapper.Map<
+                    IEnumerable<Borrower>, 
+                    IEnumerable<EditBorrowerViewModel>>
+                    (borRepo.All.Where(m => Regex.IsMatch(SearchFor, m.BarCode)));
+            }
+            return View(viewModel);
         }
 
         //
