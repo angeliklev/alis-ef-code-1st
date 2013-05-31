@@ -1,0 +1,41 @@
+﻿@model AlisFirst.Areas.AMS.ViewModels.AssetRepairsEdit
+
+<div class="column">
+    <h2>Create Repair</h2>
+    @Html.Partial("_AssetRepairCreate", Model.RepairToCreate)
+</div>
+
+<div class="column">
+    <h2>Repairs History</h2>
+    <table>
+        <tr>
+            <th>Date
+            </th>
+            <th>Repair result
+            </th>
+            <th>Technician
+            </th>
+        </tr>
+
+        @foreach (var item in Model.RepairHistory)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IssuedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Result)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TechnicianName)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div class="clear"></div>
+
+
+
+

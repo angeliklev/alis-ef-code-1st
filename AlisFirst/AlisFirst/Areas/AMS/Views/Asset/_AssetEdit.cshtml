@@ -1,0 +1,14 @@
+﻿@model AlisFirst.Areas.AMS.ViewModels.AssetEdit
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+
+        @Html.EditorForModel()
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
