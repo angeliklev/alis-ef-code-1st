@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using AlisFirst.Validation;
+using AlisFirst.Models;
 
 namespace AlisFirst.ViewModels
 {
@@ -11,6 +12,18 @@ namespace AlisFirst.ViewModels
     [LoanDateValidation]
     public class CreateLoanViewModel
     {
+        // === Included by Jon ===
+        // {
+
+            public Asset Asset { get; set; }
+
+            public Borrower Borrower { get; set; }
+
+            public IEnumerable<CheckListItem> CheckListItems { get; set; }
+            
+        // }
+        // =======================
+
         [AssetBarcodeValidation]
         public string AssetBarcode { get; set;} 
         [BorrowerBarcodeValidation]

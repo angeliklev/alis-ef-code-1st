@@ -16,18 +16,97 @@ namespace AlisFirst.Controllers
 		private readonly IBorrowerRepository borrowerRepository;
 		private readonly ILoanRepository loanRepository;
         private readonly IAssetConditionRepository assetConditionRepository;
+
+        // === Included by Jon ===
+        // {
+
+            private readonly ICheckListItemRepository checkListItemRepository;
+
+        // }
+        // =======================
+
 		// If you are using Dependency Injection, you can delete the following constructor
-        public LoansController() : this(new AssetRepository(), new BorrowerRepository(), new LoanRepository(), new AssetConditionRepository())
+        public LoansController() : this(new AssetRepository(), new BorrowerRepository(), new LoanRepository(), new AssetConditionRepository(), new CheckListItemRepository())
         {
         }
 
-        public LoansController(IAssetRepository assetRepository, IBorrowerRepository borrowerRepository, ILoanRepository loanRepository, IAssetConditionRepository assetConditionRepository)
+        public LoansController(IAssetRepository assetRepository, IBorrowerRepository borrowerRepository, ILoanRepository loanRepository, IAssetConditionRepository assetConditionRepository, ICheckListItemRepository checkListItemRepository)
         {
 			this.assetRepository = assetRepository;
 			this.borrowerRepository = borrowerRepository;
 			this.loanRepository = loanRepository;
             this.assetConditionRepository = assetConditionRepository;
+            this.checkListItemRepository = checkListItemRepository;
         }
+
+        // === Included by Jon ===
+        // {
+
+            public virtual ActionResult SelectBorrower(CreateLoanViewModel createloan)
+            {
+                try
+                {
+                    Loan insertLoan = AutoMapper.Mapper.Map<CreateLoanViewModel, Loan>(createloan);
+                    insertLoan.BorrowerID = loanRepository.getBorrowerID(createloan.BorrowerBarcode);
+
+                    CreateLoanViewModel viewmodel = new CreateLoanViewModel
+                    {
+                        BorrowerBarcode = createloan.BorrowerBarcode,
+                        Borrower = borrowerRepository.Find(insertLoan.BorrowerID)
+                    };
+
+                    return View("Create",viewmodel);
+                }
+                catch
+                {
+                    return View("Create");
+                }
+            }
+            
+            [HttpPost]
+            public virtual ActionResult SelectAsset(CreateLoanViewModel createloan)
+            {
+                try
+                {
+                    Loan insertLoan = AutoMapper.Mapper.Map<CreateLoanViewModel, Loan>(createloan);
+                    insertLoan.BorrowerID = loanRepository.getBorrowerID(createloan.BorrowerBarcode);
+                    insertLoan.AssetID = loanRepository.getAssetID(createloan.AssetBarcode);
+
+
+                    CreateLoanViewModel viewmodel = new CreateLoanViewModel
+                    {
+                        BorrowerBarcode = createloan.BorrowerBarcode,
+                        AssetBarcode = createloan.AssetBarcode,
+                        Borrower = borrowerRepository.Find(insertLoan.BorrowerID),
+                        Asset = assetRepository.Find(insertLoan.AssetID)
+                    };
+
+                    return View("Create",viewmodel);
+                }
+                catch
+                {
+                    try
+                    {
+                        Loan insertLoan = AutoMapper.Mapper.Map<CreateLoanViewModel, Loan>(createloan);
+                        insertLoan.BorrowerID = loanRepository.getBorrowerID(createloan.BorrowerBarcode);
+
+                        CreateLoanViewModel viewmodel = new CreateLoanViewModel
+                        {
+                            BorrowerBarcode = createloan.BorrowerBarcode,
+                            Borrower = borrowerRepository.Find(insertLoan.BorrowerID)
+                        };
+
+                        return View("Create", viewmodel);
+                    }
+                    catch
+                    {
+                        return View("Create");
+                    }
+                }
+            }
+
+        // }
+        // =======================
 
         //
         // GET: /Loans/
@@ -51,7 +130,7 @@ namespace AlisFirst.Controllers
         public ActionResult Create()
         {
             Loan newLoan = new Loan();
-
+            
             newLoan.LoanDate = DateTime.Now;
             return View(AutoMapper.Mapper.Map<Loan, CreateLoanViewModel>(newLoan));
         } 
@@ -72,10 +151,9 @@ namespace AlisFirst.Controllers
                 loanRepository.Save();
                 return RedirectToAction("Index");
             }
-
             else
             {
-                return View(createLoan);
+                return View("Create", createLoan);
             }
         }
         

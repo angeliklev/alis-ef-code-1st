@@ -1,0 +1,85 @@
+﻿@model AlisFirst.ViewModels.CreateLoanViewModel
+@if (Model.BorrowerBarcode != null && Model.AssetBarcode != null)
+{
+    using (Html.BeginForm("Create","Loans")) 
+    {
+        @Html.ValidationSummary(true)
+        
+            @Html.HiddenFor(model => model.BorrowerBarcode)
+            @Html.HiddenFor(model => model.AssetBarcode)
+    
+            <fieldset>
+                <legend>Asset Information</legend>
+
+                <div class="display-label">Bar Code</div>
+                <div class="display-field">@Model.Asset.BarCode</div>
+
+                <div class="display-label">Serial Number</div>
+                <div class="display-field">@Model.Asset.SerialNum</div>
+
+                <div class="display-label">Supplier</div>
+                <div class="display-field">@Html.DisplayTextFor(_ => Model.Asset.Supplier).ToString()</div>
+
+                <div class="display-label">Model</div>
+                <div class="display-field">@Html.DisplayTextFor(_ => Model.Asset.AssetModel).ToString()</div>
+
+                <div class="display-label">Date Recieved</div>
+                <div class="display-field">@String.Format("{0:g}", Model.Asset.DateRecieved)</div>
+
+                <div class="display-label">Warranty Expires</div>
+                <div class="display-field">@String.Format("{0:g}", Model.Asset.WarrantyExpires)</div>
+
+                <div class="display-label">PurchaseCost</div>
+                <div class="display-field">@String.Format("{0:F}", Model.Asset.PurchaseCost)</div>
+
+                <div class="display-label">IsLoanable</div>
+                <div class="display-field">@Model.Asset.IsLoanable</div>
+
+                <div class="display-label">Notes</div>
+                <div class="display-field">@Model.Asset.Notes</div>
+
+                <div class="display-label">AssetConditions</div>
+                <div class="display-field">@(Model.Asset.AssetConditions == null ? "None" : Model.Asset.AssetConditions.Count.ToString())</div>
+
+                <div class="display-label">CheckListItems</div>
+                <div class="display-field">@(Model.Asset.CheckListItems == null ? "None" : Model.Asset.CheckListItems.Count.ToString())</div>
+
+                <div class="display-label">Repairs</div>
+                <div class="display-field">@(Model.Asset.Repairs == null ? "None" : Model.Asset.Repairs.Count.ToString())</div>
+
+                <div class="display-label">Loans</div>
+                <div class="display-field">@(Model.Asset.Loans == null ? "None" : Model.Asset.Loans.Count.ToString())</div>
+
+                <div class="display-label">AssignedToes</div>
+                <div class="display-field">@(Model.Asset.AssignedToes == null ? "None" : Model.Asset.AssignedToes.Count.ToString())</div>
+
+                <div class="display-label">AssignedLocations</div>
+                <div class="display-field">@(Model.Asset.AssignedLocations == null ? "None" : Model.Asset.AssignedLocations.Count.ToString())</div>
+           
+            </fieldset>
+    
+		    <div class="editor-label">
+                @Html.LabelFor(model => model.LoanDate)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor( model => model.LoanDate )
+                @Html.ValidationMessageFor(model => model.LoanDate)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.DueDate)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.DueDate)
+                @Html.ValidationMessageFor(model => model.DueDate)
+            </div>
+
+            <p>
+                <input type="submit" value="Create" />
+            </p>
+    }
+}
+else
+{
+    <p>Borrower Barcode or Asset Barcode is non-existant</p>
+}

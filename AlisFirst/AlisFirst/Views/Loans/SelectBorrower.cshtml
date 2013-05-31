@@ -1,0 +1,13 @@
+﻿@model AlisFirst.ViewModels.CreateLoanViewModel
+
+@using (Html.BeginForm("SelectBorrower","Loans"))
+{
+    <div class="editor-label">
+        Borrower Barcode
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.BorrowerBarcode) 
+        @Html.ValidationMessageFor(model => model.BorrowerBarcode)
+    </div>
+    @*<input type="submit" value="Select" />*@
+}

@@ -378,10 +378,12 @@
     <Content Include="Views\Suppliers\Index.cshtml" />
     <Content Include="Views\Suppliers\_CreateOrEdit.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\date.cshtml" />
+    <Content Include="Views\Loans\SelectBorrower.cshtml" />
+    <Content Include="Views\Loans\SelectAsset.cshtml" />
+    <Content Include="Views\Loans\_LoanDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\AMS\Controllers\" />
     <Folder Include="Areas\AMS\Models\" />
     <Folder Include="Areas\AMS\Views\Shared\" />
     <Folder Include="Areas\LMS\Models\" />

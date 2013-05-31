@@ -11,10 +11,13 @@ namespace AlisFirst.Models
     {
         public int LoanID { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime LoanDate { get; set; }
 
-        public DateTime? DueDate { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime DueDate { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime? ReturnDate { get; set; }
 
         public int AssetID { get; set; }

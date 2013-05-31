@@ -1,0 +1,54 @@
+﻿@model AlisFirst.ViewModels.CreateLoanViewModel
+
+@if(Model.BorrowerBarcode != null && Model.Borrower != null)
+{
+    using (Html.BeginForm("SelectAsset","Loans",FormMethod.Post))
+    {
+        @Html.HiddenFor(model => model.BorrowerBarcode)
+        
+        <fieldset>
+            <legend>Borrower Information</legend>
+            
+            <div class="display-label">Surname</div>
+            <div class="display-field">@Model.Borrower.Surname</div>
+
+            <div class="display-label">BarCode</div>
+            <div class="display-field">@Model.Borrower.BarCode</div>
+
+            <div class="display-label">GivenName</div>
+            <div class="display-field">@Model.Borrower.GivenName</div>
+
+            <div class="display-label">BorrowerExpiryDate</div>
+            <div class="display-field">@String.Format("{0:g}", Model.Borrower.BorrowerExpiryDate)</div>
+
+            <div class="display-label">Email</div>
+            <div class="display-field">@Model.Borrower.Email</div>
+
+            <div class="display-label">PhoneNumber</div>
+            <div class="display-field">@Model.Borrower.PhoneNumber</div>
+
+            <div class="display-label">IsEmployee</div>
+            <div class="display-field">@Model.Borrower.IsEmployee</div>
+
+            <div class="display-label">Loans</div>
+            <div class="display-field">@(Model.Borrower.Loans == null ? "None" : Model.Borrower.Loans.Count.ToString())</div>
+
+            <div class="display-label">AssignedTos</div>
+            <div class="display-field">@(Model.Borrower.AssignedTos == null ? "None" : Model.Borrower.AssignedTos.Count.ToString())</div>
+
+        </fieldset>
+        
+        <div class="editor-label">
+            Asset Barcode
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AssetBarcode)
+            @Html.ValidationMessageFor(model => model.AssetBarcode)
+        </div>
+        @*<input type="submit" value="Select" />*@
+    }
+}
+else
+{
+    <p>Borrower Barcode is non-existant.</p>
+}
