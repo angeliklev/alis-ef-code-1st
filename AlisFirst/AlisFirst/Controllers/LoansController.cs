@@ -53,6 +53,7 @@ namespace AlisFirst.Controllers
             Loan newLoan = new Loan();
 
             newLoan.LoanDate = DateTime.Now;
+            newLoan.DueDate = DateTime.Now.AddDays(7);
             return View(AutoMapper.Mapper.Map<Loan, CreateLoanViewModel>(newLoan));
         } 
 
@@ -86,7 +87,7 @@ namespace AlisFirst.Controllers
         {
             Loan returnLoan = loanRepository.Find(id);
             //DateTime loandate = returnLoan.DueDate;
-            returnLoan.LoanDate = returnLoan.LoanDate;
+            //returnLoan.LoanDate = returnLoan.LoanDate;
             returnLoan.ReturnDate = DateTime.Now;
             return View(AutoMapper.Mapper.Map<Loan, EditLoanViewModel>(returnLoan));
         }

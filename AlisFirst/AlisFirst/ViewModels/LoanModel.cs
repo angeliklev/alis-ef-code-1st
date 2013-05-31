@@ -21,7 +21,7 @@ namespace AlisFirst.ViewModels
 
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/mm/yyyy}")]
         [DataType(DataType.Date)]
-        public DateTime? DueDate { get; set; }        
+        public DateTime DueDate { get; set; }        
     }
 
     [ReturnLoanValidation]
