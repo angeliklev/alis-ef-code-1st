@@ -14,10 +14,12 @@ namespace AlisFirst.Areas.AMS
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
+
             context.MapRoute(
                 "AMS_default",
                 "AMS/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { controller = "Dashboard" ,action = "Index", id = UrlParameter.Optional },
+                new[] { "AlisFirst.Areas.AMS.Controllers" }
             );
         }
     }

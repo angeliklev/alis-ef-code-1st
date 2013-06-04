@@ -1,0 +1,101 @@
+﻿@using MvcPaging
+@model AlisFirst.Areas.AMS.ViewModels._AssetListViewModel
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+@if (!Model.Assets.Any())
+{
+    <div>Nothing to display, search again.</div>  
+}
+else
+{
+
+    <table class="grid">
+        <tr>
+            <th>BarCode
+            </th>
+            <th>SerialNum
+            </th>
+            <th>Supplier
+            </th>
+            <th>AssetModel
+            </th>
+            <th>DateRecieved
+            </th>
+            <th>WarrantyExpires
+            </th>
+            <th>PurchaseCost
+            </th>
+            <th>IsLoanable
+            </th>
+            <th>Notes
+            </th>
+            <th>IsActive
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Assets)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(i => item.BarCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(i => item.SerialNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(i => item.Supplier.SupplierName)
+                </td>
+                <td>
+                    @Html.DisplayFor(i => item.AssetModel.AssetModelName)
+                </td>
+                <td>
+                    @Html.DisplayFor(i => item.DateRecieved)
+                </td>
+                <td>
+                    @Html.DisplayFor(i => item.WarrantyExpires)
+                </td>
+                <td>
+                    @Html.DisplayFor(i => item.PurchaseCost)
+                </td>
+                <td>
+                    @Html.DisplayFor(i => item.IsLoanable)
+                </td>
+                <td>
+                    @Html.DisplayFor(i => item.Notes)
+                </td>
+                <td>
+                    @Html.DisplayFor(i => item.IsActive)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.AssetID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.AssetID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.AssetID })
+                </td>
+            </tr>
+        }
+
+
+    </table>
+    
+    
+}
+
+<div id="AJAXpager" style="display: none">
+    @Html.Pager(Model.Assets.PageSize, Model.Assets.PageNumber, Model.Assets.TotalItemCount, new AjaxOptions { UpdateTargetId = "AssetList" }).Options(o => o.Action("AjaxIndex"))
+</div>
+
+<div id="pager" style="display: block">
+    @Html.Pager(Model.Assets.PageSize, Model.Assets.PageNumber, Model.Assets.TotalItemCount).Options(o => o.Action("noJSIndex"))
+</div>
+
+<script>
+    document.getElementById('AJAXpager').style.display = 'block';
+    document.getElementById('pager').style.display = 'none';
+</script>
+
+

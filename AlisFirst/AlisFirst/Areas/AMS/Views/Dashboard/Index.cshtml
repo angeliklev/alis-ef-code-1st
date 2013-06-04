@@ -1,0 +1,33 @@
+﻿@model AlisFirst.Areas.AMS.ViewModels.DashboardViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div id="left">
+</div>
+
+<div id="middle">
+    <p>You can perform these tasks</p>
+
+    @Html.ActionLink("Create Asset", null);
+    @Html.ActionLink("Create Employee", null);
+    @Html.ActionLink("Update Lookup Tables", null);
+    @Html.ActionLink("Warranty Expire Report", null);
+
+</div>
+
+<div id="right">
+    @using (Html.BeginForm())
+    {
+        @Html.TextBoxFor(i => i.Barcode)
+   
+        <input type="submit" name="Maintain" value="Maintain" />            
+        <input type="submit" name="Employee" value="Employee" />
+        <input type="submit" name="Location" value="Location" />
+        <input type="submit" name="Status" value="Status" />
+    }
+</div>
+
+

@@ -27,7 +27,7 @@ namespace AlisFirst.DAL
 
         public DbSet<AlisFirst.Models.Borrower> Borrowers { get; set; }
 
-        public DbSet<AlisFirst.Models.AssetStatus> AssetStatus { get; set; }
+        public DbSet<AlisFirst.Models.AssetStatus> AssetStatuses { get; set; }
 
         public DbSet<AlisFirst.Models.AssignedLocation> AssignedLocations { get; set; }
 

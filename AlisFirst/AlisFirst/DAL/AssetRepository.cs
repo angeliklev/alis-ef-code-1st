@@ -49,6 +49,8 @@ namespace AlisFirst.DAL
             context.Assets.Remove(asset);
         }
 
+
+
         public void Save()
         {
             context.SaveChanges();
