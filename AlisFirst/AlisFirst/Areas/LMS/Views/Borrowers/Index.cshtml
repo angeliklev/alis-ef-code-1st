@@ -45,8 +45,7 @@
 @foreach (var item in Model.ListOfBorrowers ) {
     <tr>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.BorrowerID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.BorrowerID })
+            @Html.ActionLink("Edit", "Edit", new { id=item.BorrowerID })
         </td>
         <td>
 			@item.Surname
