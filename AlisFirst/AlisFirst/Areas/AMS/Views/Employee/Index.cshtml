@@ -8,12 +8,16 @@
 
 <p>
     @Html.ActionLink("Create New", "Create")
-    @Html.EditorFor( i => i.SearchKey)
 </p>
+    @using(Html.BeginForm())
+    {
+        @Html.TextBoxFor(model => model.SearchKey)
+        <input type="submit" value="Search" />
+    }
 <table>
     <tr>
         <th>
-            Borrower ID
+
         </th>
         <th>
             Bar Code
@@ -39,8 +43,9 @@
 @foreach (var item in Model.ListOfEmployees) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.BorrowerID)
+            @Html.ActionLink("Edit", "Edit", new { id=item.BorrowerID })
         </td>
+            @Html.HiddenFor(modelItem => item.BorrowerID)
         <td>
             @Html.DisplayFor(modelItem => item.BarCode)
         </td>
@@ -58,9 +63,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.PhoneNumber)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.BorrowerID })
         </td>
     </tr>
 }

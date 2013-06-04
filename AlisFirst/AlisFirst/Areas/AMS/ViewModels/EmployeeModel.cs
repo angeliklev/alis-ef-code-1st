@@ -36,16 +36,14 @@ namespace AlisFirst.Areas.AMS.ViewModels
         [Required]
         [Key]
         public int BorrowerID { get; set; }
-        [UniqueBarcode]
         [Display(Name = "Bar Code")]
         public string BarCode { get; set; }
         public string Surname { get; set; }
         [Display(Name = "Given Name")]
         public string GivenName { get; set; }
         [DataType(DataType.Date)]
-        [Display(Name = "Borrower Expiry Date")]
+        [Display(Name = "Borrower Expiry Date")][DisplayFormat(DataFormatString="{0:dd/mm/yy}")]
         public DateTime? BorrowerExpiryDate { get; set; }
-        [UniqueEmail]
         public string Email { get; set; }
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
