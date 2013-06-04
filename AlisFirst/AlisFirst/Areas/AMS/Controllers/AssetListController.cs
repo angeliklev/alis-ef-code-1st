@@ -60,12 +60,13 @@ namespace AlisFirst.Areas.AMS.Controllers
             
             int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
 
+            AlisFirst.Areas.AMS.ViewModels._AssetListViewModel ViewModel = new ViewModels._AssetListViewModel();
            
 
             var Assets = assetRepository.All.ToList();
-            AssetListIndexViewModel.Assets = Assets.ToPagedList<AlisFirst.Models.Asset>(currentPageIndex, 5);
+            ViewModel.Assets = Assets.ToPagedList<AlisFirst.Models.Asset>(currentPageIndex, 5);
 
-            return PartialView("_AssetList", AssetListIndexViewModel.Assets);
+            return PartialView("_AssetList", ViewModel);
 
         }
 
