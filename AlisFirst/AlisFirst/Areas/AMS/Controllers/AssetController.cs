@@ -16,25 +16,27 @@ namespace AlisFirst.Areas.AMS.Controllers
         private readonly ISupplierRepository supplierRepository;
         private readonly ICategoryRepository categoryRepository;
         private readonly IAssetModelRepository assetmodelRepository;
-        private readonly IAssetRepository assetRepository;
+        private readonly IAssetRepository assetRepo;
         private readonly ICheckListItemRepository checkListItemRepository;
+        private readonly IRepairRepository repairRepo;
 
         // If you are using Dependency Injection, you can delete the following constructor
         public AssetController()
             : this(new SupplierRepository(), new CategoryRepository(), new AssetModelRepository(),
-            new AssetRepository(), new CheckListItemRepository())
+            new AssetRepository(), new CheckListItemRepository(), new RepairRepository())
         {
         }
 
         public AssetController(ISupplierRepository supplierRepository, ICategoryRepository categoryRepository,
             IAssetModelRepository assetmodelRepository, IAssetRepository assetRepository,
-            ICheckListItemRepository checkListItemRepository)
+            ICheckListItemRepository checkListItemRepository, IRepairRepository repairRepository)
         {
             this.supplierRepository = supplierRepository;
             this.categoryRepository = categoryRepository;
             this.assetmodelRepository = assetmodelRepository;
-            this.assetRepository = assetRepository;
+            this.assetRepo = assetRepository;
             this.checkListItemRepository = checkListItemRepository;
+            this.repairRepo = repairRepository;
         }
 
         //
@@ -42,16 +44,16 @@ namespace AlisFirst.Areas.AMS.Controllers
 
         public ActionResult Index()
         {
-            //var assets = assetRepository.AllIncluding(asset => asset.Supplier,
-            //    asset => asset.AssetModel,
-            //    asset => asset.AssetConditions,
-            //    asset => asset.CheckListItems,
-            //    asset => asset.Repairs,
-            //    asset => asset.Loans,
-            //    asset => asset.AssignedToes,
-            //    asset => asset.AssignedLocations);
-            //return View(assets);
-            return RedirectToAction("Index", "AssetList");
+            var assets = assetRepo.AllIncluding(asset => asset.Supplier,
+                asset => asset.AssetModel,
+                asset => asset.AssetConditions,
+                asset => asset.CheckListItems,
+                asset => asset.Repairs,
+                asset => asset.Loans,
+                asset => asset.AssignedToes,
+                asset => asset.AssignedLocations);
+            return View(assets);
+            //return RedirectToAction("Index", "AssetList");
         }
 
         //
@@ -59,7 +61,7 @@ namespace AlisFirst.Areas.AMS.Controllers
 
         public ViewResult Details(int id)
         {
-            return View(assetRepository.Find(id));
+            return View(assetRepo.Find(id));
         }
 
         //
@@ -81,8 +83,8 @@ namespace AlisFirst.Areas.AMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                assetRepository.InsertOrUpdate(asset);
-                assetRepository.Save();
+                assetRepo.InsertOrUpdate(asset);
+                assetRepo.Save();
                 return RedirectToAction("Index");
             }
             else
@@ -94,19 +96,121 @@ namespace AlisFirst.Areas.AMS.Controllers
         }
 
         //
-        // GET: /Asset/Edit/5
+        // GET: AMS/Asset/Edit/5
 
         public ActionResult Edit(int id)
         {
-            ViewBag.PossibleSuppliers = supplierRepository.All;
-            ViewBag.PossibleCategories = categoryRepository.All;
-            ViewBag.PossibleAssetModels = assetmodelRepository.All;
+            //// to display single form for editing Asset and related Checklist items.
+            //ViewBag.PossibleSuppliers = supplierRepository.All;
+            //ViewBag.PossibleCategories = categoryRepository.All;
+            //ViewBag.PossibleAssetModels = assetmodelRepository.All;
+            //var asset = assetRepository.Find(id);
+            //PopulateChosenCheckListItemsData(asset);
+            //return View(asset);
 
-            var asset = assetRepository.Find(id);
-
-            PopulateChosenCheckListItemsData(asset);
-            return View(asset);
+            //instead we will display partial views with forms separate for editing Asset 
+            // and for its related objects
+            return View(PopulateAssetMaintainView(id));
         }
+
+        private AssetMaintain PopulateAssetMaintainView(int id)
+        {
+            var assetToMaintain = new AssetMaintain
+            {
+                AssetID = id,
+                AssetToEdit = PopulateAssetEditView(id),
+                AssetRepairs = PopulateAssetRepairsView(id)
+            };
+            return assetToMaintain;
+        }
+
+        private AssetEdit PopulateAssetEditView(int id)
+        {
+            var assetToEdit = assetRepo.Find(id);
+            return AutoMapper.Mapper.Map<Asset, AssetEdit>(assetToEdit);
+        }
+
+        private AssetRepairs PopulateAssetRepairsView(int id)
+        {
+            return new AssetRepairs
+            {
+                RepairHistory = PopulateRepairsHistory(id),
+                RepairToCreate = PopulateRepairToCreate(id)
+            };
+        }
+
+        private IEnumerable<AssetRepair> PopulateRepairsHistory(int id)
+        {
+            var repairs = repairRepo.All.Where(m => m.AssetID == id);
+            var repairsHistory = AutoMapper.Mapper.Map<IEnumerable<Repair>,
+                    IEnumerable<AssetRepair>>(repairs);
+            return repairsHistory; ;
+        }
+
+        private AssetRepair PopulateRepairToCreate(int id)
+        {
+            return new AssetRepair
+            {
+                AssetID = id,
+                IssuedDate = DateTime.Today,
+                TechnicianName = "",
+                Result = " ",
+            };
+        }
+
+        // 
+        // POST from partial _AssetRepairCreate
+
+        [HttpPost]
+        public ActionResult CreateRepair(AssetRepair repairToCreate)
+        {
+            // when JS enabled, in IE throws exception just when trying to make active text field, so never comes here
+            if (ModelState.IsValid)
+            {
+                repairRepo.InsertOrUpdate(AutoMapper.Mapper.Map<AssetRepair,
+                                                                Repair>(repairToCreate));
+                repairRepo.Save();
+                if (Request.IsAjaxRequest())
+                {
+                    //
+                    // in Firefox, Google Chrome this doesn't clear textfields values (not as expected!)
+                    return PartialView("_AssetRepairHistory", PopulateAssetRepairsView(repairToCreate.AssetID));
+                }
+                else
+                {
+                    // works in Firefox, IE, Google Chrome
+                    // this renders the whole page again, with updated data
+                    return RedirectToAction("Edit", new { id = repairToCreate.AssetID });
+                }
+            }
+            else
+            {
+                if (Request.IsAjaxRequest())
+                {
+                    // works in Firefox, Google Chrome
+                    //this works correct but not in Google Chrome
+                    //return PartialView("_AssetRepairCreate", repairToCreate);
+                    var repairModel = new AssetRepairs
+                    {
+                        RepairHistory = PopulateRepairsHistory(repairToCreate.AssetID),
+                        RepairToCreate = repairToCreate
+                    };
+                    return PartialView("_AssetRepairHistory", repairModel);
+                }
+                else
+                {
+                    // works in Firefox, IE, Google Chrome
+                    // 1 - render the whole viewmodel data
+                    var editModel = PopulateAssetMaintainView(repairToCreate.AssetID);
+
+                    // 2 - update repairToCreate with current repair data (then it is with updated modelState)
+                    editModel.AssetRepairs.RepairToCreate = repairToCreate;
+
+                    return View("Edit", editModel);
+                }
+            }
+        }
+
 
         //
         // POST: /Asset/Edit/5
@@ -119,8 +223,8 @@ namespace AlisFirst.Areas.AMS.Controllers
             {
                 UpdateAssetCheckListItems(selectedCheckListItems, asset);
 
-                assetRepository.InsertOrUpdate(asset);
-                assetRepository.Save();
+                assetRepo.InsertOrUpdate(asset);
+                assetRepo.Save();
                 return RedirectToAction("Index");
             }
             else
@@ -185,7 +289,7 @@ namespace AlisFirst.Areas.AMS.Controllers
 
         public ActionResult Delete(int id)
         {
-            return View(assetRepository.Find(id));
+            return View(assetRepo.Find(id));
         }
 
         //
@@ -194,8 +298,8 @@ namespace AlisFirst.Areas.AMS.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            assetRepository.Delete(id);
-            assetRepository.Save();
+            assetRepo.Delete(id);
+            assetRepo.Save();
 
             return RedirectToAction("Index");
         }
@@ -206,7 +310,7 @@ namespace AlisFirst.Areas.AMS.Controllers
             {
                 supplierRepository.Dispose();
                 assetmodelRepository.Dispose();
-                assetRepository.Dispose();
+                assetRepo.Dispose();
             }
             base.Dispose(disposing);
         }

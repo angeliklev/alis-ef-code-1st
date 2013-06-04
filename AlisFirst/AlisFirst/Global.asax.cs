@@ -8,7 +8,9 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using AlisFirst.Models;
 using AlisFirst.DAL;
+using AlisFirst.ViewModels;
 using AlisFirst.Areas.LMS.ViewModels;
+using AlisFirst.Areas.AMS.ViewModels;
 
 namespace AlisFirst
 {
@@ -60,6 +62,12 @@ namespace AlisFirst
             AutoMapper.Mapper.CreateMap<Loan, CreateLoanViewModel>();
             AutoMapper.Mapper.CreateMap<EditLoanViewModel, Loan>();
             AutoMapper.Mapper.CreateMap<Loan, EditLoanViewModel>();
+
+            // Mapping for maintain Asset, between domain models and view models
+            AutoMapper.Mapper.CreateMap<Asset, AssetEdit>();
+            AutoMapper.Mapper.CreateMap<AssetEdit, Asset>();
+            AutoMapper.Mapper.CreateMap<Repair, AssetRepair>();
+            AutoMapper.Mapper.CreateMap<AssetRepair, Repair>();
         }
     }
 }

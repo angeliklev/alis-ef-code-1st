@@ -103,6 +103,7 @@
     <Compile Include="Areas\AMS\Controllers\AssetListController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Areas\AMS\ViewModels\AssetMaintain.cs" />
     <Compile Include="Areas\AMS\ViewModels\AssetsViewModel.cs" />
     <Compile Include="Areas\AMS\ViewModels\SelectedCheckListItemsData.cs" />
     <Compile Include="Areas\LMS\Controllers\BorrowersController.cs" />
@@ -250,6 +251,9 @@
     <Content Include="Areas\AMS\Views\Asset\Edit.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\Create.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\_CreateOrEdit.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\_AssetEdit.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\_AssetRepairHistory.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\_AssetRepairCreate.cshtml" />
     <None Include="Scripts\jquery-2.0.0.intellisense.js" />
     <Content Include="Scripts\EditorHookup.js" />
     <Content Include="Scripts\GoBack.js" />
@@ -387,7 +391,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\AMS\Controllers\" />
     <Folder Include="Areas\AMS\Models\" />
     <Folder Include="Areas\AMS\Views\Shared\" />
     <Folder Include="Areas\LMS\Models\" />
