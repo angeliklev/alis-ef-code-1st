@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using AlisFirst.Models;
 using AlisFirst.DAL;
 using AlisFirst.ViewModels;
 using AlisFirst.Areas.LMS.ViewModels;
-using AlisFirst.Areas.AMS.ViewModels;
 
 namespace AlisFirst
 {
@@ -68,6 +63,8 @@ namespace AlisFirst
             AutoMapper.Mapper.CreateMap<AssetEdit, Asset>();
             AutoMapper.Mapper.CreateMap<Repair, AssetRepair>();
             AutoMapper.Mapper.CreateMap<AssetRepair, Repair>();
+            AutoMapper.Mapper.CreateMap<AssignedLocation, AssignedLocationData>();
+            AutoMapper.Mapper.CreateMap<AssignedLocationData, AssignedLocation>();
         }
     }
 }

@@ -1,8 +1,10 @@
 ﻿// File /ViewModels/AssetMaintain.cs
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using AlisFirst.Models;
 
 namespace AlisFirst.Areas.AMS.ViewModels
 {
@@ -12,6 +14,7 @@ namespace AlisFirst.Areas.AMS.ViewModels
         public int AssetID { get; set; }
         public AssetEdit AssetToEdit { get; set; }
         public AssetRepairs AssetRepairs { get; set; }
+        public AssetAssignedLocationsVM AssetLocations { get; set; }
     }
 
     public class AssetEdit
@@ -39,6 +42,7 @@ namespace AlisFirst.Areas.AMS.ViewModels
     public class AssetRepair
     {
         [Required]
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         public DateTime IssuedDate { get; set; }
         [Required]
         public string TechnicianName { get; set; }
@@ -48,4 +52,39 @@ namespace AlisFirst.Areas.AMS.ViewModels
         [HiddenInput(DisplayValue = false)]
         public int AssetID { get; set; }
     }
+
+    public class AssetAssignedLocationsVM
+    {
+        public AssignedLocationVM LocationToCreate { get; set; }
+        public IEnumerable<AssignedLocationData> LocationHistory { get; set; }
+    }
+
+    public class AssignedLocationData
+    {
+        [HiddenInput(DisplayValue = false)]
+        public int AssetID { get; set; } 
+       
+        [Required]
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
+        public DateTime AssignedLocationDate { get; set; }
+
+        public int? LocationID { get; set; }
+        public virtual Location Location { get; set; } 
+    }
+
+    public class AssignedLocationVM
+    {
+        public AssignedLocationData  AssignedLocation { get; set; }
+        // list of locatins for DDL to select
+        public SelectList Locations { get; private set; }
+
+        public AssignedLocationVM(AssignedLocationData newlocation,  
+                                        IEnumerable locations) {
+            AssignedLocation = newlocation;
+            Locations = new SelectList(locations, "LocationID", "LocationName", AssignedLocation.LocationID);
+            //Locations = new SelectList(locations, "LocationID", "LocationName");
+        }
+
+    }
 }
+

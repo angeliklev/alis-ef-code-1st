@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using AlisFirst.Models;
-using AlisFirst.DAL;
 using AlisFirst.Areas.AMS.ViewModels;
+using AlisFirst.DAL;
+using AlisFirst.Models;
 
 namespace AlisFirst.Areas.AMS.Controllers
 {
@@ -19,17 +16,21 @@ namespace AlisFirst.Areas.AMS.Controllers
         private readonly IAssetRepository assetRepo;
         private readonly ICheckListItemRepository checkListItemRepository;
         private readonly IRepairRepository repairRepo;
+        private readonly IAssignedLocationRepository assignedLocationRepo;
+        private readonly ILocationRepository locationRepo;
 
         // If you are using Dependency Injection, you can delete the following constructor
         public AssetController()
             : this(new SupplierRepository(), new CategoryRepository(), new AssetModelRepository(),
-            new AssetRepository(), new CheckListItemRepository(), new RepairRepository())
+            new AssetRepository(), new CheckListItemRepository(), new RepairRepository(),
+            new AssignedLocationRepository(), new LocationRepository())
         {
         }
 
         public AssetController(ISupplierRepository supplierRepository, ICategoryRepository categoryRepository,
             IAssetModelRepository assetmodelRepository, IAssetRepository assetRepository,
-            ICheckListItemRepository checkListItemRepository, IRepairRepository repairRepository)
+            ICheckListItemRepository checkListItemRepository, IRepairRepository repairRepository,
+            IAssignedLocationRepository assignedLocationRepository, ILocationRepository locationReposiroty)
         {
             this.supplierRepository = supplierRepository;
             this.categoryRepository = categoryRepository;
@@ -37,6 +38,8 @@ namespace AlisFirst.Areas.AMS.Controllers
             this.assetRepo = assetRepository;
             this.checkListItemRepository = checkListItemRepository;
             this.repairRepo = repairRepository;
+            this.assignedLocationRepo = assignedLocationRepository;
+            this.locationRepo = locationReposiroty;
         }
 
         //
@@ -119,7 +122,8 @@ namespace AlisFirst.Areas.AMS.Controllers
             {
                 AssetID = id,
                 AssetToEdit = PopulateAssetEditView(id),
-                AssetRepairs = PopulateAssetRepairsView(id)
+                AssetRepairs = PopulateAssetRepairsView(id),
+                AssetLocations = PopulateAssetLocationsView(id)
             };
             return assetToMaintain;
         }
@@ -128,6 +132,83 @@ namespace AlisFirst.Areas.AMS.Controllers
         {
             var assetToEdit = assetRepo.Find(id);
             return AutoMapper.Mapper.Map<Asset, AssetEdit>(assetToEdit);
+        }
+
+        private AssetAssignedLocationsVM PopulateAssetLocationsView(int id)
+        {
+            var viewModel =
+             new AssetAssignedLocationsVM
+            {
+                LocationHistory = PopulateLocationHistory(id),
+                LocationToCreate = PopulateLocationToCreate(id)
+            };
+            return viewModel;
+        }
+
+        private IEnumerable<AssignedLocationData> PopulateLocationHistory(int id)
+        {
+            // here happens lazy loading for the last added object.... 
+            // the Location.LocationName is not displayed, but this happens if to refresh the page
+            var viewModel = AutoMapper.Mapper.Map<IEnumerable<AssignedLocation>, 
+                IEnumerable<AssignedLocationData>>(assignedLocationRepo.All
+                .Where(m => m.AssetID == id));
+            return viewModel;
+        }
+
+        private AssignedLocationVM PopulateLocationToCreate(int id)
+        {
+            var forNewLocation = new AssignedLocationData 
+            {
+                AssetID = id, AssignedLocationDate = DateTime.Today
+            };
+
+            return new AssignedLocationVM( forNewLocation, locationRepo.All.ToList());
+        }
+        
+        // 
+        // POST from partial _AssetLocationCreate
+
+        [HttpPost]
+        public ActionResult CreateLocation(AssignedLocationData assignedLocation)
+        {
+            if (ModelState.IsValid)
+            {
+                assignedLocationRepo.InsertOrUpdate(AutoMapper.Mapper.Map<AssignedLocationData,
+                                                                AssignedLocation>(assignedLocation));
+                assignedLocationRepo.Save();
+                if (Request.IsAjaxRequest())
+                {
+                    var viewModel = PopulateAssetLocationsView(assignedLocation.AssetID);
+                    return PartialView("_AssetLocationHistory",viewModel);
+                }
+                else
+                {
+                    // this returns the whole page again, with updated data
+                    return RedirectToAction("Edit", new { id = assignedLocation.AssetID });
+                }
+            }
+            else
+            {
+                if (Request.IsAjaxRequest())
+                {
+                    var viewModel = new AssetAssignedLocationsVM
+                    {
+                        LocationHistory = PopulateLocationHistory(assignedLocation.AssetID),
+                        LocationToCreate = new AssignedLocationVM( assignedLocation, locationRepo.All.ToList())
+                    };
+                    return PartialView("_AssetLocationHistory", viewModel);
+                }
+                else
+                {
+                    // 1 - render the whole viewmodel data
+                    var editModel = PopulateAssetMaintainView(assignedLocation.AssetID);
+
+                    // 2 - update repairToCreate with current repair data (then it is with updated modelState)
+                    editModel.AssetLocations.LocationToCreate = new AssignedLocationVM(assignedLocation, locationRepo.All.ToList()); 
+
+                    return View("Edit", editModel);
+                }
+            }
         }
 
         private AssetRepairs PopulateAssetRepairsView(int id)
@@ -164,7 +245,6 @@ namespace AlisFirst.Areas.AMS.Controllers
         [HttpPost]
         public ActionResult CreateRepair(AssetRepair repairToCreate)
         {
-            // when JS enabled, in IE throws exception just when trying to make active text field, so never comes here
             if (ModelState.IsValid)
             {
                 repairRepo.InsertOrUpdate(AutoMapper.Mapper.Map<AssetRepair,
