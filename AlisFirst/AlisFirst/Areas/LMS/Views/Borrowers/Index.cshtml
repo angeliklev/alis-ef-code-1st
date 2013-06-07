@@ -11,8 +11,7 @@
     <br />
     @using (Html.BeginForm())
     {
-        @Html.LabelFor(m => m.SearchFor)
-        @Html.EditorFor(m => m.SearchFor)
+        @Html.TextBox("SearchFor")
         <input type="submit", value="Search" />
     }
 </p>

@@ -31,7 +31,7 @@ namespace AlisFirst.Areas.LMS.Controllers
                 viewModel.ListOfBorrowers = AutoMapper.Mapper.Map<
                     IEnumerable<Borrower>, 
                     IEnumerable<EditBorrowerViewModel>>
-                    (borRepo.All.Where(m => Regex.IsMatch(SearchFor, m.BarCode)));
+                    (borRepo.All.Where(m => SearchFor.Equals(m.BarCode)));
             }
             return View(viewModel);
         }
