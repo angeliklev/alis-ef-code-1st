@@ -16,6 +16,7 @@ namespace AlisFirst.Areas.AMS.Controllers
         //
         // GET: /Employee/
 
+        [HttpGet]
         public ViewResult Index()
         {
             IEnumerable<Borrower> AllEmployees = empRepo.AllEmployees;
@@ -30,11 +31,13 @@ namespace AlisFirst.Areas.AMS.Controllers
         // POST: /Employee/
 
         [HttpPost]
-        public ActionResult Index(ListEmployeeViewModel viewModel)
+        public ActionResult Index(string SearchKey)
         {
+            ListEmployeeViewModel viewModel = new ListEmployeeViewModel();
+
             if (ModelState.IsValid)
             {
-                if (false)
+                if (String.IsNullOrEmpty(SearchKey))
                 {
                     viewModel.ListOfEmployees =
                         AutoMapper.Mapper.Map<IEnumerable<Borrower>, IEnumerable<EditEmployeeViewModel>>(empRepo.AllEmployees);
@@ -42,7 +45,7 @@ namespace AlisFirst.Areas.AMS.Controllers
                 else
                 {
                     viewModel.ListOfEmployees =
-                        AutoMapper.Mapper.Map<IEnumerable<Borrower>, IEnumerable<EditEmployeeViewModel>>(empRepo.All.Where(m => m.BarCode == viewModel.SearchKey));
+                        AutoMapper.Mapper.Map<IEnumerable<Borrower>, IEnumerable<EditEmployeeViewModel>>(empRepo.All.Where(m => m.BarCode == SearchKey));
                 }
             }
             return View(viewModel);

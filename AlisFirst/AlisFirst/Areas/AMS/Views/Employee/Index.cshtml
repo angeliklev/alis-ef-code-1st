@@ -9,11 +9,13 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-    @using(Html.BeginForm())
-    {
-        @Html.TextBoxFor(model => model.SearchKey)
-        <input type="submit" value="Search" />
-    }
+@using(Html.BeginForm())
+{
+    <p>
+    @Html.TextBox("SearchKey")
+    <input type="submit" value="Search" />
+    </p>
+}
 <table>
     <tr>
         <th>
@@ -42,9 +44,18 @@
 
 @foreach (var item in Model.ListOfEmployees) {
     <tr>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.BorrowerID })
-        </td>
+        @if( item.IsEmployee)
+        {
+            <td>
+                @Html.ActionLink("Edit Employee", "Edit", new { id=item.BorrowerID })
+            </td>
+        }
+        else
+        {
+            <td>
+                Not Employee    
+            </td>    
+        }
             @Html.HiddenFor(modelItem => item.BorrowerID)
         <td>
             @Html.DisplayFor(modelItem => item.BarCode)

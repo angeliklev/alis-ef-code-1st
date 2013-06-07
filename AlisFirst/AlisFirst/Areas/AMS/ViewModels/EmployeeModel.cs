@@ -47,6 +47,7 @@ namespace AlisFirst.Areas.AMS.ViewModels
         public string Email { get; set; }
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
+        public bool IsEmployee { get; set; }
     }
 
     public class DeleteEmployeeViewModel
