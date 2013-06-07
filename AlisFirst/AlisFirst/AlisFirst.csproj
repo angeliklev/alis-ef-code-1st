@@ -105,7 +105,6 @@
     </Compile>
     <Compile Include="Areas\AMS\ViewModels\AssetMaintain.cs" />
     <Compile Include="Areas\AMS\ViewModels\AssetsViewModel.cs" />
-    <Compile Include="Areas\AMS\ViewModels\SelectedCheckListItemsData.cs" />
     <Compile Include="Areas\LMS\Controllers\BorrowersController.cs" />
     <Compile Include="Areas\LMS\LMSAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -254,15 +253,14 @@
     <Content Include="Areas\AMS\Views\Asset\_AssetEdit.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\_AssetRepairHistory.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\_AssetRepairCreate.cshtml" />
-    <None Include="Scripts\jquery-2.0.0.intellisense.js" />
     <Content Include="Scripts\EditorHookup.js" />
     <Content Include="Scripts\GoBack.js" />
-    <Content Include="Scripts\jquery-2.0.0.js" />
-    <Content Include="Scripts\jquery-2.0.0.min.js" />
-    <Content Include="Scripts\jquery-2.0.0.min.map" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.10.2.js" />
     <Content Include="Scripts\jquery-ui-1.10.2.min.js" />
+    <Content Include="Areas\AMS\Views\Asset\_AssetLocationHistory.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\_AssetLocationCreate.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\_AssetCheckListItems.cshtml" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />

@@ -19,6 +19,10 @@
 @Html.Partial("_AssetRepairHistory", Model.AssetRepairs)
     </div>
 
+<div id="check-list" class="related-items">
+@Html.Partial("_AssetCheckListItems", Model.AssetCheckListView)
+    </div>
+
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>

@@ -54,10 +54,17 @@ namespace AlisFirst.DAL
             context.SaveChanges();
         }
 
+        public void Update(Asset asset)
+        {
+            context.Entry(asset).State = EntityState.Modified;
+        }
+
         public void Dispose() 
         {
             context.Dispose();
         }
+
+
     }
 
     public interface IAssetRepository : IDisposable
@@ -68,5 +75,6 @@ namespace AlisFirst.DAL
         void InsertOrUpdate(Asset asset);
         void Delete(int id);
         void Save();
+        void Update(Asset asset);
     }
 }

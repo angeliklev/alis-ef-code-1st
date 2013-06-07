@@ -15,6 +15,7 @@ namespace AlisFirst.Areas.AMS.ViewModels
         public AssetEdit AssetToEdit { get; set; }
         public AssetRepairs AssetRepairs { get; set; }
         public AssetAssignedLocationsVM AssetLocations { get; set; }
+        public AssetCheckListVM AssetCheckListView { get; set; }
     }
 
     public class AssetEdit
@@ -82,9 +83,22 @@ namespace AlisFirst.Areas.AMS.ViewModels
                                         IEnumerable locations) {
             AssignedLocation = newlocation;
             Locations = new SelectList(locations, "LocationID", "LocationName", AssignedLocation.LocationID);
-            //Locations = new SelectList(locations, "LocationID", "LocationName");
         }
 
+    }
+
+    public class AssetCheckListVM
+    {
+        [HiddenInput(DisplayValue = false)]
+        public int AssetID { get; set; }
+        public List<SelectedCheckListItemsData> SelectedItems { get; set; }
+    }
+
+    public class SelectedCheckListItemsData
+    {
+        public int CheckListItemID { get; set; }
+        public string ItemName { get; set; }
+        public bool Selected { get; set; }
     }
 }
 
