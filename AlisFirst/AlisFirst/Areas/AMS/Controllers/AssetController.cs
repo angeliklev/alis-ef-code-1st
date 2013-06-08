@@ -120,7 +120,6 @@ namespace AlisFirst.Areas.AMS.Controllers
         {
             var assetToMaintain = new AssetMaintain
             {
-                AssetID = id,
                 AssetToEdit = PopulateAssetEditView(id),
                 AssetLocations = PopulateAssetLocationsView(id),
                 AssetRepairs = PopulateAssetRepairsView(id),
@@ -129,53 +128,52 @@ namespace AlisFirst.Areas.AMS.Controllers
             return assetToMaintain;
         }
 
-        private AssetEdit PopulateAssetEditView(int id)
+        private AssetEditVM PopulateAssetEditView(int id)
         {
             var assetToEdit = assetRepo.Find(id);
-            return AutoMapper.Mapper.Map<Asset, AssetEdit>(assetToEdit);
+            return AutoMapper.Mapper.Map<Asset, AssetEditVM>(assetToEdit);
         }
 
         private AssetAssignedLocationsVM PopulateAssetLocationsView(int id)
         {
             var viewModel =
              new AssetAssignedLocationsVM
-            {
-                LocationHistory = PopulateLocationHistory(id),
-                LocationToCreate = PopulateLocationToCreate(id)
-            };
+             {
+                 LocationHistory = PopulateLocationHistory(id),
+                 LocationToCreate = PopulateLocationToCreate(id)
+             };
             return viewModel;
         }
 
-        private IEnumerable<AssignedLocationData> PopulateLocationHistory(int id)
+        private IEnumerable<LocationHistoryItemsVM> PopulateLocationHistory(int id)
         {
-            // here happens lazy loading for the last added object.... 
-            // the Location.LocationName is not displayed, but this happens if to refresh the page
             var viewModel = AutoMapper.Mapper.Map<IEnumerable<AssignedLocation>,
-                IEnumerable<AssignedLocationData>>(assignedLocationRepo.All
+                IEnumerable<LocationHistoryItemsVM>>(assignedLocationRepo
+                .AllIncluding(l => l.Location).OrderBy(l => l.AssignedLocationDate)
                 .Where(m => m.AssetID == id));
             return viewModel;
         }
 
-        private AssignedLocationVM PopulateLocationToCreate(int id)
+        private CreateAssignedLocationWithDDLVM PopulateLocationToCreate(int id)
         {
-            var forNewLocation = new AssignedLocationData
+            var forNewLocation = new CreateAssignedLocationVM
             {
                 AssetID = id,
                 AssignedLocationDate = DateTime.Today
             };
 
-            return new AssignedLocationVM(forNewLocation, locationRepo.All.ToList());
+            return new CreateAssignedLocationWithDDLVM(forNewLocation, locationRepo.All.ToList());
         }
 
         // 
         // POST from partial _AssetLocationCreate
 
         [HttpPost]
-        public ActionResult CreateLocation(AssignedLocationData assignedLocation)
+        public ActionResult CreateLocation(CreateAssignedLocationVM assignedLocation)
         {
             if (ModelState.IsValid)
             {
-                assignedLocationRepo.InsertOrUpdate(AutoMapper.Mapper.Map<AssignedLocationData,
+                assignedLocationRepo.InsertOrUpdate(AutoMapper.Mapper.Map<CreateAssignedLocationVM,
                                                                 AssignedLocation>(assignedLocation));
                 assignedLocationRepo.Save();
                 if (Request.IsAjaxRequest())
@@ -196,7 +194,7 @@ namespace AlisFirst.Areas.AMS.Controllers
                     var viewModel = new AssetAssignedLocationsVM
                     {
                         LocationHistory = PopulateLocationHistory(assignedLocation.AssetID),
-                        LocationToCreate = new AssignedLocationVM(assignedLocation, locationRepo.All.ToList())
+                        LocationToCreate = new CreateAssignedLocationWithDDLVM(assignedLocation, locationRepo.All.ToList())
                     };
                     return PartialView("_AssetLocationHistory", viewModel);
                 }
@@ -206,33 +204,33 @@ namespace AlisFirst.Areas.AMS.Controllers
                     var editModel = PopulateAssetMaintainView(assignedLocation.AssetID);
 
                     // 2 - update repairToCreate with current repair data (then it is with updated modelState)
-                    editModel.AssetLocations.LocationToCreate = new AssignedLocationVM(assignedLocation, locationRepo.All.ToList());
+                    editModel.AssetLocations.LocationToCreate = new CreateAssignedLocationWithDDLVM(assignedLocation, locationRepo.All.ToList());
 
                     return View("Edit", editModel);
                 }
             }
         }
 
-        private AssetRepairs PopulateAssetRepairsView(int id)
+        private AssetRepairsVM PopulateAssetRepairsView(int id)
         {
-            return new AssetRepairs
+            return new AssetRepairsVM
             {
                 RepairHistory = PopulateRepairsHistory(id),
                 RepairToCreate = PopulateRepairToCreate(id)
             };
         }
 
-        private IEnumerable<AssetRepair> PopulateRepairsHistory(int id)
+        private IEnumerable<CreateAssetRepairVM> PopulateRepairsHistory(int id)
         {
             var repairs = repairRepo.All.Where(m => m.AssetID == id);
             var repairsHistory = AutoMapper.Mapper.Map<IEnumerable<Repair>,
-                    IEnumerable<AssetRepair>>(repairs);
+                    IEnumerable<CreateAssetRepairVM>>(repairs);
             return repairsHistory; ;
         }
 
-        private AssetRepair PopulateRepairToCreate(int id)
+        private CreateAssetRepairVM PopulateRepairToCreate(int id)
         {
-            return new AssetRepair
+            return new CreateAssetRepairVM
             {
                 AssetID = id,
                 IssuedDate = DateTime.Today,
@@ -245,11 +243,11 @@ namespace AlisFirst.Areas.AMS.Controllers
         // POST from partial _AssetRepairCreate
 
         [HttpPost]
-        public ActionResult CreateRepair(AssetRepair repairToCreate)
+        public ActionResult CreateRepair(CreateAssetRepairVM repairToCreate)
         {
             if (ModelState.IsValid)
             {
-                repairRepo.InsertOrUpdate(AutoMapper.Mapper.Map<AssetRepair,
+                repairRepo.InsertOrUpdate(AutoMapper.Mapper.Map<CreateAssetRepairVM,
                                                                 Repair>(repairToCreate));
                 repairRepo.Save();
                 if (Request.IsAjaxRequest())
@@ -267,7 +265,7 @@ namespace AlisFirst.Areas.AMS.Controllers
             {
                 if (Request.IsAjaxRequest())
                 {
-                    var repairModel = new AssetRepairs
+                    var repairModel = new AssetRepairsVM
                     {
                         RepairHistory = PopulateRepairsHistory(repairToCreate.AssetID),
                         RepairToCreate = repairToCreate
@@ -353,15 +351,8 @@ namespace AlisFirst.Areas.AMS.Controllers
                 } // end foreach
             } // end condition if selectedItems is empty
 
-            try
-            {
-                assetRepo.Update(asset);
-                assetRepo.Save();
-            }
-            catch (Exception)
-            {
-                ModelState.AddModelError("", "Unable to save changes. See your system administrator.");
-            }
+            assetRepo.Update(asset);
+            assetRepo.Save();
 
             return PartialView("_AssetCheckListItems", SetSelectedCheckListItemsView(selectedItemsView.AssetID));
         }

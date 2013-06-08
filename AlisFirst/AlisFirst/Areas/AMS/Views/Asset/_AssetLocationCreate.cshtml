@@ -1,4 +1,5 @@
-﻿@model AlisFirst.Areas.AMS.ViewModels.AssignedLocationVM
+﻿@* Views\Asset\_AssetLocationCreate.cshtml *@
+@model AlisFirst.Areas.AMS.ViewModels.CreateAssignedLocationWithDDLVM
 
 @using (Ajax.BeginForm("CreateLocation", new AjaxOptions { UpdateTargetId = "location-history" }))
 {
@@ -17,7 +18,7 @@
             @Html.LabelFor(model => model.AssignedLocation.LocationID, "Location")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("AssignedLocation.LocationID", Model.Locations,"Choose an option")
+            @Html.DropDownList("AssignedLocation.LocationID", Model.LocationsList,"Choose an option")
             @Html.ValidationMessageFor(model => model.AssignedLocation.LocationID)
         </div>
 

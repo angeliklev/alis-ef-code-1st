@@ -1,4 +1,5 @@
-﻿@model AlisFirst.Areas.AMS.ViewModels.AssetAssignedLocationsVM
+﻿@* Views\Asset\_AssetLocationHistory.cshtml *@
+@model AlisFirst.Areas.AMS.ViewModels.AssetAssignedLocationsVM
 <div class="column">
     <h2>Assign new Location</h2>
     @Html.Partial("_AssetLocationCreate", Model.LocationToCreate)
@@ -18,7 +19,7 @@
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.AssignedLocationDate)
                 </td>
-                <td>@Html.DisplayFor(modelItem => item.Location.LocationName)
+                <td>@Html.DisplayFor(modelItem => item.LocationLocationName)
                 </td>
             </tr>    
         }

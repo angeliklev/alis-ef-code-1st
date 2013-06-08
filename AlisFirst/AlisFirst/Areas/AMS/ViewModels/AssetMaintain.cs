@@ -10,15 +10,13 @@ namespace AlisFirst.Areas.AMS.ViewModels
 {
     public class AssetMaintain
     {
-        [HiddenInput(DisplayValue = false)]
-        public int AssetID { get; set; }
-        public AssetEdit AssetToEdit { get; set; }
-        public AssetRepairs AssetRepairs { get; set; }
+        public AssetEditVM AssetToEdit { get; set; }
+        public AssetRepairsVM AssetRepairs { get; set; }
         public AssetAssignedLocationsVM AssetLocations { get; set; }
         public AssetCheckListVM AssetCheckListView { get; set; }
     }
 
-    public class AssetEdit
+    public class AssetEditVM
     {
         [HiddenInput(DisplayValue = false)]
         public int AssetID { get; set; }
@@ -30,17 +28,13 @@ namespace AlisFirst.Areas.AMS.ViewModels
         public string SerialNum { get; set; }
     }
 
-    public class AssetRepairs
+    public class AssetRepairsVM
     {
-        // We might need it when rendering partial view, then we must know AssetID
-        [HiddenInput(DisplayValue = false)]
-        public int AssetID { get; set; } 
-
-        public AssetRepair RepairToCreate { get; set; }
-        public IEnumerable<AssetRepair> RepairHistory { get; set; }
+        public CreateAssetRepairVM RepairToCreate { get; set; }
+        public IEnumerable<CreateAssetRepairVM> RepairHistory { get; set; }
     }
 
-    public class AssetRepair
+    public class CreateAssetRepairVM
     {
         [Required]
         [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
@@ -49,42 +43,47 @@ namespace AlisFirst.Areas.AMS.ViewModels
         public string TechnicianName { get; set; }
         [Required]
         public string Result { get; set; }
-
         [HiddenInput(DisplayValue = false)]
         public int AssetID { get; set; }
     }
 
     public class AssetAssignedLocationsVM
     {
-        public AssignedLocationVM LocationToCreate { get; set; }
-        public IEnumerable<AssignedLocationData> LocationHistory { get; set; }
+        public CreateAssignedLocationWithDDLVM LocationToCreate { get; set; }
+        public IEnumerable<LocationHistoryItemsVM> LocationHistory { get; set; }
     }
 
-    public class AssignedLocationData
+    public class LocationHistoryItemsVM
+    {
+        public string AssignedLocationDate { get; set; }
+        public string LocationLocationName { get; set; }
+    }
+
+    public class CreateAssignedLocationWithDDLVM
+    {
+        public CreateAssignedLocationVM AssignedLocation { get; set; }
+        public SelectList LocationsList { get; private set; }
+
+        public CreateAssignedLocationWithDDLVM(CreateAssignedLocationVM newlocation,
+                                        IEnumerable locations)
+        {
+            AssignedLocation = newlocation;
+            LocationsList = new SelectList(locations, "LocationID", "LocationName", String.Empty);
+        }
+    }
+
+    public class CreateAssignedLocationVM
     {
         [HiddenInput(DisplayValue = false)]
-        public int AssetID { get; set; } 
-       
+        public int AssetID { get; set; }
+
         [Required]
         [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         public DateTime AssignedLocationDate { get; set; }
 
+        [Required]
         public int? LocationID { get; set; }
-        public virtual Location Location { get; set; } 
-    }
-
-    public class AssignedLocationVM
-    {
-        public AssignedLocationData  AssignedLocation { get; set; }
-        // list of locatins for DDL to select
-        public SelectList Locations { get; private set; }
-
-        public AssignedLocationVM(AssignedLocationData newlocation,  
-                                        IEnumerable locations) {
-            AssignedLocation = newlocation;
-            Locations = new SelectList(locations, "LocationID", "LocationName", AssignedLocation.LocationID);
-        }
-
+        public virtual Location Location { get; set; }
     }
 
     public class AssetCheckListVM

@@ -59,12 +59,13 @@ namespace AlisFirst
             AutoMapper.Mapper.CreateMap<Loan, EditLoanViewModel>();
 
             // Mapping for maintain Asset, between domain models and view models
-            AutoMapper.Mapper.CreateMap<Asset, AssetEdit>();
-            AutoMapper.Mapper.CreateMap<AssetEdit, Asset>();
-            AutoMapper.Mapper.CreateMap<Repair, AssetRepair>();
-            AutoMapper.Mapper.CreateMap<AssetRepair, Repair>();
-            AutoMapper.Mapper.CreateMap<AssignedLocation, AssignedLocationData>();
-            AutoMapper.Mapper.CreateMap<AssignedLocationData, AssignedLocation>();
+            AutoMapper.Mapper.CreateMap<Asset, AssetEditVM>();
+            AutoMapper.Mapper.CreateMap<AssetEditVM, Asset>();
+            AutoMapper.Mapper.CreateMap<Repair, CreateAssetRepairVM>();
+            AutoMapper.Mapper.CreateMap<CreateAssetRepairVM, Repair>();
+            AutoMapper.Mapper.CreateMap<AssignedLocation, CreateAssignedLocationVM>();
+            AutoMapper.Mapper.CreateMap<CreateAssignedLocationVM, AssignedLocation>();
+            AutoMapper.Mapper.CreateMap<AssignedLocation, LocationHistoryItemsVM>();
         }
     }
 }
