@@ -163,7 +163,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validation\LoanValidation.cs" />
     <Compile Include="Validation\BorrowerValidation.cs" />
-    <Compile Include="ViewModels\BorrowerModel.cs" />
+    <Compile Include="Areas\LMS\ViewModels\BorrowerModel.cs" />
     <Compile Include="ViewModels\LoanModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -236,11 +236,9 @@
     <Content Include="Areas\LMS\Views\Borrowers\Create.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\Edit.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\Delete.cshtml" />
-    <Content Include="Areas\LMS\Views\Borrowers\Details.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\Index.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\_Edit.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\_Create.cshtml" />
-    <Content Include="Areas\LMS\Views\Borrowers\_CreateOrEdit.cshtml" />
     <Content Include="Areas\AMS\Views\AssetList\Create.cshtml" />
     <Content Include="Areas\AMS\Views\AssetList\Delete.cshtml" />
     <Content Include="Areas\AMS\Views\AssetList\Details.cshtml" />
@@ -394,6 +392,7 @@
     <Folder Include="Areas\AMS\Views\Shared\" />
     <Folder Include="Areas\LMS\Models\" />
     <Folder Include="Areas\LMS\Views\Shared\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
