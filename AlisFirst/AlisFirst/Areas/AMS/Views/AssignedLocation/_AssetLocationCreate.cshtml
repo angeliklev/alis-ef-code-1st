@@ -1,7 +1,7 @@
-﻿@* Views\Asset\_AssetLocationCreate.cshtml *@
+﻿@* Views\AssignedLocation\_AssetLocationCreate.cshtml *@
 @model AlisFirst.Areas.AMS.ViewModels.AssignedLocationCreateModel
 
-@using (Ajax.BeginForm("CreateLocation", new AjaxOptions { UpdateTargetId = "location-history" }))
+@using (Ajax.BeginForm("../AssignedLocation/Create", new AjaxOptions { UpdateTargetId = "location-history" }))
 {
     @Html.ValidationSummary(true)
     <fieldset>

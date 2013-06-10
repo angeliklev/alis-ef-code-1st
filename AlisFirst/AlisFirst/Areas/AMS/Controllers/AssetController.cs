@@ -98,88 +98,25 @@ namespace AlisFirst.Areas.AMS.Controllers
 
         public ActionResult Edit(int id)
         {
-            return View(PopulateAssetMaintainView(id));
-        }
+            var assetToEdit = assetRepo.Find(id);
+            var locationsList = AutoMapper.Mapper.Map<IEnumerable<AssignedLocation>,
+                    IEnumerable<AssetMaintainModel.LocationHistoryItemsModel>>(assignedLocationRepo
+                    .AllIncluding(l => l.Location).OrderBy(l => l.AssignedLocationDate)
+                    .Where(m => m.AssetID == id));
 
-        private AssetMaintainModel PopulateAssetMaintainView(int id)
-        {
-            var assetToEdit = assetRepo.Find(id);            
-            
+
             var assetToMaintain = new AssetMaintainModel
             {
                 AssetToEdit = AutoMapper.Mapper.Map<Asset, AssetMaintainModel.AssetEditVM>(assetToEdit),
 
-                // would be great to move these below to constrictors or another controllers...
-                AssetLocations = PopulateAssetLocationsView(id),
+                AssetLocations = new AssetMaintainModel.AssetAssignedLocationsModel(id, locationRepo.All.ToList(),
+                     locationsList),
+
                 AssetRepairs = PopulateAssetRepairsView(id),
                 AssetCheckListView = SetSelectedCheckListItemsView(id)
             };
-            return assetToMaintain;
-        }
 
-        private AssetMaintainModel.AssetAssignedLocationsModel PopulateAssetLocationsView(int id)
-        {
-            var viewModel =
-             new AssetMaintainModel.AssetAssignedLocationsModel
-             {
-                 LocationHistory = PopulateLocationHistory(id),
-                 LocationToCreate = new AssignedLocationCreateModel(id, locationRepo.All.ToList())
-             };
-            return viewModel;
-        }
-
-        private IEnumerable<AssetMaintainModel.LocationHistoryItemsModel> PopulateLocationHistory(int id)
-        {
-            return AutoMapper.Mapper.Map<IEnumerable<AssignedLocation>,
-                IEnumerable<AssetMaintainModel.LocationHistoryItemsModel>>(assignedLocationRepo
-                .AllIncluding(l => l.Location).OrderBy(l => l.AssignedLocationDate)
-                .Where(m => m.AssetID == id));
-        }
-
-        // 
-        // POST from partial _AssetLocationCreate
-
-        [HttpPost]
-        public ActionResult CreateLocation(AssignedLocationCreateModel assignedLocation)
-        {
-            if (ModelState.IsValid)
-            {
-                assignedLocationRepo.InsertOrUpdate(AutoMapper.Mapper.Map<AssignedLocationCreateModel,
-                                                                AssignedLocation>(assignedLocation));
-                assignedLocationRepo.Save();
-                if (Request.IsAjaxRequest())
-                {
-                    var viewModel = PopulateAssetLocationsView(assignedLocation.AssetID);
-                    return PartialView("_AssetLocationHistory", viewModel);
-                }
-                else
-                {
-                    // this returns the whole page again, with updated data
-                    return RedirectToAction("Edit", new { id = assignedLocation.AssetID });
-                }
-            }
-            else
-            {
-                if (Request.IsAjaxRequest())
-                {
-                    var viewModel = new AssetMaintainModel.AssetAssignedLocationsModel
-                    {
-                        LocationHistory = PopulateLocationHistory(assignedLocation.AssetID),
-                        LocationToCreate = new AssignedLocationCreateModel(assignedLocation.AssetID, locationRepo.All.ToList())
-                    };
-                    return PartialView("_AssetLocationHistory", viewModel);
-                }
-                else
-                {
-                    // 1 - render the whole viewmodel data
-                    var editModel = PopulateAssetMaintainView(assignedLocation.AssetID);
-
-                    // 2 - update repairToCreate with current repair data (then it is with updated modelState)
-                    editModel.AssetLocations.LocationToCreate = new AssignedLocationCreateModel(assignedLocation.AssetID, locationRepo.All.ToList());
-
-                    return View("Edit", editModel);
-                }
-            }
+            return View(assetToMaintain);
         }
 
         private AssetMaintainModel.AssetRepairsModel PopulateAssetRepairsView(int id)
@@ -238,13 +175,8 @@ namespace AlisFirst.Areas.AMS.Controllers
                 }
                 else
                 {
-                    // 1 - render the whole viewmodel data
-                    var editModel = PopulateAssetMaintainView(repairToCreate.AssetID);
-
-                    // 2 - update repairToCreate with current repair data (then it is with updated modelState)
-                    editModel.AssetRepairs.RepairToCreate = repairToCreate;
-
-                    return View("Edit", editModel);
+                    // seems in this case can only add an error message to the view call and pass it as a parameter.
+                    return View("Edit", repairToCreate.AssetID);
                 }
             }
         }
@@ -341,26 +273,6 @@ namespace AlisFirst.Areas.AMS.Controllers
                 ViewBag.PossibleAssetModels = assetmodelRepository.All;
                 return View();
             }
-        }
-
-        //
-        // GET: /Asset/Delete/5
-
-        public ActionResult Delete(int id)
-        {
-            return View(assetRepo.Find(id));
-        }
-
-        //
-        // POST: /Asset/Delete/5
-
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            assetRepo.Delete(id);
-            assetRepo.Save();
-
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

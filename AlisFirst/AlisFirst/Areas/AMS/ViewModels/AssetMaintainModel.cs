@@ -51,6 +51,14 @@ namespace AlisFirst.Areas.AMS.ViewModels
         {
             public AssignedLocationCreateModel LocationToCreate { get; set; }
             public IEnumerable<LocationHistoryItemsModel> LocationHistory { get; set; }
+
+            public AssetAssignedLocationsModel() { }
+            public AssetAssignedLocationsModel(int id, IEnumerable locations, 
+                IEnumerable<AssetMaintainModel.LocationHistoryItemsModel> historylist) 
+            { 
+                LocationToCreate = new AssignedLocationCreateModel(id, locations ) ;
+                LocationHistory = historylist;
+            }
         }
 
         public class LocationHistoryItemsModel
@@ -58,33 +66,6 @@ namespace AlisFirst.Areas.AMS.ViewModels
             public string AssignedLocationDate { get; set; }
             public string LocationLocationName { get; set; }
         }
-
-        //public class AssignedLocationCreateModel
-        //{
-        //    public AssignedLocationCreateBasicModel AssignedLocation { get; set; }
-        //    public SelectList LocationsList { get; private set; }
-
-        //    public AssignedLocationCreateModel(AssignedLocationCreateBasicModel newlocation,
-        //                                    IEnumerable locations)
-        //    {
-        //        AssignedLocation = newlocation;
-        //        LocationsList = new SelectList(locations, "LocationID", "LocationName", String.Empty);
-        //    }
-        //}
-
-        //public class AssignedLocationCreateBasicModel
-        //{
-        //    [HiddenInput(DisplayValue = false)]
-        //    public int AssetID { get; set; }
-
-        //    [Required]
-        //    [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
-        //    public DateTime AssignedLocationDate { get; set; }
-
-        //    [Required]
-        //    public int? LocationID { get; set; }
-        //    public virtual Location Location { get; set; }
-        //}
 
         public class AssetCheckListVM
         {

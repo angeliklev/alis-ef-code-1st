@@ -1,28 +1,34 @@
 ﻿@* Views\Asset\Edit.cshtml *@
 @model AlisFirst.Areas.AMS.ViewModels.AssetMaintainModel
-
 @{
     ViewBag.Title = "Edit";
 }
 
 <h2>Edit Asset @Model.AssetToEdit.BarCode </h2>
-
-<div id="edit-asset" class="related-items">
-@Html.Partial("_AssetEdit",Model.AssetToEdit)
+<div id="tabs">
+    <ul>
+        <li><a href="#edit-asset">Asset</a></li>
+        <li><a href="#location-history">Location</a></li>
+        <li><a href="#repair-history">Repair</a></li>
+        <li><a href="#check-list">Check List</a></li>
+    </ul>
+    <div id="edit-asset" class="related-items">
+        @Html.Partial("_AssetEdit", Model.AssetToEdit)
     </div>
 
-<div id="location-history" class="related-items">
-@Html.Partial("_AssetLocationHistory", Model.AssetLocations)
+    <div id="location-history" class="related-items">
+        @Html.Partial("../AssignedLocation/_Create", Model.AssetLocations)
     </div>
 
-<div id="repair-history" class="related-items">
-@Html.Partial("_AssetRepairHistory", Model.AssetRepairs)
+    <div id="repair-history" class="related-items">
+        @Html.Partial("_AssetRepairHistory", Model.AssetRepairs)
     </div>
 
-<div id="check-list" class="related-items">
-@Html.Partial("_AssetCheckListItems", Model.AssetCheckListView)
+    <div id="check-list" class="related-items">
+        @Html.Partial("_AssetCheckListItems", Model.AssetCheckListView)
     </div>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
 </div>

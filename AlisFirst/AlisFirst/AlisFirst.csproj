@@ -103,6 +103,7 @@
     <Compile Include="Areas\AMS\Controllers\AssetListController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Areas\AMS\Controllers\AssignedLocationController.cs" />
     <Compile Include="Areas\AMS\ViewModels\AssetMaintainModel.cs" />
     <Compile Include="Areas\AMS\ViewModels\AssetRepairCreateModel.cs" />
     <Compile Include="Areas\AMS\ViewModels\AssetsViewModel.cs" />
@@ -260,9 +261,9 @@
     <Content Include="Scripts\GoBack.js" />
     <Content Include="Scripts\jquery-ui-1.10.2.js" />
     <Content Include="Scripts\jquery-ui-1.10.2.min.js" />
-    <Content Include="Areas\AMS\Views\Asset\_AssetLocationHistory.cshtml" />
-    <Content Include="Areas\AMS\Views\Asset\_AssetLocationCreate.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\_AssetCheckListItems.cshtml" />
+    <Content Include="Areas\AMS\Views\AssignedLocation\_Create.cshtml" />
+    <Content Include="Areas\AMS\Views\AssignedLocation\_AssetLocationCreate.cshtml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
@@ -271,6 +272,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\TabHookup.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -392,7 +394,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\AMS\Models\" />
     <Folder Include="Areas\AMS\Views\Shared\" />
     <Folder Include="Areas\LMS\Models\" />
     <Folder Include="Areas\LMS\Views\Shared\" />
