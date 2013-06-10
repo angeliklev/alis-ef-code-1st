@@ -1,0 +1,66 @@
+@model AlisFirst.Models.Asset
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Asset</legend>
+
+    <div class="display-label">BarCode</div>
+    <div class="display-field">@Model.BarCode</div>
+
+    <div class="display-label">SerialNum</div>
+    <div class="display-field">@Model.SerialNum</div>
+
+    <div class="display-label">Supplier</div>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Supplier).ToString()</div>
+
+    <div class="display-label">AssetModel</div>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.AssetModel).ToString()</div>
+
+    <div class="display-label">DateRecieved</div>
+    <div class="display-field">@String.Format("{0:g}", Model.DateRecieved)</div>
+
+    <div class="display-label">WarrantyExpires</div>
+    <div class="display-field">@String.Format("{0:g}", Model.WarrantyExpires)</div>
+
+    <div class="display-label">PurchaseCost</div>
+    <div class="display-field">@String.Format("{0:F}", Model.PurchaseCost)</div>
+
+    <div class="display-label">IsLoanable</div>
+    <div class="display-field">@Model.IsLoanable</div>
+
+    <div class="display-label">Notes</div>
+    <div class="display-field">@Model.Notes</div>
+
+    <div class="display-label">IsActive</div>
+    <div class="display-field">@Model.IsActive</div>
+
+    <div class="display-label">AssetConditions</div>
+    <div class="display-field">@(Model.AssetConditions == null ? "None" : Model.AssetConditions.Count.ToString())</div>
+
+    <div class="display-label">CheckListItems</div>
+    <div class="display-field">@(Model.CheckListItems == null ? "None" : Model.CheckListItems.Count.ToString())</div>
+
+    <div class="display-label">Repairs</div>
+    <div class="display-field">@(Model.Repairs == null ? "None" : Model.Repairs.Count.ToString())</div>
+
+    <div class="display-label">Loans</div>
+    <div class="display-field">@(Model.Loans == null ? "None" : Model.Loans.Count.ToString())</div>
+
+    <div class="display-label">AssignedToes</div>
+    <div class="display-field">@(Model.AssignedToes == null ? "None" : Model.AssignedToes.Count.ToString())</div>
+
+    <div class="display-label">AssignedLocations</div>
+    <div class="display-field">@(Model.AssignedLocations == null ? "None" : Model.AssignedLocations.Count.ToString())</div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

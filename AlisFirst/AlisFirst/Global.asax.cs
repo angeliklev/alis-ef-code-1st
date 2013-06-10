@@ -8,7 +8,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using AlisFirst.Models;
 using AlisFirst.DAL;
-using AlisFirst.ViewModels;
+using AlisFirst.Areas.LMS.ViewModels;
 using AlisFirst.Areas.AMS.ViewModels;
 
 namespace AlisFirst
@@ -67,6 +67,10 @@ namespace AlisFirst
             AutoMapper.Mapper.CreateMap<DeleteEmployeeViewModel, Borrower>();
             AutoMapper.Mapper.CreateMap<Borrower, DeleteEmployeeViewModel>();
 
+            AutoMapper.Mapper.CreateMap<CreateLoanViewModel,Loan>();
+            AutoMapper.Mapper.CreateMap<Loan, CreateLoanViewModel>();
+            AutoMapper.Mapper.CreateMap<EditLoanViewModel, Loan>();
+            AutoMapper.Mapper.CreateMap<Loan, EditLoanViewModel>();
         }
     }
 }

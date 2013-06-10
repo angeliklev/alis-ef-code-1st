@@ -33,6 +33,11 @@ namespace AlisFirst.DAL
             get { return context.Borrowers.Where(b => b.IsEmployee == true); }
         }
 
+        public IQueryable<Loan> GetBorrowerLoans( int BorrowerID )
+        {
+            return context.Loans.Where(l => l.BorrowerID == BorrowerID);
+        }
+
         public IQueryable<Borrower> AllIncluding(params Expression<Func<Borrower, object>>[] includeProperties)
         {
             IQueryable<Borrower> query = context.Borrowers;

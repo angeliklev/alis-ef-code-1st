@@ -46,7 +46,7 @@
 			@String.Format("{0:g}", item.ReturnDate)
         </td>
         <td>
-            @String.Format("{0:g}", item.Asset)
+			@Html.DisplayTextFor(_ => item.Asset).ToString()
         </td>
         <td>
 			@(item.Borrower == null ? "None" : item.Borrower.Surname)
