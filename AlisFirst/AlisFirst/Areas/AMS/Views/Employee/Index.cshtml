@@ -67,7 +67,7 @@
             @Html.DisplayFor(modelItem => item.GivenName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.BorrowerExpiryDate)
+            @String.Format("{0:dd/MM/yy}", item.BorrowerExpiryDate)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Email)
