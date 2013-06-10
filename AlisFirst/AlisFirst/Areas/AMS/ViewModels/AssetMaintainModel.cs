@@ -1,4 +1,4 @@
-﻿// File /ViewModels/AssetMaintain.cs
+﻿// File /ViewModels/AssetMaintainModel.cs
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -47,23 +47,9 @@ namespace AlisFirst.Areas.AMS.ViewModels
             public string Result { get; set; }
         }
 
-        public class AssetRepairCreateModel
-        {
-            [HiddenInput(DisplayValue = false)]
-            public int AssetID { get; set; }
-
-            [Required]
-            [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
-            public DateTime IssuedDate { get; set; }
-            [Required]
-            public string TechnicianName { get; set; }
-            [Required]
-            public string Result { get; set; }
-        }
-
         public class AssetAssignedLocationsModel
         {
-            public AssignedLocationCreateDDLModel LocationToCreate { get; set; }
+            public AssignedLocationCreateModel LocationToCreate { get; set; }
             public IEnumerable<LocationHistoryItemsModel> LocationHistory { get; set; }
         }
 
@@ -73,32 +59,32 @@ namespace AlisFirst.Areas.AMS.ViewModels
             public string LocationLocationName { get; set; }
         }
 
-        public class AssignedLocationCreateDDLModel
-        {
-            public AssignedLocationCreateModel AssignedLocation { get; set; }
-            public SelectList LocationsList { get; private set; }
+        //public class AssignedLocationCreateModel
+        //{
+        //    public AssignedLocationCreateBasicModel AssignedLocation { get; set; }
+        //    public SelectList LocationsList { get; private set; }
 
-            public AssignedLocationCreateDDLModel(AssignedLocationCreateModel newlocation,
-                                            IEnumerable locations)
-            {
-                AssignedLocation = newlocation;
-                LocationsList = new SelectList(locations, "LocationID", "LocationName", String.Empty);
-            }
-        }
+        //    public AssignedLocationCreateModel(AssignedLocationCreateBasicModel newlocation,
+        //                                    IEnumerable locations)
+        //    {
+        //        AssignedLocation = newlocation;
+        //        LocationsList = new SelectList(locations, "LocationID", "LocationName", String.Empty);
+        //    }
+        //}
 
-        public class AssignedLocationCreateModel
-        {
-            [HiddenInput(DisplayValue = false)]
-            public int AssetID { get; set; }
+        //public class AssignedLocationCreateBasicModel
+        //{
+        //    [HiddenInput(DisplayValue = false)]
+        //    public int AssetID { get; set; }
 
-            [Required]
-            [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
-            public DateTime AssignedLocationDate { get; set; }
+        //    [Required]
+        //    [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
+        //    public DateTime AssignedLocationDate { get; set; }
 
-            [Required]
-            public int? LocationID { get; set; }
-            public virtual Location Location { get; set; }
-        }
+        //    [Required]
+        //    public int? LocationID { get; set; }
+        //    public virtual Location Location { get; set; }
+        //}
 
         public class AssetCheckListVM
         {
