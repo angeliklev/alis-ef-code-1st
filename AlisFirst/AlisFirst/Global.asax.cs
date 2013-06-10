@@ -2,8 +2,9 @@
 using System.Data.Entity.Infrastructure;
 using System.Web.Mvc;
 using System.Web.Routing;
-using AlisFirst.Models;
 using AlisFirst.DAL;
+using AlisFirst.Helpers;
+using AlisFirst.Models;
 using AlisFirst.ViewModels;
 using AlisFirst.Areas.LMS.ViewModels;
 
@@ -44,6 +45,8 @@ namespace AlisFirst
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
 
+            AutoMapperBootstrapper.Initialize();
+
             //Mapping information for viewmodel/model conversion (discuss where to move this junk to, it certainly shouldn't be in here)
             AutoMapper.Mapper.CreateMap<Borrower, CreateBorrowerViewModel>();
             AutoMapper.Mapper.CreateMap<CreateBorrowerViewModel, Borrower>();
@@ -57,15 +60,6 @@ namespace AlisFirst
             AutoMapper.Mapper.CreateMap<Loan, CreateLoanViewModel>();
             AutoMapper.Mapper.CreateMap<EditLoanViewModel, Loan>();
             AutoMapper.Mapper.CreateMap<Loan, EditLoanViewModel>();
-
-            // Mapping for maintain Asset, between domain models and view models
-            AutoMapper.Mapper.CreateMap<Asset, AssetMaintain.AssetEditVM>();
-            AutoMapper.Mapper.CreateMap<AssetMaintain.AssetEditVM, Asset>();
-            AutoMapper.Mapper.CreateMap<Repair, AssetMaintain.CreateAssetRepairVM>();
-            AutoMapper.Mapper.CreateMap<AssetMaintain.CreateAssetRepairVM, Repair>();
-            AutoMapper.Mapper.CreateMap<AssignedLocation, AssetMaintain.CreateAssignedLocationVM>();
-            AutoMapper.Mapper.CreateMap<AssetMaintain.CreateAssignedLocationVM, AssignedLocation>();
-            AutoMapper.Mapper.CreateMap<AssignedLocation, AssetMaintain.LocationHistoryItemsVM>();
         }
     }
 }

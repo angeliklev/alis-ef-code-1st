@@ -103,7 +103,7 @@
     <Compile Include="Areas\AMS\Controllers\AssetListController.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Areas\AMS\ViewModels\AssetMaintain.cs" />
+    <Compile Include="Areas\AMS\ViewModels\AssetMaintainModel.cs" />
     <Compile Include="Areas\AMS\ViewModels\AssetsViewModel.cs" />
     <Compile Include="Areas\LMS\Controllers\BorrowersController.cs" />
     <Compile Include="Areas\LMS\LMSAreaRegistration.cs" />
@@ -127,6 +127,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AutoMapperBootstrapper.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="DAL\AlisFirstContext.cs" />
     <Compile Include="DAL\AlisFirstDBInitializer.cs" />
@@ -261,8 +262,12 @@
     <Content Include="Areas\AMS\Views\Asset\_AssetLocationCreate.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\_AssetCheckListItems.cshtml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -272,10 +277,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\MicrosoftAjax.js" />
     <Content Include="Scripts\MicrosoftAjax.debug.js" />
     <Content Include="Scripts\MicrosoftMvcAjax.js" />

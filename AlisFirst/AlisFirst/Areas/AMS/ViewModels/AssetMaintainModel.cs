@@ -8,11 +8,11 @@ using AlisFirst.Models;
 
 namespace AlisFirst.Areas.AMS.ViewModels
 {
-    public class AssetMaintain
+    public class AssetMaintainModel
     {
         public AssetEditVM AssetToEdit { get; set; }
-        public AssetRepairsVM AssetRepairs { get; set; }
-        public AssetAssignedLocationsVM AssetLocations { get; set; }
+        public AssetRepairsModel AssetRepairs { get; set; }
+        public AssetAssignedLocationsModel AssetLocations { get; set; }
         public AssetCheckListVM AssetCheckListView { get; set; }
 
         public class AssetEditVM
@@ -35,14 +35,23 @@ namespace AlisFirst.Areas.AMS.ViewModels
             public virtual AssetModel AssetModel { get; set; }
             public string Name { get; set; }
         }
-        public class AssetRepairsVM
+        public class AssetRepairsModel
         {
-            public CreateAssetRepairVM RepairToCreate { get; set; }
-            public IEnumerable<CreateAssetRepairVM> RepairHistory { get; set; }
+            public AssetRepairCreateModel RepairToCreate { get; set; }
+            public IEnumerable<AssetRepairsHistoryModel> RepairHistory { get; set; }
+        }
+        public class AssetRepairsHistoryModel
+        {
+            public string IssuedDate { get; set; }
+            public string TechnicianName { get; set; }
+            public string Result { get; set; }
         }
 
-        public class CreateAssetRepairVM
+        public class AssetRepairCreateModel
         {
+            [HiddenInput(DisplayValue = false)]
+            public int AssetID { get; set; }
+
             [Required]
             [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
             public DateTime IssuedDate { get; set; }
@@ -50,28 +59,26 @@ namespace AlisFirst.Areas.AMS.ViewModels
             public string TechnicianName { get; set; }
             [Required]
             public string Result { get; set; }
-            [HiddenInput(DisplayValue = false)]
-            public int AssetID { get; set; }
         }
 
-        public class AssetAssignedLocationsVM
+        public class AssetAssignedLocationsModel
         {
-            public CreateAssignedLocationWithDDLVM LocationToCreate { get; set; }
-            public IEnumerable<LocationHistoryItemsVM> LocationHistory { get; set; }
+            public AssignedLocationCreateDDLModel LocationToCreate { get; set; }
+            public IEnumerable<LocationHistoryItemsModel> LocationHistory { get; set; }
         }
 
-        public class LocationHistoryItemsVM
+        public class LocationHistoryItemsModel
         {
             public string AssignedLocationDate { get; set; }
             public string LocationLocationName { get; set; }
         }
 
-        public class CreateAssignedLocationWithDDLVM
+        public class AssignedLocationCreateDDLModel
         {
-            public CreateAssignedLocationVM AssignedLocation { get; set; }
+            public AssignedLocationCreateModel AssignedLocation { get; set; }
             public SelectList LocationsList { get; private set; }
 
-            public CreateAssignedLocationWithDDLVM(CreateAssignedLocationVM newlocation,
+            public AssignedLocationCreateDDLModel(AssignedLocationCreateModel newlocation,
                                             IEnumerable locations)
             {
                 AssignedLocation = newlocation;
@@ -79,7 +86,7 @@ namespace AlisFirst.Areas.AMS.ViewModels
             }
         }
 
-        public class CreateAssignedLocationVM
+        public class AssignedLocationCreateModel
         {
             [HiddenInput(DisplayValue = false)]
             public int AssetID { get; set; }
