@@ -1,4 +1,4 @@
-@model IEnumerable<AlisFirst.ViewModels.ListBorrowerViewModel>
+@model AlisFirst.Areas.LMS.ViewModels.ListBorrowerViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -8,6 +8,12 @@
 
 <p>
     @Html.ActionLink("Create New", "Create")
+    <br />
+    @using (Html.BeginForm())
+    {
+        @Html.TextBox("SearchFor")
+        <input type="submit", value="Search" />
+    }
 </p>
 <table>
     <tr>
@@ -35,12 +41,10 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.ListOfBorrowers ) {
     <tr>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.BorrowerID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.BorrowerID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.BorrowerID })
+            @Html.ActionLink("Edit", "Edit", new { id=item.BorrowerID })
         </td>
         <td>
 			@item.Surname
