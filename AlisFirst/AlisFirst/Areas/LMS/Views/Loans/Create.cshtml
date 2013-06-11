@@ -1,0 +1,56 @@
+@model AlisFirst.Areas.LMS.ViewModels.CreateLoanViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Loan</legend>
+
+        <div class="editor-label">
+            Borrower Barcode
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BorrowerBarcode) 
+            @Html.ValidationMessageFor(model => model.BorrowerBarcode)
+        </div>
+
+         <div class="editor-label">
+            Asset Barcode
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AssetBarcode)
+            @Html.ValidationMessageFor(model => model.AssetBarcode)
+        </div>
+
+		<div class="editor-label">
+            @Html.LabelFor(model => model.LoanDate)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor( model => model.LoanDate )
+            @Html.ValidationMessageFor(model => model.LoanDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DueDate)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.DueDate)
+            @Html.ValidationMessageFor(model => model.DueDate)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+

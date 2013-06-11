@@ -1,0 +1,77 @@
+@model AlisFirst.Areas.LMS.ViewModels.EditLoanViewModel
+
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Return</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Loan</legend>
+
+        @Html.HiddenFor(model => model.LoanID)
+        <div class="editor-label">
+            Borrower Barcode
+        </div>
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.BorrowerBarcode)
+            @Html.DisplayFor(model => model.BorrowerBarcode)
+            @Html.ValidationMessageFor(model => model.BorrowerBarcode)
+        </div>
+
+        <div class="editor-label">
+            Asset Barcode
+        </div>
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.AssetBarcode)
+            @Html.DisplayFor(model => model.AssetBarcode)
+            @Html.ValidationMessageFor(model => model.AssetBarcode)
+        </div>
+
+		<div class="editor-label">
+            @Html.LabelFor(model => model.LoanDate)
+        </div>
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.LoanDate)
+            @Html.DisplayFor(model => model.LoanDate)
+            @Html.ValidationMessageFor(model => model.LoanDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DueDate)
+        </div>
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.DueDate)
+            @Html.DisplayFor(model => model.DueDate)
+            @Html.ValidationMessageFor(model => model.DueDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ReturnDate)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.ReturnDate)
+            @Html.ValidationMessageFor(model => model.ReturnDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.NewCondition)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.NewCondition)
+            @Html.ValidationMessageFor(model => model.NewCondition)
+        </div>
+     
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,3 +1,3 @@
 ﻿$(document).ready(function () {
-    $('.date').attr('readonly', 'readonly').datepicker({ dateFormat: 'dd/mm/yyyy' });
+    $('.date').attr('readonly', 'readonly').datepicker({ dateFormat: 'dd/MM/yy' });
 });
