@@ -117,7 +117,7 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CheckListItemsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LoansController.cs" />
+    <Compile Include="Areas\LMS\Controllers\LoansController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\ManufacturersController.cs" />
     <Compile Include="Controllers\RepairsController.cs" />
@@ -162,7 +162,7 @@
     <Compile Include="Validation\LoanValidation.cs" />
     <Compile Include="Validation\BorrowerValidation.cs" />
     <Compile Include="ViewModels\BorrowerModel.cs" />
-    <Compile Include="ViewModels\LoanModel.cs" />
+    <Compile Include="Areas\LMS\ViewModels\LoanModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
@@ -258,7 +258,9 @@
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -347,12 +349,12 @@
     <Content Include="Views\CheckListItems\Details.cshtml" />
     <Content Include="Views\CheckListItems\Index.cshtml" />
     <Content Include="Views\CheckListItems\_CreateOrEdit.cshtml" />
-    <Content Include="Views\Loans\Create.cshtml" />
-    <Content Include="Views\Loans\Edit.cshtml" />
-    <Content Include="Views\Loans\Delete.cshtml" />
-    <Content Include="Views\Loans\Details.cshtml" />
-    <Content Include="Views\Loans\Index.cshtml" />
-    <Content Include="Views\Loans\_CreateOrEdit.cshtml" />
+    <Content Include="Areas\LMS\Views\Loans\Create.cshtml" />
+    <Content Include="Areas\LMS\Views\Loans\Edit.cshtml" />
+    <Content Include="Areas\LMS\Views\Loans\Delete.cshtml" />
+    <Content Include="Areas\LMS\Views\Loans\Details.cshtml" />
+    <Content Include="Areas\LMS\Views\Loans\Index.cshtml" />
+    <Content Include="Areas\LMS\Views\Loans\_CreateOrEdit.cshtml" />
     <Content Include="Views\Locations\Create.cshtml" />
     <Content Include="Views\Locations\Edit.cshtml" />
     <Content Include="Views\Locations\Delete.cshtml" />
@@ -381,7 +383,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\AMS\Controllers\" />
     <Folder Include="Areas\AMS\Models\" />
     <Folder Include="Areas\AMS\Views\Shared\" />
     <Folder Include="Areas\LMS\Models\" />
