@@ -85,23 +85,6 @@ namespace AlisFirst.Areas.AMS.Controllers
 
         }
 
-        //public ActionResult Filter(AlisFirst.Areas.AMS.ViewModels._AssetListViewModel model)
-        //{
-            
-
-        //    ass.listViewModel = new ViewModels._AssetListViewModel();
-
-        //    var asse = from i in assetRepository.All
-        //               where model.SelectedLocations.Contains((i.AssignedLocations.OrderByDescending(te => te.AssignedLocationDate)).FirstOrDefault().LocationID)
-        //               select i;
-
-        //    ass.listViewModel.Assets = asse.ToList().ToPagedList<AlisFirst.Models.Asset>(1, 5);
-
-        //    ass.listViewModel.Locations = locationRepository.All;
-
-        //    return View("Index", ass);
-
-        //}
 
         [HttpPost]
         public ActionResult Index(ViewModels.AssetsViewModel v)
