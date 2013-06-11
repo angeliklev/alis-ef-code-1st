@@ -1,0 +1,44 @@
+﻿@model AlisFirst.Areas.LMS.ViewModels.DashboardViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div id="left">
+</div>
+
+<div style="display:inline-block">
+    <p>You can perform these tasks</p>
+    <ul>
+
+    <li>@Html.ActionLink("Create Borrower",null)</li>
+    <li>@Html.ActionLink("Overdue Loans Report", null)</li>
+    <li>@Html.ActionLink("Active Loans by Borrower Report", null)</li>
+    </ul>
+</div>
+
+<div style="display:inline-block">
+    @using (Html.BeginForm("Asset", "Dashboard"))
+    {
+        @Html.Label("With an Asset (Enter Barcode)")<br />
+        @Html.TextBoxFor(i => i.Barcode)<br />
+   
+        <input type="submit" name="Register Loan" value="Register" /><br />            
+        <input type="submit" name="Return From Loan" value="Return" /><br />       
+    }
+</div>
+
+<div style="display:inline-block">
+    @using (Html.BeginForm("Borrower", "Dashboard"))
+    {
+        @Html.Label("With a Borrower (Enter Barcode)")<br />
+        @Html.TextBoxFor(i => i.Barcode)<br />
+   
+        <input type="submit" name="Register Loan" value="Register" /><br />               
+        <input type="submit" name="Return From Loan" value="Return" /><br /> 
+        <input type="submit" name="Edit Borrower" value="Edit_Borrower" /><br />
+        <input type="submit" name="Active Loans by Borrower Report" value="Loans" /><br />
+    }
+</div>
