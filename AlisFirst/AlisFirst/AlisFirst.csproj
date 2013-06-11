@@ -99,10 +99,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\AMS\AMSAreaRegistration.cs" />
+    <Compile Include="Areas\AMS\Controllers\AssetController.cs" />
     <Compile Include="Areas\AMS\Controllers\AssetListController.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Areas\AMS\ViewModels\AssetsViewModel.cs" />
+    <Compile Include="Areas\AMS\ViewModels\SelectedCheckListItemsData.cs" />
     <Compile Include="Areas\LMS\Controllers\BorrowersController.cs" />
     <Compile Include="Areas\LMS\LMSAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -161,7 +163,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validation\LoanValidation.cs" />
     <Compile Include="Validation\BorrowerValidation.cs" />
-    <Compile Include="ViewModels\BorrowerModel.cs" />
+    <Compile Include="Areas\LMS\ViewModels\BorrowerModel.cs" />
     <Compile Include="Areas\LMS\ViewModels\LoanModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -234,11 +236,9 @@
     <Content Include="Areas\LMS\Views\Borrowers\Create.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\Edit.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\Delete.cshtml" />
-    <Content Include="Areas\LMS\Views\Borrowers\Details.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\Index.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\_Edit.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\_Create.cshtml" />
-    <Content Include="Areas\LMS\Views\Borrowers\_CreateOrEdit.cshtml" />
     <Content Include="Areas\AMS\Views\AssetList\Create.cshtml" />
     <Content Include="Areas\AMS\Views\AssetList\Delete.cshtml" />
     <Content Include="Areas\AMS\Views\AssetList\Details.cshtml" />
@@ -246,6 +246,10 @@
     <Content Include="Areas\AMS\Views\AssetList\Index.cshtml" />
     <Content Include="Areas\AMS\Views\Web.config" />
     <Content Include="Areas\AMS\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\Index.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\Edit.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\Create.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\_CreateOrEdit.cshtml" />
     <None Include="Scripts\jquery-2.0.0.intellisense.js" />
     <Content Include="Scripts\EditorHookup.js" />
     <Content Include="Scripts\GoBack.js" />
@@ -291,8 +295,8 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Assets\Create.cshtml" />
     <Content Include="Views\Assets\Edit.cshtml" />
-    <Content Include="Views\Assets\Delete.cshtml" />
-    <Content Include="Views\Assets\Details.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\Delete.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\Details.cshtml" />
     <Content Include="Views\Assets\Index.cshtml" />
     <Content Include="Views\Assets\_CreateOrEdit.cshtml" />
     <Content Include="Views\AssetModels\Create.cshtml" />
@@ -380,6 +384,8 @@
     <Content Include="Views\Suppliers\Index.cshtml" />
     <Content Include="Views\Suppliers\_CreateOrEdit.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\date.cshtml" />
+    <Content Include="Views\Assets\Delete.cshtml" />
+    <Content Include="Views\Assets\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -387,6 +393,7 @@
     <Folder Include="Areas\AMS\Views\Shared\" />
     <Folder Include="Areas\LMS\Models\" />
     <Folder Include="Areas\LMS\Views\Shared\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
