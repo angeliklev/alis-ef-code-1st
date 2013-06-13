@@ -126,6 +126,7 @@
     <Compile Include="Controllers\BorrowersController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CheckListItemsController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoansController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
@@ -394,6 +395,7 @@
     <Content Include="Views\Shared\EditorTemplates\date.cshtml" />
     <Content Include="Views\Assets\Delete.cshtml" />
     <Content Include="Views\Assets\Details.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
