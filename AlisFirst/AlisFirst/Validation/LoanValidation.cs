@@ -142,34 +142,6 @@ namespace AlisFirst.Validation
         }
     }
 
-    //[AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-    //public class SearchValidation : ValidationAttribute
-    //{
-    //    LoanRepository LoanRepo = new LoanRepository();
-    //    public SearchValidation()
-    //        :base("Unknow Error")
-    //    {}
-    //     protected override ValidationResult IsValid(object value, ValidationContext validationContext)
-    //    {
-    //        if (value == null)
-    //            return new ValidationResult("Please input Asset Barcode");
-
-    //        string AssetBarcode = (string)value;
-
-    //        if (LoanRepo.getAssetID(AssetBarcode.Trim()) == -1)
-    //            return new ValidationResult("Not Found Asset");
-    //        else
-    //        {
-    //            if (LoanRepo.IsLoanable(LoanRepo.getAssetID(AssetBarcode.Trim())))
-    //                return new ValidationResult("This asset is not loanable");
-
-    //            if (LoanRepo.IsOnLoan(LoanRepo.getAssetID(AssetBarcode.Trim())))
-    //            {
-    //                return new ValidationResult("Already On Loan");
-    //            }
-    //        }
-    //        return ValidationResult.Success;
-    //    }
-    //}
+    
 
 }

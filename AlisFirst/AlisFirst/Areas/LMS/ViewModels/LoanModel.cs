@@ -45,4 +45,11 @@ namespace AlisFirst.Areas.LMS.ViewModels
         public string NewCondition { get; set; }
 
     }
+
+    public class ListOfOnLoans
+    {
+        public IEnumerable<EditLoanViewModel> OnLoans;
+        //Return Date error
+        public string SearchKey = "";
+    }
 }

@@ -32,9 +32,32 @@ namespace AlisFirst.Areas.LMS.Controllers
         //
         // GET: /Loans/
 
+        [HttpGet]
         public ViewResult Index()
         {
-            return View(loanRepository.AllIncluding(loan => loan.Asset, loan => loan.Borrower));
+            IEnumerable<Loan> AllOnLoans = loanRepository.AllOnLoans;
+            ListOfOnLoans viewOnLoans = new ListOfOnLoans();
+            viewOnLoans.OnLoans = AutoMapper.Mapper.Map<IEnumerable<Loan>, IEnumerable<EditLoanViewModel>>(loanRepository.AllOnLoans);
+
+            return View(viewOnLoans);
+            //return View(loanRepository.AllIncluding(loan => loan.Asset, loan => loan.Borrower));
+        }
+
+        [HttpPost]
+        public ActionResult Index(string SearchKey)
+        {
+            ListOfOnLoans viewLoan = new ListOfOnLoans();
+            
+            if(ModelState.IsValid)
+                if (String.IsNullOrEmpty(SearchKey))
+                {
+                    viewLoan.OnLoans = AutoMapper.Mapper.Map<IEnumerable<Loan>, IEnumerable<EditLoanViewModel>>(loanRepository.AllOnLoans);
+                }
+                else
+                {
+                    viewLoan.OnLoans = AutoMapper.Mapper.Map<IEnumerable<Loan>, IEnumerable<EditLoanViewModel>>(loanRepository.All.Where(ol=> ol.Asset.BarCode == SearchKey));
+                }
+            return View(viewLoan);
         }
 
         //

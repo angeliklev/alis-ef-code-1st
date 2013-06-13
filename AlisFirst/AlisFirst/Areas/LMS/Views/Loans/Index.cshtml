@@ -1,4 +1,4 @@
-@model IEnumerable<AlisFirst.Models.Loan>
+@model AlisFirst.Areas.LMS.ViewModels.ListOfOnLoans
 
 @{
     ViewBag.Title = "Index";
@@ -9,6 +9,13 @@
 <p>
     @Html.ActionLink("Record Loan", "Create")
 </p>
+@using(Html.BeginForm())
+{
+    <p>
+    @Html.TextBox("SearchKey")
+    <input type="submit" value="Search" />
+    </p>
+}
 <table>
     <tr>
         <th></th>
@@ -29,27 +36,50 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.OnLoans) {
     <tr>
+
         <td>
             @Html.ActionLink("Return Loan", "Edit", new { id=item.LoanID })
-           @* @Html.ActionLink("Details", "Details", new { id=item.LoanID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.LoanID })*@
-        </td>
+         </td>
+       
+
+            @Html.HiddenFor(modelItem => item.LoanID)
         <td>
-			@String.Format("{0:g}", item.LoanDate)
+            
+            @Html.DisplayFor(modelItem => item.LoanDate)
         </td>
+
         <td>
-			@String.Format("{0:g}", item.DueDate)
+            @Html.DisplayFor(modelItem => item.DueDate)
         </td>
+
+       @* This is not a good practice, but since it is already filtered in repo so it is fine for this case. I do prefer another                 methon, I think it will be more maintainable*@
+
         <td>
-			@String.Format("{0:g}", item.ReturnDate)
+             @Html.Display("")
         </td>
+
+        
+        @*@if (item.ReturnDate.CompareTo(default(DateTime)) == 0)
+        {
+             <td>
+                @Html.Display("")
+             </td>
+        }
+        else
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.ReturnDate)
+            </td>
+        }*@
+       
         <td>
-			@Html.DisplayTextFor(_ => item.Asset).ToString()
+            @Html.DisplayFor(modelItem => item.AssetBarcode)
         </td>
+
         <td>
-			@(item.Borrower == null ? "None" : item.Borrower.Surname)
+            @Html.DisplayFor(modelItem => item.BorrowerBarcode)
         </td>
     </tr>
 }

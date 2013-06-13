@@ -138,6 +138,12 @@ namespace AlisFirst.DAL
             return (DateTime)borrowerExpiryDate.SingleOrDefault();
         }
 
+        public IQueryable<Loan> AllOnLoans
+        {
+            get { return context.Loans.Where(ol => ol.ReturnDate == null); }
+            
+        }
+
 
 
     }
@@ -154,5 +160,7 @@ namespace AlisFirst.DAL
         int getAssetID(string AssetBarCode);
         Boolean IsOnLoan(int assetID);
         Boolean IsLoanable(int assetID);
+        IQueryable<Loan> AllOnLoans{get;}
+
     }
 }
