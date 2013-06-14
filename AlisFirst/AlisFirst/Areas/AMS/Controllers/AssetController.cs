@@ -47,11 +47,11 @@ namespace AlisFirst.Areas.AMS.Controllers
         public ActionResult Index()
         {
             // this return is to work with my index until dashboard is ready
-            var assets = assetRepo.All;
-            return View(assets);
+            //var assets = assetRepo.All;
+            //return View(assets);
 
             // this 'return' is to work with AMS dashboard when it is ready
-            //return RedirectToAction("Index", "AssetList");
+            return RedirectToAction("Index", "AssetList");
         }
 
         //

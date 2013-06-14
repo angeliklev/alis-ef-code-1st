@@ -7,7 +7,6 @@ using AlisFirst.Helpers;
 using AlisFirst.Models;
 using AlisFirst.ViewModels;
 using AlisFirst.Areas.LMS.ViewModels;
-using AlisFirst.ViewModels;
 
 
 namespace AlisFirst
@@ -29,7 +28,7 @@ namespace AlisFirst
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional }, // Parameter defaults
+                new { controller = "Dashboard", action = "Index", id = UrlParameter.Optional }, // Parameter defaults
                 new[] { "AlisFirst.Controllers" }
                 );
 

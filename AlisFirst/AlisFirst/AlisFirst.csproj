@@ -113,7 +113,6 @@
     <Compile Include="Areas\AMS\ViewModels\AssetsViewModel.cs" />
     <Compile Include="Areas\AMS\ViewModels\AssignedLocationCreateModel.cs" />
     <Compile Include="Areas\AMS\ViewModels\DashboardViewModel.cs" />
-    <Compile Include="Areas\AMS\ViewModels\SelectedCheckListItemsData.cs" />
     <Compile Include="Areas\AMS\ViewModels\_AssetListViewModel.cs" />
     <Compile Include="Areas\LMS\Controllers\BorrowersController.cs" />
     <Compile Include="Areas\LMS\Controllers\DashboardController.cs" />
