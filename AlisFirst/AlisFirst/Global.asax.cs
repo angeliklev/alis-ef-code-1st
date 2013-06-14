@@ -9,6 +9,8 @@ using System.Web.Routing;
 using AlisFirst.Models;
 using AlisFirst.DAL;
 using AlisFirst.Areas.LMS.ViewModels;
+using AlisFirst.ViewModels;
+
 
 namespace AlisFirst
 {

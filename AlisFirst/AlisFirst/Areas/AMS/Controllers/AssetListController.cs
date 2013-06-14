@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Reflection;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AlisFirst.Models;
 using AlisFirst.DAL;
+using MvcPaging;
 
 namespace AlisFirst.Areas.AMS.Controllers
 {
@@ -15,70 +17,96 @@ namespace AlisFirst.Areas.AMS.Controllers
         private readonly ISupplierRepository supplierRepository;
         private readonly IAssetModelRepository assetmodelRepository;
         private readonly IAssetRepository assetRepository;
-
+        private readonly ILocationRepository locationRepository;
+        ViewModels.AssetsViewModel AssetListIndexViewModel = new ViewModels.AssetsViewModel();
 
         // If you are using Dependency Injection, you can delete the following constructor
         public AssetListController()
-            : this(new SupplierRepository(), new AssetModelRepository(), new AssetRepository())
+            : this(new SupplierRepository(), new AssetModelRepository(), new AssetRepository(), new LocationRepository())
         {
         }
 
         public AssetListController(ISupplierRepository supplierRepository,
             IAssetModelRepository assetmodelRepository,
-            IAssetRepository assetRepository
+            IAssetRepository assetRepository,
+            LocationRepository locationRepository
             )
         {
             this.supplierRepository = supplierRepository;
             this.assetmodelRepository = assetmodelRepository;
             this.assetRepository = assetRepository;
-
+            this.locationRepository = locationRepository;
         }
 
         //
         // GET: /Asset/
 
-        public ViewResult Index()
+        public ActionResult Index()
+        {
+            
+
+            int currentpageindex = 0;
+            var Assets = assetRepository.All.ToList();
+
+            AssetListIndexViewModel.listViewModel = new ViewModels._AssetListViewModel();
+
+            AssetListIndexViewModel.listViewModel.Assets = Assets.ToPagedList(currentpageindex, 5);
+
+            return View(AssetListIndexViewModel);
+        }
+        
+        public ActionResult AjaxIndex(int? page)
+        {
+            
+            int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
+
+            AlisFirst.Areas.AMS.ViewModels._AssetListViewModel ViewModel = new ViewModels._AssetListViewModel();
+           
+
+            var Assets = assetRepository.All.ToList();
+            ViewModel.Assets = Assets.ToPagedList<AlisFirst.Models.Asset>(currentPageIndex, 5);
+
+            return PartialView("_AssetList", ViewModel);
+
+        }
+
+        public ActionResult noJSIndex(int? page)
         {
 
-            //This is just a silly peice of code to allow MVC 3 to redirect here as home page.
-            if (!this.ControllerContext.RouteData.DataTokens.ContainsKey("area"))
-            {
-                this.ControllerContext.RouteData.DataTokens.Add("area", "AMS");
-            }
+            int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
+            var Assets = assetRepository.All.ToList();
 
-            ViewModels.AssetsViewModel ass = new ViewModels.AssetsViewModel();
+            AssetListIndexViewModel.listViewModel = new ViewModels._AssetListViewModel();
 
-            //ass.Status = assetRepository.AllIncluding(status => status
+            AssetListIndexViewModel.listViewModel.Assets = Assets.ToPagedList(currentPageIndex, 5);
 
-            ass.Assets = assetRepository.All.ToList();
 
-            return View(ass);
+            return View("Index", AssetListIndexViewModel);
+
         }
 
 
-        //This can be extended to allow filtering and searching by checking the buttons that come through on the form collections
-
         [HttpPost]
-        public ActionResult Index(FormCollection coll)
+        public ActionResult Index(ViewModels.AssetsViewModel v)
         {
             //This is just a silly peice of code to allow MVC 3 to redirect here as home page.
             if (!this.ControllerContext.RouteData.DataTokens.ContainsKey("area"))
             {
                 this.ControllerContext.RouteData.DataTokens.Add("area", "AMS");
             }
-            ViewModels.AssetsViewModel ass = new ViewModels.AssetsViewModel();
 
-            if (String.IsNullOrEmpty(coll["searchKey"]))
+            
+            if (String.IsNullOrEmpty(v.searchKey))
                 return RedirectToAction("Index");
 
-            string SearchKey = coll["searchKey"].Trim();
+
 
             var assets = from Models.Asset a in assetRepository.All
-                         where a.AssetModel.AssetModelName.Contains(SearchKey) || a.BarCode.Contains(SearchKey)
-                         || a.SerialNum.Contains(SearchKey) || a.Supplier.SupplierName.Contains(SearchKey)
+                         where a.AssetModel.AssetModelName.Contains(v.searchKey.Trim()) || a.BarCode.Contains(v.searchKey.Trim())
+                         || a.SerialNum.Contains(v.searchKey.Trim()) || a.Supplier.SupplierName.Contains(v.searchKey.Trim())
                          select a;
 
-            ass.Assets = assets.ToList();
+            
 
 
 
@@ -88,96 +116,13 @@ namespace AlisFirst.Areas.AMS.Controllers
 
                 return RedirectToAction("Edit", new { id = a.AssetID.ToString() });
             }
+            v.listViewModel = new ViewModels._AssetListViewModel();
+            v.listViewModel.Assets = assets.ToList().ToPagedList(0, 5);
 
-            return View(ass);
+            return View(v);
         }
 
-        //
-        // GET: /Asset/Details/5
 
-        public ViewResult Details(int id)
-        {
-            Asset asset = assetRepository.Find(id);
-            return View(asset);
-        }
-
-        //
-        // GET: /Asset/Create
-
-        public ActionResult Create()
-        {
-            ViewBag.SupplierID = new SelectList(supplierRepository.All, "SupplierID", "SupplierName");
-            ViewBag.AssetModelID = new SelectList(assetmodelRepository.All, "AssetModelID", "AssetModelName");
-            return View();
-        }
-
-        //
-        // POST: /Asset/Create
-
-        [HttpPost]
-        public ActionResult Create(Asset asset)
-        {
-            if (ModelState.IsValid)
-            {
-                assetRepository.InsertOrUpdate(asset);
-                assetRepository.Save();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.SupplierID = new SelectList(supplierRepository.All, "SupplierID", "SupplierName");
-            ViewBag.AssetModelID = new SelectList(assetmodelRepository.All, "AssetModelID", "AssetModelName");
-            return View(asset);
-        }
-
-        //
-        // GET: /Asset/Edit/5
-
-        public ActionResult Edit(int id)
-        {
-            Asset asset = assetRepository.Find(id);
-            ViewBag.SupplierID = new SelectList(supplierRepository.All, "SupplierID", "SupplierName");
-            ViewBag.AssetModelID = new SelectList(assetmodelRepository.All, "AssetModelID", "AssetModelName");
-            return View(asset);
-        }
-
-        //
-        // POST: /Asset/Edit/5
-
-        [HttpPost]
-        public ActionResult Edit(Asset asset)
-        {
-            if (ModelState.IsValid)
-            {
-                assetRepository.InsertOrUpdate(asset);
-                assetRepository.Save();
-                return RedirectToAction("Index");
-            }
-            ViewBag.SupplierID = new SelectList(supplierRepository.All, "SupplierID", "SupplierName");
-            ViewBag.AssetModelID = new SelectList(assetmodelRepository.All, "AssetModelID", "AssetModelName");
-            return View(asset);
-        }
-
-        //
-        // GET: /Asset/Delete/5
-
-        public ActionResult Delete(int id)
-        {
-            Asset asset = assetRepository.Find(id);
-            assetRepository.Save();
-            return View(asset);
-        }
-
-        //
-        // POST: /Asset/Delete/5
-
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
-        {
-
-            assetRepository.Delete(id);
-            assetRepository.Save();
-            return RedirectToAction("Index");
-        }
 
         protected override void Dispose(bool disposing)
         {
