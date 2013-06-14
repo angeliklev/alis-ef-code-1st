@@ -1,0 +1,17 @@
+﻿@* Views\Asset\_AssetRepairCreate.cshtml *@
+@model AlisFirst.Areas.AMS.ViewModels.AssetRepairCreateModel
+
+@using (Ajax.BeginForm("CreateRepair", new AjaxOptions { UpdateTargetId = "repair-history" }))
+
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+
+        @Html.EditorForModel()
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
