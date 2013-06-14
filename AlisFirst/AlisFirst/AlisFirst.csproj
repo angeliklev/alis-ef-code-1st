@@ -43,6 +43,9 @@
       <HintPath>..\packages\AutoMapper.2.2.1\lib\net40\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MvcPaging">
+      <HintPath>..\packages\MvcPaging.2.0.4\lib\net40\MvcPaging.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.Entity" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -106,10 +109,16 @@
     <Compile Include="Areas\AMS\Controllers\AssignedLocationController.cs" />
     <Compile Include="Areas\AMS\ViewModels\AssetMaintainModel.cs" />
     <Compile Include="Areas\AMS\ViewModels\AssetRepairCreateModel.cs" />
+    <Compile Include="Areas\AMS\Controllers\DashboardController.cs" />
     <Compile Include="Areas\AMS\ViewModels\AssetsViewModel.cs" />
     <Compile Include="Areas\AMS\ViewModels\AssignedLocationCreateModel.cs" />
+    <Compile Include="Areas\AMS\ViewModels\DashboardViewModel.cs" />
+    <Compile Include="Areas\AMS\ViewModels\SelectedCheckListItemsData.cs" />
+    <Compile Include="Areas\AMS\ViewModels\_AssetListViewModel.cs" />
     <Compile Include="Areas\LMS\Controllers\BorrowersController.cs" />
+    <Compile Include="Areas\LMS\Controllers\DashboardController.cs" />
     <Compile Include="Areas\LMS\LMSAreaRegistration.cs" />
+    <Compile Include="Areas\LMS\ViewModels\DashboardViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AssetConditionsController.cs" />
     <Compile Include="Controllers\AssetModelsController.cs" />
@@ -121,6 +130,7 @@
     <Compile Include="Controllers\BorrowersController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CheckListItemsController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoansController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
@@ -257,6 +267,9 @@
     <Content Include="Areas\AMS\Views\Asset\_AssetEdit.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\_AssetRepairHistory.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\_AssetRepairCreate.cshtml" />
+    <Content Include="Areas\AMS\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\LMS\Views\Dashboard\Index.cshtml" />
+    <None Include="Scripts\jquery-2.0.0.intellisense.js" />
     <Content Include="Scripts\EditorHookup.js" />
     <Content Include="Scripts\GoBack.js" />
     <Content Include="Scripts\jquery-ui-1.10.2.js" />
@@ -391,13 +404,13 @@
     <Content Include="Views\Shared\EditorTemplates\date.cshtml" />
     <Content Include="Views\Assets\Delete.cshtml" />
     <Content Include="Views\Assets\Details.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\AMS\Views\Shared\" />
     <Folder Include="Areas\LMS\Models\" />
     <Folder Include="Areas\LMS\Views\Shared\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
