@@ -112,7 +112,9 @@
     <Compile Include="Areas\AMS\ViewModels\SelectedCheckListItemsData.cs" />
     <Compile Include="Areas\AMS\ViewModels\_AssetListViewModel.cs" />
     <Compile Include="Areas\LMS\Controllers\BorrowersController.cs" />
+    <Compile Include="Areas\LMS\Controllers\DashboardController.cs" />
     <Compile Include="Areas\LMS\LMSAreaRegistration.cs" />
+    <Compile Include="Areas\LMS\ViewModels\DashboardViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AssetConditionsController.cs" />
     <Compile Include="Controllers\AssetModelsController.cs" />
@@ -256,6 +258,8 @@
     <Content Include="Areas\AMS\Views\Asset\Edit.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\Create.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\_CreateOrEdit.cshtml" />
+    <Content Include="Areas\AMS\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\LMS\Views\Dashboard\Index.cshtml" />
     <None Include="Scripts\jquery-2.0.0.intellisense.js" />
     <Content Include="Scripts\EditorHookup.js" />
     <Content Include="Scripts\GoBack.js" />
