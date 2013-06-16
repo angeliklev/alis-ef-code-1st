@@ -103,11 +103,8 @@
   <ItemGroup>
     <Compile Include="Areas\AMS\AMSAreaRegistration.cs" />
     <Compile Include="Areas\AMS\Controllers\AssetController.cs" />
-    <Compile Include="Areas\AMS\Controllers\AssetListController.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Areas\AMS\Controllers\DashboardController.cs" />
-    <Compile Include="Areas\AMS\ViewModels\AssetsViewModel.cs" />
+    <Compile Include="Areas\AMS\ViewModels\AssetsIndexViewModel.cs" />
     <Compile Include="Areas\AMS\ViewModels\DashboardViewModel.cs" />
     <Compile Include="Areas\AMS\ViewModels\SelectedCheckListItemsData.cs" />
     <Compile Include="Areas\AMS\ViewModels\_AssetListViewModel.cs" />
@@ -239,7 +236,6 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="Global.asax" />
-    <Content Include="Areas\AMS\Views\Web.config" />
     <Content Include="Areas\LMS\Views\Web.config" />
     <Content Include="Areas\LMS\Views\_ViewStart.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\Create.cshtml" />
@@ -248,19 +244,17 @@
     <Content Include="Areas\LMS\Views\Borrowers\Index.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\_Edit.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\_Create.cshtml" />
-    <Content Include="Areas\AMS\Views\AssetList\Create.cshtml" />
-    <Content Include="Areas\AMS\Views\AssetList\Delete.cshtml" />
-    <Content Include="Areas\AMS\Views\AssetList\Details.cshtml" />
-    <Content Include="Areas\AMS\Views\AssetList\Edit.cshtml" />
-    <Content Include="Areas\AMS\Views\AssetList\Index.cshtml" />
-    <Content Include="Areas\AMS\Views\Web.config" />
-    <Content Include="Areas\AMS\Views\_ViewStart.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\Index.cshtml" />
+    <Content Include="Areas\AMS\Views\_ViewStart.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\Edit.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\Create.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\_CreateOrEdit.cshtml" />
     <Content Include="Areas\AMS\Views\Dashboard\Index.cshtml" />
     <Content Include="Areas\LMS\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\AMS\Views\Shared\Menu.cshtml" />
+    <Content Include="Areas\AMS\Views\Shared\_AssetList.cshtml" />
+    <Content Include="Areas\AMS\Views\Web.config" />
+    <Content Include="Areas\LMS\Views\Shared\Menu.cshtml" />
     <None Include="Scripts\jquery-2.0.0.intellisense.js" />
     <Content Include="Scripts\EditorHookup.js" />
     <Content Include="Scripts\GoBack.js" />
@@ -401,9 +395,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\AMS\Models\" />
-    <Folder Include="Areas\AMS\Views\Shared\" />
     <Folder Include="Areas\LMS\Models\" />
-    <Folder Include="Areas\LMS\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

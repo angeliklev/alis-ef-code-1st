@@ -13,26 +13,22 @@ else
 
     <table class="grid">
         <tr>
-            <th>BarCode
+            <th>Bar Code
             </th>
-            <th>SerialNum
+            <th>Serial Number
             </th>
             <th>Supplier
             </th>
-            <th>AssetModel
+            <th>Asset Model
             </th>
-            <th>DateRecieved
+            <th>Date Recieved
             </th>
-            <th>WarrantyExpires
+            <th>Warranty Expires
             </th>
-            <th>PurchaseCost
+            <th>Purchase Cost
             </th>
-            <th>IsLoanable
-            </th>
-            <th>Notes
-            </th>
-            <th>IsActive
-            </th>
+            <th>Loanable
+            </th>            
             <th></th>
         </tr>
 
@@ -63,16 +59,11 @@ else
                 <td>
                     @Html.DisplayFor(i => item.IsLoanable)
                 </td>
-                <td>
-                    @Html.DisplayFor(i => item.Notes)
-                </td>
-                <td>
-                    @Html.DisplayFor(i => item.IsActive)
-                </td>
+               
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.AssetID }) |
             @Html.ActionLink("Details", "Details", new { id = item.AssetID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.AssetID })
+            
                 </td>
             </tr>
         }

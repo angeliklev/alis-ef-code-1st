@@ -7,21 +7,25 @@ using AlisFirst.Models;
 using AlisFirst.DAL;
 
 namespace AlisFirst.Controllers
-{   
+{
     public class AssetModelsController : Controller
     {
-		private readonly IManufacturerRepository manufacturerRepository;
-		private readonly IAssetModelRepository assetmodelRepository;
 
-		// If you are using Dependency Injection, you can delete the following constructor
-        public AssetModelsController() : this(new ManufacturerRepository(), new AssetModelRepository())
+        //Create the data sources
+        private readonly IManufacturerRepository manufacturerRepository;
+        private readonly IAssetModelRepository assetmodelRepository;
+
+        // If you are using Dependency Injection, you can delete the following constructor
+        public AssetModelsController()
+            : this(new ManufacturerRepository(), new AssetModelRepository())
         {
         }
 
+        //Constructor, instantiate the repos
         public AssetModelsController(IManufacturerRepository manufacturerRepository, IAssetModelRepository assetmodelRepository)
         {
-			this.manufacturerRepository = manufacturerRepository;
-			this.assetmodelRepository = assetmodelRepository;
+            this.manufacturerRepository = manufacturerRepository;
+            this.assetmodelRepository = assetmodelRepository;
         }
 
         //
@@ -29,6 +33,7 @@ namespace AlisFirst.Controllers
 
         public ViewResult Index()
         {
+            //Return the Index page with all data, including the manufacturers and assets.
             return View(assetmodelRepository.AllIncluding(assetmodel => assetmodel.Manufacturer, assetmodel => assetmodel.Assets));
         }
 
@@ -37,6 +42,7 @@ namespace AlisFirst.Controllers
 
         public ViewResult Details(int id)
         {
+            //Return the Detail page, with an asset matching the ID from the URI
             return View(assetmodelRepository.Find(id));
         }
 
@@ -45,33 +51,45 @@ namespace AlisFirst.Controllers
 
         public ActionResult Create()
         {
-			ViewBag.PossibleManufacturers = manufacturerRepository.All;
+            //Place all manufacturers into the viewbag for access in the view.
+            ViewBag.PossibleManufacturers = manufacturerRepository.All;
+            //Returns the create page on GET request
             return View();
-        } 
+        }
 
         //
         // POST: /AssetModels/Create
 
+        //Uses Databinding to create an asset model
         [HttpPost]
         public ActionResult Create(AssetModel assetmodel)
         {
-            if (ModelState.IsValid) {
+            //Checks if the model is valid
+            if (ModelState.IsValid)
+            {
+                //If so it inserts it into the repo and saves.
                 assetmodelRepository.InsertOrUpdate(assetmodel);
                 assetmodelRepository.Save();
+                //then returns to the Index page.
                 return RedirectToAction("Index");
-            } else {
-				ViewBag.PossibleManufacturers = manufacturerRepository.All;
-				return View();
-			}
+            }
+            else
+            {
+                //if not, just returns to the Create page.
+                ViewBag.PossibleManufacturers = manufacturerRepository.All;
+                return View();
+            }
         }
-        
+
         //
         // GET: /AssetModels/Edit/5
- 
+
         public ActionResult Edit(int id)
         {
-			ViewBag.PossibleManufacturers = manufacturerRepository.All;
-             return View(assetmodelRepository.Find(id));
+            //Place all manufacturers into the viewbag for access in the view.
+            ViewBag.PossibleManufacturers = manufacturerRepository.All;
+            //Return the Edit page, with an asset matching the ID from the URI
+            return View(assetmodelRepository.Find(id));
         }
 
         //
@@ -80,21 +98,29 @@ namespace AlisFirst.Controllers
         [HttpPost]
         public ActionResult Edit(AssetModel assetmodel)
         {
-            if (ModelState.IsValid) {
+            //Checks if the model is valid
+            if (ModelState.IsValid)
+            {
+                //If so it updates it in the repo and saves.
                 assetmodelRepository.InsertOrUpdate(assetmodel);
                 assetmodelRepository.Save();
+                //then returns to the Index page.
                 return RedirectToAction("Index");
-            } else {
-				ViewBag.PossibleManufacturers = manufacturerRepository.All;
-				return View();
-			}
+            }
+            else
+            {
+                //if not, just returns to the Edit page.
+                ViewBag.PossibleManufacturers = manufacturerRepository.All;
+                return View();
+            }
         }
 
         //
         // GET: /AssetModels/Delete/5
- 
+
         public ActionResult Delete(int id)
         {
+            //Return the Delete page, with an asset matching the ID from the URI
             return View(assetmodelRepository.Find(id));
         }
 
@@ -104,15 +130,17 @@ namespace AlisFirst.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
+            //Deletes the Asset with matching id from the URI and saves the changes
             assetmodelRepository.Delete(id);
             assetmodelRepository.Save();
-
+            //Redirects to the index page.
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing) {
+            if (disposing)
+            {
                 manufacturerRepository.Dispose();
                 assetmodelRepository.Dispose();
             }

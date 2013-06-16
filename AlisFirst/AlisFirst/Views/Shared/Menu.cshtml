@@ -1,7 +1,5 @@
-﻿   <ul id="menu">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Assets", "Index", "Assets")</li>
-                    <li>@Html.ActionLink("Loans", "Index", "Loans")</li>
-                    <li>@Html.ActionLink("Borrowers", "Index", "Borrowers")</li>
-                </ul>
+﻿<ul id="menu">
+    <li>@Html.ActionLink("Home", "Index", "Dashboard")</li>
+    <li>@Html.ActionLink("AMS", "Index", "Dashboard", new { area = "AMS" }, null)</li>
+    <li>@Html.ActionLink("LMS", "Index", "Dashboard", new { area = "LMS" }, null)</li>    
+</ul>
