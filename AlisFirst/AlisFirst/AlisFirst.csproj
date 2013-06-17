@@ -103,12 +103,10 @@
   <ItemGroup>
     <Compile Include="Areas\AMS\AMSAreaRegistration.cs" />
     <Compile Include="Areas\AMS\Controllers\AssetController.cs" />
-
     <Compile Include="Areas\AMS\Controllers\AssignedLocationController.cs" />
     <Compile Include="Areas\AMS\ViewModels\AssetMaintainModel.cs" />
     <Compile Include="Areas\AMS\ViewModels\AssetRepairCreateModel.cs" />
     <Compile Include="Areas\AMS\Controllers\DashboardController.cs" />
-    <Compile Include="Areas\AMS\ViewModels\AssetsViewModel.cs" />
     <Compile Include="Areas\AMS\ViewModels\AssetsIndexViewModel.cs" />
     <Compile Include="Areas\AMS\ViewModels\AssignedLocationCreateModel.cs" />
     <Compile Include="Areas\AMS\ViewModels\DashboardViewModel.cs" />
@@ -251,7 +249,6 @@
     <Content Include="Areas\LMS\Views\Borrowers\Index.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\_Edit.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\_Create.cshtml" />
-    
     <Content Include="Areas\AMS\Views\Asset\Index.cshtml" />
     <Content Include="Areas\AMS\Views\_ViewStart.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\Edit.cshtml" />

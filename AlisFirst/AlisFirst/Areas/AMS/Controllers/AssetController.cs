@@ -5,6 +5,7 @@ using AlisFirst.Areas.AMS.ViewModels;
 using AlisFirst.DAL;
 using AlisFirst.Models;
 using MvcPaging;
+using System;
 
 namespace AlisFirst.Areas.AMS.Controllers
 {
@@ -52,7 +53,7 @@ namespace AlisFirst.Areas.AMS.Controllers
             ViewModels.AssetsIndexViewModel AssetListIndexViewModel = new ViewModels.AssetsIndexViewModel();
 
             int currentpageindex = 0;
-            var Assets = assetRepository.All.ToList();
+            var Assets = assetRepo.All.ToList();
 
             AssetListIndexViewModel.listViewModel = new ViewModels._AssetListViewModel();
 
@@ -69,7 +70,7 @@ namespace AlisFirst.Areas.AMS.Controllers
             AlisFirst.Areas.AMS.ViewModels._AssetListViewModel ViewModel = new ViewModels._AssetListViewModel();
 
 
-            var Assets = assetRepository.All.ToList();
+            var Assets = assetRepo.All.ToList();
             ViewModel.Assets = Assets.ToPagedList<AlisFirst.Models.Asset>(currentPageIndex, 5);
 
             return PartialView("_AssetList", ViewModel);
@@ -81,7 +82,7 @@ namespace AlisFirst.Areas.AMS.Controllers
             ViewModels.AssetsIndexViewModel AssetListIndexViewModel = new ViewModels.AssetsIndexViewModel();
 
             int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
-            var Assets = assetRepository.All.ToList();
+            var Assets = assetRepo.All.ToList();
 
             AssetListIndexViewModel.listViewModel = new ViewModels._AssetListViewModel();
 
@@ -108,7 +109,7 @@ namespace AlisFirst.Areas.AMS.Controllers
 
 
 
-            var assets = from Models.Asset a in assetRepository.All
+            var assets = from Models.Asset a in assetRepo.All
                          where a.AssetModel.AssetModelName.Contains(v.searchKey.Trim()) || a.BarCode.Contains(v.searchKey.Trim())
                          || a.SerialNum.Contains(v.searchKey.Trim()) || a.Supplier.SupplierName.Contains(v.searchKey.Trim())
                          select a;
