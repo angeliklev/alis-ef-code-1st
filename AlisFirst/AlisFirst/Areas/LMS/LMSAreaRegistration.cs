@@ -18,7 +18,7 @@ namespace AlisFirst.Areas.LMS
                 "LMS_default",
                 "LMS/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional },
-                new[] { "AlisFirst.Areas.AMS.Controllers" }
+                new[] { "AlisFirst.Areas.LMS.Controllers" }
                 );
         }
     }
