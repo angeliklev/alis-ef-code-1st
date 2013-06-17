@@ -17,8 +17,9 @@ namespace AlisFirst.Areas.AMS
             context.MapRoute(
                 "AMS_default",
                 "AMS/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
-            );
+                new { controller = "Dashboard" ,action = "Index", id = UrlParameter.Optional },
+                new[] { "AlisFirst.Areas.AMS.Controllers" }
+                );
         }
     }
 }

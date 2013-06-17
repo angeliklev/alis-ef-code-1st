@@ -1,0 +1,30 @@
+﻿@* Views\AssignedLocation\_AssetLocationCreate.cshtml *@
+@model AlisFirst.Areas.AMS.ViewModels.AssignedLocationCreateModel
+
+@using (Ajax.BeginForm("../AssignedLocation/Create", new AjaxOptions { UpdateTargetId = "location-history" }))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        @Html.HiddenFor(model => model.AssetID)
+       <div class="editor-label">
+            @Html.LabelFor(model => model.AssignedLocationDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AssignedLocationDate)
+            @Html.ValidationMessageFor(model => model.AssignedLocationDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LocationID, "Location")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("LocationID", Model.LocationsList,"Choose a location")
+            @Html.ValidationMessageFor(model => model.LocationID)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+

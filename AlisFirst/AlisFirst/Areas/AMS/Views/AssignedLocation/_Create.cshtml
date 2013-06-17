@@ -1,0 +1,33 @@
+@* Views\AssignedLocation\_Create.cshtml *@
+@model AlisFirst.Areas.AMS.ViewModels.AssetMaintainModel.AssetAssignedLocationsModel
+<div class="column">
+    <h2>Assign new Location from Assigned Location</h2>
+    @Html.Partial("../AssignedLocation/_AssetLocationCreate", Model.LocationToCreate)
+</div>
+
+<div class="column">
+    <h2>Location History</h2>
+
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Location</th>
+        </tr>
+
+        @foreach (var item in Model.LocationHistory)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.AssignedLocationDate)
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.LocationLocationName)
+                </td>
+            </tr>    
+        }
+
+    </table>
+</div>
+<div class="clear"></div>
+
+
+
+
