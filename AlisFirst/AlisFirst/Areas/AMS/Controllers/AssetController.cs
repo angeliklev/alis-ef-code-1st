@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using AlisFirst.Models;
-using AlisFirst.DAL;
 using AlisFirst.Areas.AMS.ViewModels;
+using AlisFirst.DAL;
+using AlisFirst.Models;
 using MvcPaging;
 
 namespace AlisFirst.Areas.AMS.Controllers
@@ -17,25 +13,33 @@ namespace AlisFirst.Areas.AMS.Controllers
         private readonly ISupplierRepository supplierRepository;
         private readonly ICategoryRepository categoryRepository;
         private readonly IAssetModelRepository assetmodelRepository;
-        private readonly IAssetRepository assetRepository;
+        private readonly IAssetRepository assetRepo;
         private readonly ICheckListItemRepository checkListItemRepository;
+        private readonly IRepairRepository repairRepo;
+        private readonly IAssignedLocationRepository assignedLocationRepo;
+        private readonly ILocationRepository locationRepo;
 
         // If you are using Dependency Injection, you can delete the following constructor
         public AssetController()
             : this(new SupplierRepository(), new CategoryRepository(), new AssetModelRepository(),
-            new AssetRepository(), new CheckListItemRepository())
+            new AssetRepository(), new CheckListItemRepository(), new RepairRepository(),
+            new AssignedLocationRepository(), new LocationRepository())
         {
         }
 
         public AssetController(ISupplierRepository supplierRepository, ICategoryRepository categoryRepository,
             IAssetModelRepository assetmodelRepository, IAssetRepository assetRepository,
-            ICheckListItemRepository checkListItemRepository)
+            ICheckListItemRepository checkListItemRepository, IRepairRepository repairRepository,
+            IAssignedLocationRepository assignedLocationRepository, ILocationRepository locationReposiroty)
         {
             this.supplierRepository = supplierRepository;
             this.categoryRepository = categoryRepository;
             this.assetmodelRepository = assetmodelRepository;
-            this.assetRepository = assetRepository;
+            this.assetRepo = assetRepository;
             this.checkListItemRepository = checkListItemRepository;
+            this.repairRepo = repairRepository;
+            this.assignedLocationRepo = assignedLocationRepository;
+            this.locationRepo = locationReposiroty;
         }
 
         //
@@ -43,6 +47,7 @@ namespace AlisFirst.Areas.AMS.Controllers
 
         public ActionResult Index()
         {
+            
 
             ViewModels.AssetsIndexViewModel AssetListIndexViewModel = new ViewModels.AssetsIndexViewModel();
 
@@ -129,7 +134,7 @@ namespace AlisFirst.Areas.AMS.Controllers
 
         public ViewResult Details(int id)
         {
-            return View(assetRepository.Find(id));
+            return View(assetRepo.Find(id));
         }
 
         //
@@ -151,8 +156,8 @@ namespace AlisFirst.Areas.AMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                assetRepository.InsertOrUpdate(asset);
-                assetRepository.Save();
+                assetRepo.InsertOrUpdate(asset);
+                assetRepo.Save();
                 return RedirectToAction("Index");
             }
             else
@@ -164,18 +169,163 @@ namespace AlisFirst.Areas.AMS.Controllers
         }
 
         //
-        // GET: /Asset/Edit/5
+        // GET: AMS/Asset/Edit/5
 
         public ActionResult Edit(int id)
         {
-            ViewBag.PossibleSuppliers = supplierRepository.All;
-            ViewBag.PossibleCategories = categoryRepository.All;
-            ViewBag.PossibleAssetModels = assetmodelRepository.All;
+            var assetToEdit = assetRepo.Find(id);
+            var locationsList = AutoMapper.Mapper.Map<IEnumerable<AssignedLocation>,
+                    IEnumerable<AssetMaintainModel.LocationHistoryItemsModel>>(assignedLocationRepo
+                    .AllIncluding(l => l.Location).OrderBy(l => l.AssignedLocationDate)
+                    .Where(m => m.AssetID == id));
 
-            var asset = assetRepository.Find(id);
 
-            PopulateChosenCheckListItemsData(asset);
-            return View(asset);
+            var assetToMaintain = new AssetMaintainModel
+            {
+                AssetToEdit = AutoMapper.Mapper.Map<Asset, AssetMaintainModel.AssetEditVM>(assetToEdit),
+
+                AssetLocations = new AssetMaintainModel.AssetAssignedLocationsModel(id, locationRepo.All.ToList(),
+                     locationsList),
+
+                AssetRepairs = PopulateAssetRepairsView(id),
+                AssetCheckListView = SetSelectedCheckListItemsView(id)
+            };
+
+            return View(assetToMaintain);
+        }
+
+        private AssetMaintainModel.AssetRepairsModel PopulateAssetRepairsView(int id)
+        {
+            return new AssetMaintainModel.AssetRepairsModel
+            {
+                RepairHistory = PopulateRepairsHistory(id),
+                RepairToCreate = new AssetRepairCreateModel(id)
+            };
+        }
+
+        private IEnumerable<AssetMaintainModel.AssetRepairsHistoryModel> PopulateRepairsHistory(int id)
+        {
+            // this didn't work. Automapper did not like the mapping Map<Asset,
+                    //IEnumerable<AssetMaintainModel.AssetRepairsHistoryModel>>... needed resolving maybe.
+            //var asset = assetRepo.AllIncluding(m => m.Repairs).Where(m => m.AssetID == id).FirstOrDefault();
+            //return AutoMapper.Mapper.Map<Asset,IEnumerable<AssetMaintainModel.AssetRepairsHistoryModel>>(asset);   
+         
+            var repairs = repairRepo.All.Where(m => m.AssetID == id);
+            return AutoMapper.Mapper.Map<IEnumerable<Repair>,
+                    IEnumerable<AssetMaintainModel.AssetRepairsHistoryModel>>(repairs);
+        }
+
+        // 
+        // POST from partial _AssetRepairCreate
+
+        [HttpPost]
+        public ActionResult CreateRepair(AssetRepairCreateModel repairToCreate)
+        {
+            if (ModelState.IsValid)
+            {
+                repairRepo.InsertOrUpdate(AutoMapper.Mapper.Map<AssetRepairCreateModel,
+                                                                Repair>(repairToCreate));
+                repairRepo.Save();
+                if (Request.IsAjaxRequest())
+                {
+                    // in Firefox, Google Chrome this doesn't clear textfields values (not as expected!)
+                    return PartialView("_AssetRepairHistory", PopulateAssetRepairsView(repairToCreate.AssetID));
+                }
+                else
+                {
+                    // this renders the whole page again, with updated data
+                    return RedirectToAction("Edit", new { id = repairToCreate.AssetID });
+                }
+            }
+            else
+            {
+                if (Request.IsAjaxRequest())
+                {
+                    var repairModel = new AssetMaintainModel.AssetRepairsModel
+                    {
+                        RepairHistory = PopulateRepairsHistory(repairToCreate.AssetID),
+                        RepairToCreate = repairToCreate
+                    };
+                    return PartialView("_AssetRepairHistory", repairModel);
+                }
+                else
+                {
+                    // seems in this case can only add an error message to the view call and pass it as a parameter.
+                    return View("Edit", repairToCreate.AssetID);
+                }
+            }
+        }
+
+        private AssetMaintainModel.AssetCheckListVM SetSelectedCheckListItemsView(int id)
+        {
+            var allCheckListItems = checkListItemRepository.All.ToList();
+            var asset = assetRepo.Find(id);
+            // check if it is not null!!!
+
+            var assetCheckListItems = new HashSet<int>(asset.CheckListItems.Select(c => c.CheckListItemID));
+            var viewModel = new AssetMaintainModel.AssetCheckListVM
+            {
+                AssetID = id,
+                SelectedItems = new List<AssetMaintainModel.SelectedCheckListItemsData> { }
+            };
+
+            foreach (var item in allCheckListItems)
+            {
+                viewModel.SelectedItems.Add(new AssetMaintainModel.SelectedCheckListItemsData
+                {
+                    CheckListItemID = item.CheckListItemID,
+                    ItemName = item.CheckListItemName,
+                    Selected = assetCheckListItems.Contains(item.CheckListItemID)
+                });
+            };
+            return viewModel;
+        }
+
+        // 
+        // POST from partial _AssetRepairCreate
+
+        public ActionResult UpdateCheckList(AssetMaintainModel.AssetCheckListVM selectedItemsView, string[] selectedItems)
+        {
+            //asset to update related data
+            var asset = assetRepo.AllIncluding(m => m.CheckListItems)
+                .Where(m => m.AssetID == selectedItemsView.AssetID).FirstOrDefault();
+
+            if (selectedItems == null)
+            {
+                asset.CheckListItems = new List<CheckListItem>();
+            }
+            else
+            {
+                var allCheckListItems = checkListItemRepository.All.ToList();
+                // current asset items ids, before update 
+                var assetItemsIDsHS = new HashSet<int>(asset.CheckListItems.Select(c => c.CheckListItemID));
+
+                // input values
+                var selectedItemsHS = new HashSet<string>(selectedItems);
+
+                foreach (var item in allCheckListItems)
+                {
+                    if (selectedItemsHS.Contains(item.CheckListItemID.ToString()))
+                    {
+                        if (!assetItemsIDsHS.Contains(item.CheckListItemID))
+                        {
+                            asset.CheckListItems.Add(item);
+                        }
+                    }
+                    else
+                    {
+                        if (assetItemsIDsHS.Contains(item.CheckListItemID))
+                        {
+                            asset.CheckListItems.Remove(item);
+                        }
+                    }
+                } // end foreach
+            } // end condition if selectedItems is empty
+
+            assetRepo.Update(asset);
+            assetRepo.Save();
+
+            return PartialView("_AssetCheckListItems", SetSelectedCheckListItemsView(selectedItemsView.AssetID));
         }
 
         //
@@ -187,10 +337,8 @@ namespace AlisFirst.Areas.AMS.Controllers
 
             if (ModelState.IsValid)
             {
-                UpdateAssetCheckListItems(selectedCheckListItems, asset);
-
-                assetRepository.InsertOrUpdate(asset);
-                assetRepository.Save();
+                assetRepo.InsertOrUpdate(asset);
+                assetRepo.Save();
                 return RedirectToAction("Index");
             }
             else
@@ -198,76 +346,8 @@ namespace AlisFirst.Areas.AMS.Controllers
                 ViewBag.PossibleSuppliers = supplierRepository.All;
                 ViewBag.PossibleCategories = categoryRepository.All;
                 ViewBag.PossibleAssetModels = assetmodelRepository.All;
-
-                PopulateChosenCheckListItemsData(asset);
                 return View();
             }
-        }
-
-        private void UpdateAssetCheckListItems(string[] selectedCheckListItems, Asset assetToUpdate)
-        {
-            if (selectedCheckListItems == null)
-            {
-                assetToUpdate.CheckListItems = new List<CheckListItem>();
-                return;
-            }
-
-            var allCheckItems = checkListItemRepository.All.ToList();
-            var selectedItemsHS = new HashSet<string>(selectedCheckListItems);
-            var assetItems = new HashSet<int>
-                (assetToUpdate.CheckListItems.Select(c => c.CheckListItemID));
-            foreach (var checkItem in allCheckItems)
-            {
-                if (selectedItemsHS.Contains(checkItem.CheckListItemID.ToString()))
-                {
-                    if (!assetItems.Contains(checkItem.CheckListItemID))
-                    {
-                        assetToUpdate.CheckListItems.Add(checkItem);
-                    }
-                }
-                else
-                {
-                    if (assetItems.Contains(checkItem.CheckListItemID))
-                    {
-                        assetToUpdate.CheckListItems.Remove(checkItem);
-                    }
-                }
-            }
-        }
-        private void PopulateChosenCheckListItemsData(Asset asset)
-        {
-            var allCheckListItems = checkListItemRepository.All.ToList();
-            var assetCheckListItems = new HashSet<int>(asset.CheckListItems.Select(c => c.CheckListItemID));
-            var viewModel = new List<SelectedCheckListItemsData>();
-            foreach (var item in allCheckListItems)
-            {
-                viewModel.Add(new SelectedCheckListItemsData
-                {
-                    CheckListItemID = item.CheckListItemID,
-                    ItemName = item.CheckListItemName,
-                    Selected = assetCheckListItems.Contains(item.CheckListItemID)
-                });
-            };
-            ViewBag.CheckListItems = viewModel;
-        }
-        //
-        // GET: /Asset/Delete/5
-
-        public ActionResult Delete(int id)
-        {
-            return View(assetRepository.Find(id));
-        }
-
-        //
-        // POST: /Asset/Delete/5
-
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            assetRepository.Delete(id);
-            assetRepository.Save();
-
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
@@ -276,118 +356,10 @@ namespace AlisFirst.Areas.AMS.Controllers
             {
                 supplierRepository.Dispose();
                 assetmodelRepository.Dispose();
-                assetRepository.Dispose();
+                assetRepo.Dispose();
             }
             base.Dispose(disposing);
         }
     }
 }
 
-//        private AlisFirstContext db = new AlisFirstContext();
-
-//        //
-//        // GET: /AMS/Asset/
-
-//        public ViewResult Index()
-//        {
-//            var assets = db.Assets.Include(a => a.Supplier).Include(a => a.Category).Include(a => a.AssetModel);
-//            return View(assets.ToList());
-//        }
-
-//        //
-//        // GET: /AMS/Asset/Details/5
-
-//        public ViewResult Details(int id)
-//        {
-//            Asset asset = db.Assets.Find(id);
-//            return View(asset);
-//        }
-
-//        //
-//        // GET: /AMS/Asset/Create
-
-//        public ActionResult Create()
-//        {
-//            ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "SupplierName");
-//            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
-//            ViewBag.AssetModelID = new SelectList(db.AssetModels, "AssetModelID", "AssetModelName");
-//            return View();
-//        } 
-
-//        //
-//        // POST: /AMS/Asset/Create
-
-//        [HttpPost]
-//        public ActionResult Create(Asset asset)
-//        {
-//            if (ModelState.IsValid)
-//            {
-//                db.Assets.Add(asset);
-//                db.SaveChanges();
-//                return RedirectToAction("Index");  
-//            }
-
-//            ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "SupplierName", asset.SupplierID);
-//            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", asset.CategoryID);
-//            ViewBag.AssetModelID = new SelectList(db.AssetModels, "AssetModelID", "AssetModelName", asset.AssetModelID);
-//            return View(asset);
-//        }
-
-//        //
-//        // GET: /AMS/Asset/Edit/5
-
-//        public ActionResult Edit(int id)
-//        {
-//            Asset asset = db.Assets.Find(id);
-//            ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "SupplierName", asset.SupplierID);
-//            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", asset.CategoryID);
-//            ViewBag.AssetModelID = new SelectList(db.AssetModels, "AssetModelID", "AssetModelName", asset.AssetModelID);
-//            return View(asset);
-//        }
-
-//        //
-//        // POST: /AMS/Asset/Edit/5
-
-//        [HttpPost]
-//        public ActionResult Edit(Asset asset)
-//        {
-//            if (ModelState.IsValid)
-//            {
-//                db.Entry(asset).State = EntityState.Modified;
-//                db.SaveChanges();
-//                return RedirectToAction("Index");
-//            }
-//            ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "SupplierName", asset.SupplierID);
-//            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", asset.CategoryID);
-//            ViewBag.AssetModelID = new SelectList(db.AssetModels, "AssetModelID", "AssetModelName", asset.AssetModelID);
-//            return View(asset);
-//        }
-
-//        //
-//        // GET: /AMS/Asset/Delete/5
-
-//        public ActionResult Delete(int id)
-//        {
-//            Asset asset = db.Assets.Find(id);
-//            return View(asset);
-//        }
-
-//        //
-//        // POST: /AMS/Asset/Delete/5
-
-//        [HttpPost, ActionName("Delete")]
-//        public ActionResult DeleteConfirmed(int id)
-//        {            
-//            Asset asset = db.Assets.Find(id);
-//            db.Assets.Remove(asset);
-//            db.SaveChanges();
-//            return RedirectToAction("Index");
-//        }
-
-//        protected override void Dispose(bool disposing)
-//        {
-//            db.Dispose();
-//            base.Dispose(disposing);
-//        }
-//    }
-//}

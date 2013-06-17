@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using AlisFirst.Models;
 using AlisFirst.DAL;
-using AlisFirst.Areas.LMS.ViewModels;
+using AlisFirst.Helpers;
+using AlisFirst.Models;
 using AlisFirst.ViewModels;
+using AlisFirst.Areas.LMS.ViewModels;
 
 
 namespace AlisFirst
@@ -49,6 +46,8 @@ namespace AlisFirst
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+
+            AutoMapperBootstrapper.Initialize();
 
             //Mapping information for viewmodel/model conversion (discuss where to move this junk to, it certainly shouldn't be in here)
             AutoMapper.Mapper.CreateMap<Borrower, CreateBorrowerViewModel>();
