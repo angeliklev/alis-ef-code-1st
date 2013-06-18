@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using AlisFirst.Validation;
 
-namespace AlisFirst.ViewModels
+namespace AlisFirst.Areas.LMS.ViewModels
 {
     [DueDateValidation]
     [LoanDateValidation]
@@ -44,5 +44,12 @@ namespace AlisFirst.ViewModels
 
         public string NewCondition { get; set; }
 
+    }
+
+    public class ListOfOnLoans
+    {
+        public IEnumerable<EditLoanViewModel> OnLoans;
+        //Return Date error
+        public string SearchKey = "";
     }
 }
