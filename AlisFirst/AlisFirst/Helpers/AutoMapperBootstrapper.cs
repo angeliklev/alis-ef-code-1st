@@ -43,6 +43,14 @@ namespace AlisFirst.Helpers
                 AutoMapper.Mapper.CreateMap<DeleteBorrowerViewModel,    Borrower>();
                 AutoMapper.Mapper.CreateMap<Borrower,                   ListBorrowerViewModel>();
                 AutoMapper.Mapper.CreateMap<ListBorrowerViewModel,      Borrower>();
+                AutoMapper.Mapper.CreateMap<ListEmployeeViewModel,      Borrower>(); 
+                AutoMapper.Mapper.CreateMap<Borrower,                   ListEmployeeViewModel>(); 
+                AutoMapper.Mapper.CreateMap<CreateEmployeeViewModel,    Borrower>();
+                AutoMapper.Mapper.CreateMap<Borrower,                   CreateEmployeeViewModel>();
+                AutoMapper.Mapper.CreateMap<EditEmployeeViewModel,      Borrower>();
+                AutoMapper.Mapper.CreateMap<Borrower,                   EditEmployeeViewModel>();
+                AutoMapper.Mapper.CreateMap<DeleteEmployeeViewModel,    Borrower>();
+                AutoMapper.Mapper.CreateMap<Borrower,                   DeleteEmployeeViewModel>();
 
                 //// Mapping for maintain Asset, between domain models and view models
                 //AutoMapper.Mapper.CreateMap<AssignedLocation, AssetEdit.CreateAssignedLocationVM>();
