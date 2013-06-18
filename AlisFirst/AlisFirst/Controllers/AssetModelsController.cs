@@ -6,8 +6,7 @@ using System.Web.Mvc;
 using AlisFirst.Models;
 using AlisFirst.DAL;
 
-namespace AlisFirst.Controllers
-{
+
     public class AssetModelsController : Controller
     {
 
@@ -146,6 +145,6 @@ namespace AlisFirst.Controllers
             }
             base.Dispose(disposing);
         }
-    }
+    
 }
 
