@@ -127,7 +127,6 @@
     <Compile Include="Controllers\AssignedLocationsController.cs" />
     <Compile Include="Controllers\AssignedStatusController.cs" />
     <Compile Include="Controllers\AssignedToesController.cs" />
-    <Compile Include="Controllers\BorrowersController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CheckListItemsController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
@@ -334,12 +333,6 @@
     <Content Include="Views\AssetConditions\Details.cshtml" />
     <Content Include="Views\AssetConditions\Index.cshtml" />
     <Content Include="Views\AssetConditions\_CreateOrEdit.cshtml" />
-    <Content Include="Views\Borrowers\Create.cshtml" />
-    <Content Include="Views\Borrowers\Edit.cshtml" />
-    <Content Include="Views\Borrowers\Delete.cshtml" />
-    <Content Include="Views\Borrowers\Details.cshtml" />
-    <Content Include="Views\Borrowers\Index.cshtml" />
-    <Content Include="Views\Borrowers\_CreateOrEdit.cshtml" />
     <Content Include="Views\AssetStatus\Create.cshtml" />
     <Content Include="Views\AssetStatus\Edit.cshtml" />
     <Content Include="Views\AssetStatus\Delete.cshtml" />
@@ -413,7 +406,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\AMS\Models\" />    <Folder Include="Areas\AMS\Views\Shared\" />
+    <Folder Include="Areas\AMS\Models\" />
+    <Folder Include="Areas\AMS\Views\Shared\" />
     <Folder Include="Areas\LMS\Models\" />
     <Folder Include="Areas\LMS\Views\Shared\" />
   </ItemGroup>

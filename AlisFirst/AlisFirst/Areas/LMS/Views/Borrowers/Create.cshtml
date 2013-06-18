@@ -1,15 +1,15 @@
 @model AlisFirst.Areas.LMS.ViewModels.CreateBorrowerViewModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create Borrower";
 }
 
-<h2>Create</h2>
+<h2>Create A New Borrower</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
     <fieldset>
-        <legend>Borrower</legend>
+        <legend>Borrower Details</legend>
 
 		@Html.Partial("_Create", Model)
 
