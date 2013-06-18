@@ -1,0 +1,81 @@
+﻿@model AlisFirst.Areas.AMS.ViewModels.ListEmployeeViewModel
+
+@{
+    ViewBag.Title = "Employees";
+}
+
+<h2>Employees</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using(Html.BeginForm())
+{
+    <p>
+    @Html.TextBox("SearchKey")
+    <input type="submit" value="Search" />
+    </p>
+}
+<table>
+    <tr>
+        <th>
+
+        </th>
+        <th>
+            Bar Code
+        </th>
+        <th>
+            Surname
+        </th>
+        <th>
+            Given Name
+        </th>
+        <th>
+            Expiry Date
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Phone Number
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.ListOfEmployees) {
+    <tr>
+        @if( item.IsEmployee)
+        {
+            <td>
+                @Html.ActionLink("Edit Employee", "Edit", new { id=item.BorrowerID })
+            </td>
+        }
+        else
+        {
+            <td>
+                Not Employee    
+            </td>    
+        }
+            @Html.HiddenFor(modelItem => item.BorrowerID)
+        <td>
+            @Html.DisplayFor(modelItem => item.BarCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Surname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GivenName)
+        </td>
+        <td>
+            @String.Format("{0:dd/MM/yyyy}", item.BorrowerExpiryDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneNumber)
+        </td>
+    </tr>
+}
+
+</table>

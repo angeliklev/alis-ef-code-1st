@@ -102,6 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\AMS\AMSAreaRegistration.cs" />
+    <Compile Include="Areas\AMS\Controllers\EmployeeController.cs" />
     <Compile Include="Areas\AMS\Controllers\AssetController.cs" />
     <Compile Include="Areas\AMS\Controllers\AssignedLocationController.cs" />
     <Compile Include="Areas\AMS\ViewModels\AssetMaintainModel.cs" />
@@ -171,6 +172,7 @@
     <Compile Include="Models\Supplier.cs" />
     <Compile Include="DAL\SupplierRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Areas\AMS\ViewModels\EmployeeModel.cs" />
     <Compile Include="Validation\LoanValidation.cs" />
     <Compile Include="Validation\BorrowerValidation.cs" />
     <Compile Include="Areas\LMS\ViewModels\BorrowerModel.cs" />
@@ -249,6 +251,17 @@
     <Content Include="Areas\LMS\Views\Borrowers\Index.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\_Edit.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\_Create.cshtml" />
+    <Content Include="Areas\AMS\Views\Employee\Index.cshtml" />
+    <Content Include="Areas\AMS\Views\AssetList\Create.cshtml" />
+    <Content Include="Areas\AMS\Views\AssetList\Delete.cshtml" />
+    <Content Include="Areas\AMS\Views\AssetList\Details.cshtml" />
+    <Content Include="Areas\AMS\Views\AssetList\Edit.cshtml" />
+    <Content Include="Areas\AMS\Views\AssetList\Index.cshtml" />
+    <Content Include="Areas\AMS\Views\Web.config" />
+    <Content Include="Areas\AMS\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\AMS\Views\Employee\Create.cshtml" />
+    <Content Include="Areas\AMS\Views\Employee\Edit.cshtml" />
+    <Content Include="Areas\AMS\Views\Employee\DeleteConfirmed.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\Index.cshtml" />
     <Content Include="Areas\AMS\Views\_ViewStart.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\Edit.cshtml" />
@@ -403,6 +416,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\AMS\Models\" />    <Folder Include="Areas\AMS\Views\Shared\" />
     <Folder Include="Areas\LMS\Models\" />
   </ItemGroup>
   <ItemGroup>
