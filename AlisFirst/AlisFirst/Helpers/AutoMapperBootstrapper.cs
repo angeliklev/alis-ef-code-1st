@@ -14,7 +14,24 @@ namespace AlisFirst.Helpers
             Mapper.Initialize(cfg =>
             {
                 cfg.AddProfile<AssetEditModelProfile>();
+                cfg.AddProfile<BorrowerModelProfile>();
             });
+        }
+
+        public class BorrowerModelProfile : Profile
+        {
+            protected override void Configure()
+            {
+                //Map all viewmodels related to LMS/Borrowers to their corresponding model.
+                CreateMap<Borrower,                 CreateBorrowerViewModel>();
+                CreateMap<CreateBorrowerViewModel,  Borrower>();
+                CreateMap<Borrower,                 EditBorrowerViewModel>();
+                CreateMap<EditBorrowerViewModel,    Borrower>();
+                CreateMap<Borrower,                 DeleteBorrowerViewModel>();
+                CreateMap<DeleteBorrowerViewModel,  Borrower>();
+                CreateMap<Borrower,                 ListBorrowerViewModel>();
+                CreateMap<ListBorrowerViewModel,    Borrower>();
+            }
         }
 
         public class AssetEditModelProfile : Profile
@@ -35,16 +52,8 @@ namespace AlisFirst.Helpers
 
                 CreateMap<AssignedLocation, AssetMaintainModel.LocationHistoryItemsModel>();
 
-                AutoMapper.Mapper.CreateMap<Borrower,                   CreateBorrowerViewModel>();
-                AutoMapper.Mapper.CreateMap<CreateBorrowerViewModel,    Borrower>();
-                AutoMapper.Mapper.CreateMap<Borrower,                   EditBorrowerViewModel>();
-                AutoMapper.Mapper.CreateMap<EditBorrowerViewModel,      Borrower>();
-                AutoMapper.Mapper.CreateMap<Borrower,                   DeleteBorrowerViewModel>();
-                AutoMapper.Mapper.CreateMap<DeleteBorrowerViewModel,    Borrower>();
-                AutoMapper.Mapper.CreateMap<Borrower,                   ListBorrowerViewModel>();
-                AutoMapper.Mapper.CreateMap<ListBorrowerViewModel,      Borrower>();
-                AutoMapper.Mapper.CreateMap<ListEmployeeViewModel,      Borrower>(); 
-                AutoMapper.Mapper.CreateMap<Borrower,                   ListEmployeeViewModel>(); 
+                AutoMapper.Mapper.CreateMap<ListEmployeeViewModel, Borrower>();
+                AutoMapper.Mapper.CreateMap<Borrower, ListEmployeeViewModel>(); 
                 AutoMapper.Mapper.CreateMap<CreateEmployeeViewModel,    Borrower>();
                 AutoMapper.Mapper.CreateMap<Borrower,                   CreateEmployeeViewModel>();
                 AutoMapper.Mapper.CreateMap<EditEmployeeViewModel,      Borrower>();
