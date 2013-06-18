@@ -4,6 +4,7 @@ using AlisFirst.Models;
 using AlisFirst.Areas.AMS.ViewModels;
 using AlisFirst.Areas.LMS.ViewModels;
 using System.Collections.Generic;
+using AlisFirst.Areas.LMS.ViewModels;
 
 namespace AlisFirst.Helpers
 {
@@ -15,6 +16,7 @@ namespace AlisFirst.Helpers
             {
                 cfg.AddProfile<AssetEditModelProfile>();
                 cfg.AddProfile<EmployeeModelProfile>();
+                cfg.AddProfile<LoanModelProfile>();
             });
         }
 
@@ -57,6 +59,17 @@ namespace AlisFirst.Helpers
                 //AutoMapper.Mapper.CreateMap<AssignedLocation, AssetEdit.LocationHistoryItemsVM>();
 
             }
+        }
+        public class LoanModelProfile : Profile
+        {
+            protected override void Configure()
+            {
+                AutoMapper.Mapper.CreateMap<CreateLoanViewModel, Loan>();
+                AutoMapper.Mapper.CreateMap<Loan, CreateLoanViewModel>();
+                AutoMapper.Mapper.CreateMap<EditLoanViewModel, Loan>();
+                AutoMapper.Mapper.CreateMap<Loan, EditLoanViewModel>();
+                //base.Configure();
+    }
         }
     }
 }
