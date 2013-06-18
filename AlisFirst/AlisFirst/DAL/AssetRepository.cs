@@ -1,10 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Web;
 using AlisFirst.Models;
 
 namespace AlisFirst.DAL
@@ -54,10 +52,17 @@ namespace AlisFirst.DAL
             context.SaveChanges();
         }
 
+        public void Update(Asset asset)
+        {
+            context.Entry(asset).State = EntityState.Modified;
+        }
+
         public void Dispose() 
         {
             context.Dispose();
         }
+
+
     }
 
     public interface IAssetRepository : IDisposable
@@ -68,5 +73,6 @@ namespace AlisFirst.DAL
         void InsertOrUpdate(Asset asset);
         void Delete(int id);
         void Save();
+        void Update(Asset asset);
     }
 }
