@@ -5,7 +5,9 @@ using System.Web.Routing;
 using AlisFirst.DAL;
 using AlisFirst.Helpers;
 using AlisFirst.Models;
+using AlisFirst.DAL;
 using AlisFirst.Areas.LMS.ViewModels;
+using AlisFirst.Areas.AMS.ViewModels;
 
 
 namespace AlisFirst
@@ -29,7 +31,7 @@ namespace AlisFirst
                 "{controller}/{action}/{id}", // URL with parameters
                 new { controller = "Dashboard", action = "Index", id = UrlParameter.Optional }, // Parameter defaults
                 new[] { "AlisFirst.Controllers" }
-                );
+            );
 
         }
 

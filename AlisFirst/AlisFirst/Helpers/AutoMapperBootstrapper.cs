@@ -2,6 +2,7 @@
 using AutoMapper;
 using AlisFirst.Models;
 using AlisFirst.Areas.AMS.ViewModels;
+using AlisFirst.Areas.LMS.ViewModels;
 using System.Collections.Generic;
 using AlisFirst.Areas.LMS.ViewModels;
 
@@ -36,6 +37,14 @@ namespace AlisFirst.Helpers
 
                 CreateMap<AssignedLocation, AssetMaintainModel.LocationHistoryItemsModel>();
 
+                AutoMapper.Mapper.CreateMap<ListEmployeeViewModel,      Borrower>(); 
+                AutoMapper.Mapper.CreateMap<Borrower,                   ListEmployeeViewModel>(); 
+                AutoMapper.Mapper.CreateMap<CreateEmployeeViewModel,    Borrower>();
+                AutoMapper.Mapper.CreateMap<Borrower,                   CreateEmployeeViewModel>();
+                AutoMapper.Mapper.CreateMap<EditEmployeeViewModel,      Borrower>();
+                AutoMapper.Mapper.CreateMap<Borrower,                   EditEmployeeViewModel>();
+                AutoMapper.Mapper.CreateMap<DeleteEmployeeViewModel,    Borrower>();
+                AutoMapper.Mapper.CreateMap<Borrower,                   DeleteEmployeeViewModel>();
 
                 //// Mapping for maintain Asset, between domain models and view models
                 //AutoMapper.Mapper.CreateMap<AssignedLocation, AssetEdit.CreateAssignedLocationVM>();
