@@ -7,7 +7,7 @@ using System.Web.Routing;
 using System.Web.Security;
 using AlisFirst.Models;
 
-namespace AlisFirst.Controllers
+namespace AlisFirst.Areas
 {
     public class AccountController : Controller
     {

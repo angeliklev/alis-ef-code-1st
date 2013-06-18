@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using AlisFirst.DAL;
 using AlisFirst.Models;
-using AlisFirst.ViewModels;
+using AlisFirst.Areas.LMS.ViewModels;
 
 
 namespace AlisFirst.Validation
@@ -141,5 +141,7 @@ namespace AlisFirst.Validation
             return ValidationResult.Success;
         }
     }
+
+    
 
 }
