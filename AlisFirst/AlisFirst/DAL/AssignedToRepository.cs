@@ -18,6 +18,11 @@ namespace AlisFirst.DAL
             get { return context.AssignedToes; }
         }
 
+        public IQueryable<AssignedTo> GetAssignedToByAssetID( int AssetID )
+        {
+            return All.Where( m => m.AssetID == AssetID );
+        }
+
         public IQueryable<AssignedTo> AllIncluding(params Expression<Func<AssignedTo, object>>[] includeProperties)
         {
             IQueryable<AssignedTo> query = context.AssignedToes;
