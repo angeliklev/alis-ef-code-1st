@@ -252,7 +252,6 @@
     <Content Include="Areas\AMS\Views\Employee\Create.cshtml" />
     <Content Include="Areas\AMS\Views\Employee\Edit.cshtml" />
     <Content Include="Areas\AMS\Views\Employee\DeleteConfirmed.cshtml" />
-    <Content Include="Areas\AMS\Views\Employee\AssignToEmployee.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\Index.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\Edit.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\Create.cshtml" />
@@ -394,12 +393,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\AMS\Controllers\" />
     <Folder Include="Areas\AMS\Models\" />
     <Folder Include="Areas\AMS\Views\Shared\" />
     <Folder Include="Areas\LMS\Models\" />
     <Folder Include="Areas\LMS\Views\Shared\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

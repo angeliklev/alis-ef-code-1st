@@ -1,16 +1,16 @@
 ﻿@model AlisFirst.Areas.AMS.ViewModels.DeleteEmployeeViewModel
 
 @{
-    ViewBag.Title = "DeleteConfirmed";
+    ViewBag.Title = "Are you sure you wish to delete this?";
 }
 
-<h2>DeleteConfirmed</h2>
+<h2>Confirm Deletion</h2>
 
 <h3>Are you sure you want to delete this?</h3>
 <fieldset>
-    <legend>DeleteEmployeeViewModel</legend>
+    <legend>Employee Details</legend>
 
-    <div class="display-label">BarCode</div>
+    <div class="display-label">Bar Code</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.BarCode)
     </div>
@@ -20,12 +20,12 @@
         @Html.DisplayFor(model => model.Surname)
     </div>
 
-    <div class="display-label">GivenName</div>
+    <div class="display-label">Given Name</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.GivenName)
     </div>
 
-    <div class="display-label">BorrowerExpiryDate</div>
+    <div class="display-label">Expiry Date</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.BorrowerExpiryDate)
     </div>
@@ -35,7 +35,7 @@
         @Html.DisplayFor(model => model.Email)
     </div>
 
-    <div class="display-label">PhoneNumber</div>
+    <div class="display-label">Phone Number</div>
     <div class="display-field">
         @Html.DisplayFor(model => model.PhoneNumber)
     </div>
