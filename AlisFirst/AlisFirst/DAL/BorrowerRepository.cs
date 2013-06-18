@@ -28,6 +28,11 @@ namespace AlisFirst.DAL
             get { return context.Borrowers; }
         }
 
+        public IQueryable<Borrower> AllEmployees
+        {
+            get { return context.Borrowers.Where(b => b.IsEmployee == true); }
+        }
+
         public IQueryable<Loan> GetBorrowerLoans( int BorrowerID )
         {
             return context.Loans.Where(l => l.BorrowerID == BorrowerID);

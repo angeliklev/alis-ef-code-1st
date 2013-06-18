@@ -6,7 +6,9 @@ using AlisFirst.DAL;
 using AlisFirst.Helpers;
 using AlisFirst.Models;
 using AlisFirst.ViewModels;
+using AlisFirst.DAL;
 using AlisFirst.Areas.LMS.ViewModels;
+using AlisFirst.Areas.AMS.ViewModels;
 
 
 namespace AlisFirst
@@ -30,7 +32,7 @@ namespace AlisFirst
                 "{controller}/{action}/{id}", // URL with parameters
                 new { controller = "Dashboard", action = "Index", id = UrlParameter.Optional }, // Parameter defaults
                 new[] { "AlisFirst.Controllers" }
-                );
+            );
 
         }
 
@@ -58,6 +60,7 @@ namespace AlisFirst
             AutoMapper.Mapper.CreateMap<DeleteBorrowerViewModel, Borrower>();
             AutoMapper.Mapper.CreateMap<Borrower, ListBorrowerViewModel>();
             AutoMapper.Mapper.CreateMap<ListBorrowerViewModel, Borrower>();
+
             AutoMapper.Mapper.CreateMap<CreateLoanViewModel,Loan>();
             AutoMapper.Mapper.CreateMap<Loan, CreateLoanViewModel>();
             AutoMapper.Mapper.CreateMap<EditLoanViewModel, Loan>();

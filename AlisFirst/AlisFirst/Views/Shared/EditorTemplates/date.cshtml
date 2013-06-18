@@ -1,2 +1,2 @@
-﻿@model DateTime
-@Html.TextBox("", Model.ToString("dd/MM/yyyy"), new { @class = "date" })
+﻿@model DateTime?
+@Html.TextBox("", (Model.HasValue) ? Model.Value.ToString("dd/MM/yyyy") : "", new { @class = "date" }) <!--Sick ass ternary operator -->
