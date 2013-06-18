@@ -104,14 +104,11 @@
     <Compile Include="Areas\AMS\AMSAreaRegistration.cs" />
     <Compile Include="Areas\AMS\Controllers\EmployeeController.cs" />
     <Compile Include="Areas\AMS\Controllers\AssetController.cs" />
-    <Compile Include="Areas\AMS\Controllers\AssetListController.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Areas\AMS\Controllers\AssignedLocationController.cs" />
     <Compile Include="Areas\AMS\ViewModels\AssetMaintainModel.cs" />
     <Compile Include="Areas\AMS\ViewModels\AssetRepairCreateModel.cs" />
     <Compile Include="Areas\AMS\Controllers\DashboardController.cs" />
-    <Compile Include="Areas\AMS\ViewModels\AssetsViewModel.cs" />
+    <Compile Include="Areas\AMS\ViewModels\AssetsIndexViewModel.cs" />
     <Compile Include="Areas\AMS\ViewModels\AssignedLocationCreateModel.cs" />
     <Compile Include="Areas\AMS\ViewModels\DashboardViewModel.cs" />
     <Compile Include="Areas\AMS\ViewModels\_AssetListViewModel.cs" />
@@ -265,6 +262,7 @@
     <Content Include="Areas\AMS\Views\Employee\Edit.cshtml" />
     <Content Include="Areas\AMS\Views\Employee\DeleteConfirmed.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\Index.cshtml" />
+    <Content Include="Areas\AMS\Views\_ViewStart.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\Edit.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\Create.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\_CreateOrEdit.cshtml" />
@@ -273,6 +271,10 @@
     <Content Include="Areas\AMS\Views\Asset\_AssetRepairCreate.cshtml" />
     <Content Include="Areas\AMS\Views\Dashboard\Index.cshtml" />
     <Content Include="Areas\LMS\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\AMS\Views\Shared\Menu.cshtml" />
+    <Content Include="Areas\AMS\Views\Shared\_AssetList.cshtml" />
+    <Content Include="Areas\AMS\Views\Web.config" />
+    <Content Include="Areas\LMS\Views\Shared\Menu.cshtml" />
     <None Include="Scripts\jquery-2.0.0.intellisense.js" />
     <Content Include="Scripts\EditorHookup.js" />
     <Content Include="Scripts\GoBack.js" />
@@ -403,13 +405,13 @@
     <Content Include="Views\Assets\Delete.cshtml" />
     <Content Include="Views\Assets\Details.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Shared\Menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\AMS\Models\" />
     <Folder Include="Areas\AMS\Views\Shared\" />
     <Folder Include="Areas\LMS\Models\" />
-    <Folder Include="Areas\LMS\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
