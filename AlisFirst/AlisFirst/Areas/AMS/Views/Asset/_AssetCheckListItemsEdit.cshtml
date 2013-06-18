@@ -3,9 +3,11 @@
 <div class="column">
     @using (Ajax.BeginForm("UpdateCheckList", new AjaxOptions { UpdateTargetId = "check-list" }))
     {
-        <h2>Check List Items:</h2> 
+        
         @Html.ValidationSummary(true)
         <fieldset>
+            <legend>Check List Items </legend>
+            <p></p>
             @Html.HiddenFor(model => model.AssetID)
             @{foreach (var checkItem in Model.SelectedItems)
               {                         
@@ -14,7 +16,7 @@
                             name="SelectedItems"
                             value="@checkItem.CheckListItemID" 
                             @(Html.Raw(checkItem.Selected ? "checked=\"checked\"" : "")) />
-                            @checkItem.ItemName
+                    @checkItem.ItemName
                 </div>
               }
             }
@@ -25,3 +27,4 @@
         </fieldset>
     }
 </div>
+<div class="clear"></div>
