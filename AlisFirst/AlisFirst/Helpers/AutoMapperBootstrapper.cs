@@ -16,6 +16,7 @@ namespace AlisFirst.Helpers
             {
                 cfg.AddProfile<AssetEditModelProfile>();
                 cfg.AddProfile<EmployeeModelProfile>();
+                cfg.AddProfile<BorrowerModelProfile>();
                 cfg.AddProfile<LoanModelProfile>();
             });
         }
@@ -32,6 +33,22 @@ namespace AlisFirst.Helpers
                 AutoMapper.Mapper.CreateMap<Borrower,                   EditEmployeeViewModel>();
                 AutoMapper.Mapper.CreateMap<DeleteEmployeeViewModel,    Borrower>();
                 AutoMapper.Mapper.CreateMap<Borrower,                   DeleteEmployeeViewModel>();               
+            }
+        }
+
+        public class BorrowerModelProfile : Profile
+        {
+            protected override void Configure()
+            {
+                //Map all viewmodels related to LMS/Borrowers to their corresponding model.
+                CreateMap<Borrower,                 CreateBorrowerViewModel>();
+                CreateMap<CreateBorrowerViewModel,  Borrower>();
+                CreateMap<Borrower,                 EditBorrowerViewModel>();
+                CreateMap<EditBorrowerViewModel,    Borrower>();
+                CreateMap<Borrower,                 DeleteBorrowerViewModel>();
+                CreateMap<DeleteBorrowerViewModel,  Borrower>();
+                CreateMap<Borrower,                 ListBorrowerViewModel>();
+                CreateMap<ListBorrowerViewModel,    Borrower>();
             }
         }
 
