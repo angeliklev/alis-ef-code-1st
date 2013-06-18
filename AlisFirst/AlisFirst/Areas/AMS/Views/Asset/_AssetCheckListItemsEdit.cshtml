@@ -1,0 +1,27 @@
+﻿@* Views\Asset\_AssetCheckListItemsEdit.cshtml *@
+@model AlisFirst.Areas.AMS.ViewModels.AssetCheckListEditModel
+<div class="column">
+    @using (Ajax.BeginForm("UpdateCheckList", new AjaxOptions { UpdateTargetId = "check-list" }))
+    {
+        <h2>Check List Items:</h2> 
+        @Html.ValidationSummary(true)
+        <fieldset>
+            @Html.HiddenFor(model => model.AssetID)
+            @{foreach (var checkItem in Model.SelectedItems)
+              {                         
+                <div class="narrowcolumn">
+                    <input type="checkbox" 
+                            name="SelectedItems"
+                            value="@checkItem.CheckListItemID" 
+                            @(Html.Raw(checkItem.Selected ? "checked=\"checked\"" : "")) />
+                            @checkItem.ItemName
+                </div>
+              }
+            }
+            <div class="clear"></div>
+            <p>
+                <input type="submit" value="Save" />
+            </p>
+        </fieldset>
+    }
+</div>

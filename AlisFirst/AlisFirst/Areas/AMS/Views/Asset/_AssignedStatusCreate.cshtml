@@ -1,0 +1,30 @@
+﻿@* Views\Asset\_AssignedStatusCreate.cshtml *@
+@model AlisFirst.Areas.AMS.ViewModels.AssignedStatusCreateModel
+
+@using (Ajax.BeginForm("CreateAssignedStatus", new AjaxOptions { UpdateTargetId = "status-history" }))
+
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        @Html.HiddenFor(model => model.AssetID)
+       <div class="editor-label">
+            @Html.LabelFor(model => model.AssignedDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AssignedDate)
+            @Html.ValidationMessageFor(model => model.AssignedDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AssetStatusID, "Asset Status")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("AssetStatusID", Model.StatusesList,"Choose a status")
+            @Html.ValidationMessageFor(model => model.AssetStatusID)
+        </div>
+        <div class="clear"></div>
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}

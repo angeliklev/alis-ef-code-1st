@@ -1,12 +1,12 @@
 ﻿@* Views\Asset\_AssetEdit.cshtml *@
-@model AlisFirst.Areas.AMS.ViewModels.AssetMaintainModel.AssetEditVM
+@model AlisFirst.Areas.AMS.ViewModels.AssetEditModel
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
     <fieldset>
 
         @Html.EditorForModel()
-
+            <div class="clear"></div>
         <p>
             <input type="submit" value="Save" />
         </p>

@@ -1,7 +1,8 @@
-﻿@* Views\AssignedLocation\_AssetLocationCreate.cshtml *@
+﻿@* Views\Asset\_AssignedLocationCreate.cshtml *@
 @model AlisFirst.Areas.AMS.ViewModels.AssignedLocationCreateModel
 
-@using (Ajax.BeginForm("../AssignedLocation/Create", new AjaxOptions { UpdateTargetId = "location-history" }))
+@using (Ajax.BeginForm("CreateLocation", new AjaxOptions { UpdateTargetId = "location-history" }))
+
 {
     @Html.ValidationSummary(true)
     <fieldset>
@@ -21,7 +22,7 @@
             @Html.DropDownList("LocationID", Model.LocationsList,"Choose a location")
             @Html.ValidationMessageFor(model => model.LocationID)
         </div>
-
+        <div class="clear"></div>
         <p>
             <input type="submit" value="Create" />
         </p>

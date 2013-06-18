@@ -1,8 +1,8 @@
-@* Views\AssignedLocation\_Create.cshtml *@
-@model AlisFirst.Areas.AMS.ViewModels.AssetMaintainModel.AssetAssignedLocationsModel
+﻿@* Views\Asset\_AssignedLocationForm.cshtml *@
+@model AlisFirst.Areas.AMS.ViewModels.AssetAssignedLocationsModel
 <div class="column">
-    <h2>Assign new Location from Assigned Location</h2>
-    @Html.Partial("../AssignedLocation/_AssetLocationCreate", Model.LocationToCreate)
+    <h2>Assign new Location</h2>
+    @Html.Partial("_AssignedLocationCreate", Model.LocationToCreate)
 </div>
 
 <div class="column">
@@ -27,7 +27,4 @@
     </table>
 </div>
 <div class="clear"></div>
-
-
-
 

@@ -15,21 +15,25 @@ namespace AlisFirst.Areas.AMS.Controllers
         private readonly IAssetRepository assetRepo;
         private readonly ICheckListItemRepository checkListItemRepository;
         private readonly IRepairRepository repairRepo;
-        private readonly IAssignedLocationRepository assignedLocationRepo;
+        private readonly IAssignedLocationRepository assignedlocRepo;
         private readonly ILocationRepository locationRepo;
+        private readonly IAssignedStatusRepository assignstatRepo;
+        private readonly IAssetConditionRepository condRepo;
 
         // If you are using Dependency Injection, you can delete the following constructor
         public AssetController()
             : this(new SupplierRepository(), new CategoryRepository(), new AssetModelRepository(),
             new AssetRepository(), new CheckListItemRepository(), new RepairRepository(),
-            new AssignedLocationRepository(), new LocationRepository())
+            new AssignedLocationRepository(), new LocationRepository(), new AssignedStatusRepository(),
+            new AssetConditionRepository())
         {
         }
 
         public AssetController(ISupplierRepository supplierRepository, ICategoryRepository categoryRepository,
             IAssetModelRepository assetmodelRepository, IAssetRepository assetRepository,
             ICheckListItemRepository checkListItemRepository, IRepairRepository repairRepository,
-            IAssignedLocationRepository assignedLocationRepository, ILocationRepository locationReposiroty)
+            IAssignedLocationRepository assignedLocationRepository, ILocationRepository locationRepository,
+            IAssignedStatusRepository assignstatRepo, IAssetConditionRepository assetcondRepo)
         {
             this.supplierRepository = supplierRepository;
             this.categoryRepository = categoryRepository;
@@ -37,8 +41,10 @@ namespace AlisFirst.Areas.AMS.Controllers
             this.assetRepo = assetRepository;
             this.checkListItemRepository = checkListItemRepository;
             this.repairRepo = repairRepository;
-            this.assignedLocationRepo = assignedLocationRepository;
-            this.locationRepo = locationReposiroty;
+            this.condRepo = assetcondRepo;
+            this.assignedlocRepo = assignedLocationRepository;
+            this.locationRepo = locationRepository;
+            this.assignstatRepo = assignstatRepo;
         }
 
         //
@@ -46,12 +52,12 @@ namespace AlisFirst.Areas.AMS.Controllers
 
         public ActionResult Index()
         {
-            // this return is to work with my index until dashboard is ready
-            //var assets = assetRepo.All;
-            //return View(assets);
+            //this return is to work with my index until dashboard is ready
+            var assets = assetRepo.All;
+            return View(assets);
 
-            // this 'return' is to work with AMS dashboard when it is ready
-            return RedirectToAction("Index", "AssetList");
+            //// this 'return' is to work with AMS dashboard when it is ready
+            //return RedirectToAction("Index", "AssetList");
         }
 
         //
@@ -95,54 +101,149 @@ namespace AlisFirst.Areas.AMS.Controllers
 
         //
         // GET: AMS/Asset/Edit/5
-
+        [HttpGet]
         public ActionResult Edit(int id)
         {
-            var assetToEdit = assetRepo.Find(id);
-            var locationsList = AutoMapper.Mapper.Map<IEnumerable<AssignedLocation>,
-                    IEnumerable<AssetMaintainModel.LocationHistoryItemsModel>>(assignedLocationRepo
-                    .AllIncluding(l => l.Location).OrderBy(l => l.AssignedLocationDate)
-                    .Where(m => m.AssetID == id));
-
-
-            var assetToMaintain = new AssetMaintainModel
-            {
-                AssetToEdit = AutoMapper.Mapper.Map<Asset, AssetMaintainModel.AssetEditVM>(assetToEdit),
-
-                AssetLocations = new AssetMaintainModel.AssetAssignedLocationsModel(id, locationRepo.All.ToList(),
-                     locationsList),
-
-                AssetRepairs = PopulateAssetRepairsView(id),
-                AssetCheckListView = SetSelectedCheckListItemsView(id)
-            };
-
-            return View(assetToMaintain);
+            var assetmodel = new AssetMaintainModel(id);
+            return View("Maintain", assetmodel);
         }
 
-        private AssetMaintainModel.AssetRepairsModel PopulateAssetRepairsView(int id)
-        {
-            return new AssetMaintainModel.AssetRepairsModel
-            {
-                RepairHistory = PopulateRepairsHistory(id),
-                RepairToCreate = new AssetRepairCreateModel(id)
-            };
-        }
+        // this works if to move all the partial views into Shared forlder!
+        //[ActionName("EditGetByModel")]
+        //public ActionResult EditGetByModel()
+        //{
+        //    var viewmodel = TempData["assetmodel"] as AssetMaintainModel;
+        //    return View("Edit", viewmodel);
+        //}
 
-        private IEnumerable<AssetMaintainModel.AssetRepairsHistoryModel> PopulateRepairsHistory(int id)
-        {
-            // this didn't work. Automapper did not like the mapping Map<Asset,
-                    //IEnumerable<AssetMaintainModel.AssetRepairsHistoryModel>>... needed resolving maybe.
-            //var asset = assetRepo.AllIncluding(m => m.Repairs).Where(m => m.AssetID == id).FirstOrDefault();
-            //return AutoMapper.Mapper.Map<Asset,IEnumerable<AssetMaintainModel.AssetRepairsHistoryModel>>(asset);   
-         
-            var repairs = repairRepo.All.Where(m => m.AssetID == id);
-            return AutoMapper.Mapper.Map<IEnumerable<Repair>,
-                    IEnumerable<AssetMaintainModel.AssetRepairsHistoryModel>>(repairs);
-        }
-
+        // this doesn't work when there is non Ajax method with the same actionName
         // 
-        // POST from partial _AssetRepairCreate
+        // POST from partial _AssetLocationCreate       
+        //[HttpPost]
+        //[AjaxOnly]
+        //[ActionName("CreateLocation")]
+        //public ActionResult CreateLocationAjax(AssignedLocationCreateModel LocToCreate)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        assignedlocRepo.InsertOrUpdate(AutoMapper.Mapper.Map<AssignedLocationCreateModel,
+        //                                                         AssignedLocation>(LocToCreate));
+        //        assignedlocRepo.Save();
 
+        //        var viewModel = new AssetAssignedLocationsModel(LocToCreate.AssetID);
+        //        return PartialView("_AssignedLocationForm", viewModel);
+        //    }
+        //    else
+        //    {
+        //        var viewModel = new AssetAssignedLocationsModel(LocToCreate);
+        //        return PartialView("_AssignedLocationCreate", viewModel);
+        //    }
+        //}
+
+        [HttpPost]
+        public ActionResult CreateLocation(AssignedLocationCreateModel LocToCreate)
+        {
+            if (ModelState.IsValid)
+            {
+                assignedlocRepo.InsertOrUpdate(AutoMapper.Mapper.Map<AssignedLocationCreateModel,
+                                                                AssignedLocation>(LocToCreate));
+                assignedlocRepo.Save();
+                if (Request.IsAjaxRequest())
+                {
+                    var viewModel = new AssetAssignedLocationsModel(LocToCreate.AssetID);
+                    return PartialView("_AssignedLocationForm", viewModel);
+                }
+                else
+                {
+                    //this returns the whole page again, with updated data
+                    return RedirectToAction("Edit", "Asset", new { id = LocToCreate.AssetID });
+                }
+            }
+            else
+            {
+                if (Request.IsAjaxRequest())
+                {
+                    // this branch never runs - validation always happens on the client side!
+                    var viewModel = new AssetAssignedLocationsModel(LocToCreate);
+                    return PartialView("_AssignedLocationCreate", viewModel);
+                }
+                else
+                {
+                    AssetMaintainModel viewModel = new AssetMaintainModel(LocToCreate.AssetID);
+                    viewModel.AssetLocations = new AssetAssignedLocationsModel(LocToCreate);
+                    return View("Maintain", viewModel);
+                }
+            }
+        }
+
+        // POST from partial _AssetStatusCreate
+        [HttpPost]
+        public ActionResult CreateAssignedStatus(AssignedStatusCreateModel statToCreate)
+        {
+            if (ModelState.IsValid)
+            {
+                assignstatRepo.InsertOrUpdate(AutoMapper.Mapper.Map<AssignedStatusCreateModel, AssignedStatus>(statToCreate));
+                assignstatRepo.Save();
+                if (Request.IsAjaxRequest())
+                {
+                    var viewModel = new AssetAssignedStatusModel(statToCreate.AssetID);
+                    return PartialView("_AssignedStatusForm", viewModel);
+                }
+                else
+                {
+                    return RedirectToAction("Edit", new { id = statToCreate.AssetID });
+                }
+            }
+            else
+            {
+                if (Request.IsAjaxRequest())
+                {
+                    var viewModel = new AssetAssignedStatusModel(statToCreate);
+                    return PartialView("_AssignedStatusCreate", viewModel);
+                }
+                else
+                {
+                    var viewModel = new AssetMaintainModel(statToCreate.AssetID);
+                    viewModel.AssetAssignedStatus = new AssetAssignedStatusModel(statToCreate);
+                    return View("Maintain", viewModel);
+                }
+            }
+        }
+
+        // post from partial _AssetConditionCreate
+        [HttpPost]
+        public ActionResult CreateCondition(AssetConditionCreateModel condToCreate)
+        {
+            if (ModelState.IsValid)
+            {
+                condRepo.InsertOrUpdate(AutoMapper.Mapper.Map<AssetConditionCreateModel, AssetCondition>(condToCreate));
+                condRepo.Save();
+                if (Request.IsAjaxRequest())
+                {
+                    return PartialView("_AssetConditionForm", new AssetConditionsModel(condToCreate.AssetID));
+                }
+                else
+                {
+                    return RedirectToAction("Edit", new { id = condToCreate.AssetID });
+                }
+            }
+            else
+            {
+                if (Request.IsAjaxRequest())
+                {
+                    var condModel = new AssetConditionsModel(condToCreate);
+                    return PartialView("_AssetConditionForm", condModel);
+                }
+                else
+                {
+                    AssetMaintainModel viewModel = new AssetMaintainModel(condToCreate.AssetID);
+                    viewModel.AssetConditions = new AssetConditionsModel(condToCreate);
+                    return View("Maintain", viewModel);
+                }
+            }
+        }
+
+        // POST from partial _AssetRepairCreate
         [HttpPost]
         public ActionResult CreateRepair(AssetRepairCreateModel repairToCreate)
         {
@@ -153,12 +254,10 @@ namespace AlisFirst.Areas.AMS.Controllers
                 repairRepo.Save();
                 if (Request.IsAjaxRequest())
                 {
-                    // in Firefox, Google Chrome this doesn't clear textfields values (not as expected!)
-                    return PartialView("_AssetRepairHistory", PopulateAssetRepairsView(repairToCreate.AssetID));
+                    return PartialView("_AssetRepairForm", new AssetRepairsModel(repairToCreate.AssetID));
                 }
                 else
                 {
-                    // this renders the whole page again, with updated data
                     return RedirectToAction("Edit", new { id = repairToCreate.AssetID });
                 }
             }
@@ -166,50 +265,21 @@ namespace AlisFirst.Areas.AMS.Controllers
             {
                 if (Request.IsAjaxRequest())
                 {
-                    var repairModel = new AssetMaintainModel.AssetRepairsModel
-                    {
-                        RepairHistory = PopulateRepairsHistory(repairToCreate.AssetID),
-                        RepairToCreate = repairToCreate
-                    };
-                    return PartialView("_AssetRepairHistory", repairModel);
+                    var repairModel = new AssetRepairsModel(repairToCreate);
+                    return PartialView("_AssetRepairForm", repairModel);
                 }
                 else
                 {
-                    // seems in this case can only add an error message to the view call and pass it as a parameter.
-                    return View("Edit", repairToCreate.AssetID);
+                    AssetMaintainModel viewModel = new AssetMaintainModel(repairToCreate.AssetID);
+                    viewModel.AssetRepairs = new AssetRepairsModel(repairToCreate);
+                    return View("Maintain", viewModel);
                 }
             }
         }
 
-        private AssetMaintainModel.AssetCheckListVM SetSelectedCheckListItemsView(int id)
-        {
-            var allCheckListItems = checkListItemRepository.All.ToList();
-            var asset = assetRepo.Find(id);
-            // check if it is not null!!!
-
-            var assetCheckListItems = new HashSet<int>(asset.CheckListItems.Select(c => c.CheckListItemID));
-            var viewModel = new AssetMaintainModel.AssetCheckListVM
-            {
-                AssetID = id,
-                SelectedItems = new List<AssetMaintainModel.SelectedCheckListItemsData> { }
-            };
-
-            foreach (var item in allCheckListItems)
-            {
-                viewModel.SelectedItems.Add(new AssetMaintainModel.SelectedCheckListItemsData
-                {
-                    CheckListItemID = item.CheckListItemID,
-                    ItemName = item.CheckListItemName,
-                    Selected = assetCheckListItems.Contains(item.CheckListItemID)
-                });
-            };
-            return viewModel;
-        }
-
         // 
         // POST from partial _AssetRepairCreate
-
-        public ActionResult UpdateCheckList(AssetMaintainModel.AssetCheckListVM selectedItemsView, string[] selectedItems)
+        public ActionResult UpdateCheckList(AssetCheckListEditModel selectedItemsView, string[] selectedItems)
         {
             //asset to update related data
             var asset = assetRepo.AllIncluding(m => m.CheckListItems)
@@ -250,14 +320,14 @@ namespace AlisFirst.Areas.AMS.Controllers
             assetRepo.Update(asset);
             assetRepo.Save();
 
-            return PartialView("_AssetCheckListItems", SetSelectedCheckListItemsView(selectedItemsView.AssetID));
+            return PartialView("_AssetCheckListItems", new AssetCheckListEditModel(selectedItemsView.AssetID));
         }
 
         //
         // POST: /Asset/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Asset asset, string[] selectedCheckListItems)
+        public ActionResult AssetEdit(Asset asset, string[] selectedCheckListItems)
         {
 
             if (ModelState.IsValid)
