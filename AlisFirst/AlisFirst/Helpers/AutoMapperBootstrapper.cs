@@ -15,9 +15,25 @@ namespace AlisFirst.Helpers
             Mapper.Initialize(cfg =>
             {
                 cfg.AddProfile<AssetEditModelProfile>();
+                cfg.AddProfile<EmployeeModelProfile>();
                 cfg.AddProfile<BorrowerModelProfile>();
                 cfg.AddProfile<LoanModelProfile>();
             });
+        }
+
+        public class EmployeeModelProfile : Profile
+        {
+            protected override void Configure()
+            {
+                AutoMapper.Mapper.CreateMap<ListEmployeeViewModel,      Borrower>();
+                AutoMapper.Mapper.CreateMap<Borrower,                   ListEmployeeViewModel>();
+                AutoMapper.Mapper.CreateMap<CreateEmployeeViewModel,    Borrower>();
+                AutoMapper.Mapper.CreateMap<Borrower,                   CreateEmployeeViewModel>();
+                AutoMapper.Mapper.CreateMap<EditEmployeeViewModel,      Borrower>();
+                AutoMapper.Mapper.CreateMap<Borrower,                   EditEmployeeViewModel>();
+                AutoMapper.Mapper.CreateMap<DeleteEmployeeViewModel,    Borrower>();
+                AutoMapper.Mapper.CreateMap<Borrower,                   DeleteEmployeeViewModel>();               
+            }
         }
 
         public class BorrowerModelProfile : Profile
@@ -53,15 +69,6 @@ namespace AlisFirst.Helpers
                 CreateMap<AssignedLocationCreateModel, AssignedLocation>();
 
                 CreateMap<AssignedLocation, AssetMaintainModel.LocationHistoryItemsModel>();
-
-                AutoMapper.Mapper.CreateMap<ListEmployeeViewModel, Borrower>();
-                AutoMapper.Mapper.CreateMap<Borrower, ListEmployeeViewModel>(); 
-                AutoMapper.Mapper.CreateMap<CreateEmployeeViewModel,    Borrower>();
-                AutoMapper.Mapper.CreateMap<Borrower,                   CreateEmployeeViewModel>();
-                AutoMapper.Mapper.CreateMap<EditEmployeeViewModel,      Borrower>();
-                AutoMapper.Mapper.CreateMap<Borrower,                   EditEmployeeViewModel>();
-                AutoMapper.Mapper.CreateMap<DeleteEmployeeViewModel,    Borrower>();
-                AutoMapper.Mapper.CreateMap<Borrower,                   DeleteEmployeeViewModel>();
 
                 //// Mapping for maintain Asset, between domain models and view models
                 //AutoMapper.Mapper.CreateMap<AssignedLocation, AssetEdit.CreateAssignedLocationVM>();
