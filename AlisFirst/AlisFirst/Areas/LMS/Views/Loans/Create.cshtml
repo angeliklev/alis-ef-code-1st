@@ -31,7 +31,7 @@
             @Html.LabelFor(model => model.LoanDate)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor( model => model.LoanDate )
+            @Html.EditorFor( model => model.LoanDate )
             @Html.ValidationMessageFor(model => model.LoanDate)
         </div>
 
@@ -39,10 +39,11 @@
             @Html.LabelFor(model => model.DueDate)
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.DueDate)
+            @Html.EditorFor(model => model.DueDate)
             @Html.ValidationMessageFor(model => model.DueDate)
         </div>
 
+        <div class="clear"></div>
         <p>
             <input type="submit" value="Create" />
         </p>
