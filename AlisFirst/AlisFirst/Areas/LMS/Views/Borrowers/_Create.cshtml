@@ -3,7 +3,7 @@
 @* This partial view defines form fields that will appear when creating entities *@
 
 <div class="editor-label">
-    @Html.LabelFor(model => model.Surname)
+    @Html.LabelFor(model => model.Surname, "Surname")
 </div>
 <div class="editor-field">
     @Html.EditorFor(model => model.Surname)
@@ -11,7 +11,7 @@
 </div>
 
 <div class="editor-label">
-    @Html.LabelFor(model => model.BarCode)
+    @Html.LabelFor(model => model.BarCode, "Bar Code")
 </div>
 <div class="editor-field">
     @Html.EditorFor(model => model.BarCode)
@@ -19,7 +19,7 @@
 </div>
 
 <div class="editor-label">
-    @Html.LabelFor(model => model.GivenName)
+    @Html.LabelFor(model => model.GivenName, "Given Name")
 </div>
 <div class="editor-field">
     @Html.EditorFor(model => model.GivenName)
@@ -27,7 +27,7 @@
 </div>
 
 <div class="editor-label">
-    @Html.LabelFor(model => model.BorrowerExpiryDate)
+    @Html.LabelFor(model => model.BorrowerExpiryDate, "Expiry Date")
 </div>
 <div class="editor-field">
     @Html.EditorFor(model => model.BorrowerExpiryDate)
@@ -35,7 +35,7 @@
 </div>
 
 <div class="editor-label">
-    @Html.LabelFor(model => model.Email)
+    @Html.LabelFor(model => model.Email, "Email")
 </div>
 <div class="editor-field">
     @Html.EditorFor(model => model.Email)
@@ -43,7 +43,7 @@
 </div>
 
 <div class="editor-label">
-    @Html.LabelFor(model => model.PhoneNumber)
+    @Html.LabelFor(model => model.PhoneNumber, "Phone Number")
 </div>
 <div class="editor-field">
     @Html.EditorFor(model => model.PhoneNumber)
@@ -51,7 +51,7 @@
 </div>
 
 <div class="editor-label">
-    @Html.LabelFor(model => model.IsEmployee)
+    @Html.LabelFor(model => model.IsEmployee, "Is an Employee")
 </div>
 <div class="editor-field">
     @Html.EditorFor(model => model.IsEmployee)
