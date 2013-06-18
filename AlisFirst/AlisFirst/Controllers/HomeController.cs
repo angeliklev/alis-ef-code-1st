@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using AlisFirst.DAL;
 
-namespace AlisFirst.Controllers
+namespace AlisFirst.Areas
 {
     public class HomeController : Controller
     {

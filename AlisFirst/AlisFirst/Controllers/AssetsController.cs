@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using AlisFirst.Models;
 using AlisFirst.DAL;
 
-namespace AlisFirst.Controllers
+namespace AlisFirst.Areas
 {   
     public class AssetsController : Controller
     {

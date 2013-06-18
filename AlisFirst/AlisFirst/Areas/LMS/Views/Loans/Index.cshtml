@@ -1,0 +1,89 @@
+@model AlisFirst.Areas.LMS.ViewModels.ListOfOnLoans
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Record Loan", "Create")
+</p>
+@using(Html.BeginForm())
+{
+    <p>
+    @Html.TextBox("SearchKey")
+    <input type="submit" value="Search" />
+    </p>
+}
+<table>
+    <tr>
+        <th></th>
+        <th>
+            LoanDate
+        </th>
+        <th>
+            DueDate
+        </th>
+        <th>
+            ReturnDate
+        </th>
+        <th>
+            Asset
+        </th>
+        <th>
+            Borrower
+        </th>
+    </tr>
+
+@foreach (var item in Model.OnLoans) {
+    <tr>
+
+        <td>
+            @Html.ActionLink("Return Loan", "Edit", new { id=item.LoanID })
+         </td>
+       
+
+            @Html.HiddenFor(modelItem => item.LoanID)
+        <td>
+            
+            @Html.DisplayFor(modelItem => item.LoanDate)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.DueDate)
+        </td>
+
+       @* This is not a good practice, but since it is already filtered in repo so it is fine for this case. I do prefer another                 methon, I think it will be more maintainable*@
+
+        <td>
+             @Html.Display("")
+        </td>
+
+        
+        @*@if (item.ReturnDate.CompareTo(default(DateTime)) == 0)
+        {
+             <td>
+                @Html.Display("")
+             </td>
+        }
+        else
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.ReturnDate)
+            </td>
+        }*@
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.AssetBarcode)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.BorrowerBarcode)
+        </td>
+    </tr>
+}
+
+</table>
+
+
