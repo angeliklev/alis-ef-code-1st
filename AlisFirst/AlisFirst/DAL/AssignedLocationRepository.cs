@@ -58,6 +58,14 @@ namespace AlisFirst.DAL
         {
             context.Dispose();
         }
+
+        public IEnumerable<AssignedLocation> GetLocHistory(int id)
+        {
+            IEnumerable<AssignedLocation> query = context.AssignedLocations
+                .OrderBy(l => l.AssignedLocationDate)
+                .Where(m => m.AssetID == id);
+            return query;
+        }
     }
 
     public interface IAssignedLocationRepository : IDisposable
@@ -68,5 +76,6 @@ namespace AlisFirst.DAL
         void InsertOrUpdate(AssignedLocation assignedlocation);
         void Delete(int id);
         void Save();
+        IEnumerable<AssignedLocation> GetLocHistory(int id);
     }
 }

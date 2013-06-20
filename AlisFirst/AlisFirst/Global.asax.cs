@@ -2,12 +2,10 @@
 using System.Data.Entity.Infrastructure;
 using System.Web.Mvc;
 using System.Web.Routing;
+using AlisFirst.Areas.LMS.ViewModels;
 using AlisFirst.DAL;
 using AlisFirst.Helpers;
 using AlisFirst.Models;
-using AlisFirst.DAL;
-using AlisFirst.Areas.LMS.ViewModels;
-using AlisFirst.Areas.AMS.ViewModels;
 
 
 namespace AlisFirst
