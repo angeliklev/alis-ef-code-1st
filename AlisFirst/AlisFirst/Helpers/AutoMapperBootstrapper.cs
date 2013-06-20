@@ -4,7 +4,6 @@ using AlisFirst.Models;
 using AlisFirst.Areas.AMS.ViewModels;
 using AlisFirst.Areas.LMS.ViewModels;
 using System.Collections.Generic;
-using AlisFirst.Areas.LMS.ViewModels;
 
 namespace AlisFirst.Helpers
 {
@@ -57,24 +56,24 @@ namespace AlisFirst.Helpers
             protected override void Configure()
             {
                 // Mapping for maintain Asset, between domain models and view models
-                CreateMap<Asset, AssetMaintainModel.AssetEditVM>();
-                CreateMap<AssetMaintainModel.AssetEditVM, Asset>();
+                CreateMap<Asset, AssetEditModel>();
+                CreateMap<AssetEditModel, Asset>();
 
                 CreateMap<Repair, AssetRepairCreateModel>();
                 CreateMap<AssetRepairCreateModel, Repair>();
-
-                CreateMap<Repair, AssetMaintainModel.AssetRepairsHistoryModel>();
+                CreateMap<Repair, AssetRepairsHistoryModel>();
 
                 CreateMap<AssignedLocation, AssignedLocationCreateModel>();
                 CreateMap<AssignedLocationCreateModel, AssignedLocation>();
+                CreateMap<AssignedLocation, LocationHistoryItemsModel>();
 
-                CreateMap<AssignedLocation, AssetMaintainModel.LocationHistoryItemsModel>();
+                CreateMap<AssignedStatus, AssignedStatusCreateModel>();
+                CreateMap<AssignedStatusCreateModel, AssignedStatus>();
+                CreateMap<AssignedStatus, AssetStatusHistoryModel>();
 
-                //// Mapping for maintain Asset, between domain models and view models
-                //AutoMapper.Mapper.CreateMap<AssignedLocation, AssetEdit.CreateAssignedLocationVM>();
-                //AutoMapper.Mapper.CreateMap<AssetEdit.CreateAssignedLocationVM, AssignedLocation>();
-                //AutoMapper.Mapper.CreateMap<AssignedLocation, AssetEdit.LocationHistoryItemsVM>();
-
+                CreateMap<AssetCondition, AssetConditionCreateModel>();
+                CreateMap<AssetConditionCreateModel, AssetCondition>();
+                CreateMap<AssetCondition, AssetConditionHistoryModel>();
             }
         }
         public class LoanModelProfile : Profile
