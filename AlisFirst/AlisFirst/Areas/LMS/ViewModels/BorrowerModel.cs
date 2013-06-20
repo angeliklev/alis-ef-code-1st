@@ -15,7 +15,7 @@ namespace AlisFirst.Areas.LMS.ViewModels
         public string BarCode { get; set; }
         [Display(Name = "Given Name")]
         public string GivenName { get; set; }
-        [DataType(DataType.Date)][Display(Name = "Borrower Expiry Date")]
+        [DataType(DataType.Date)][Display(Name = "Borrower Expiry Date")][DateValidation]
         public DateTime? BorrowerExpiryDate { get; set; }
         [UniqueEmailAttribute]
         public string Email { get; set; }
@@ -34,7 +34,7 @@ namespace AlisFirst.Areas.LMS.ViewModels
         public string BarCode { get; set; }
         [Display(Name = "Given Name")]
         public string GivenName { get; set; }
-        [DataType(DataType.Date)][Display(Name = "Borrower Expiry Date")][DisplayFormat(DataFormatString="{0:dd/mm/yy}")]
+        [DataType(DataType.Date)][Display(Name = "Borrower Expiry Date")][DisplayFormat(DataFormatString="{0:dd/mm/yy}")][DateValidation]
         public DateTime? BorrowerExpiryDate { get; set; }
         public string Email { get; set; }
         [Display(Name = "Phone Number")]

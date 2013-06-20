@@ -49,4 +49,21 @@ namespace AlisFirst.Validation
             return ValidationResult.Success;
         }
     }
+
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
+    public class DateValidation : ValidationAttribute
+    {
+        public DateValidation()
+            : base("Unknown Error")
+        {
+        }
+
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            DateTime ValueDate = (DateTime)value;
+            if( ValueDate > DateTime.UtcNow )
+                return ValidationResult.Success;
+            return new ValidationResult("Field date must be after the current date.");
+        }
+    }
 }

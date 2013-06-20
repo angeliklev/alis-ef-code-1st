@@ -23,7 +23,7 @@ namespace AlisFirst.Areas.AMS.ViewModels
         [Display(Name = "Given Name")]
         public string GivenName { get; set; }
         [DataType(DataType.Date)]
-        [Display(Name = "Borrower Expiry Date")]
+        [Display(Name = "Borrower Expiry Date")][DateValidation]
         public DateTime? BorrowerExpiryDate { get; set; }
         [UniqueEmail]
         public string Email { get; set; }
@@ -42,7 +42,7 @@ namespace AlisFirst.Areas.AMS.ViewModels
         [Display(Name = "Given Name")]
         public string GivenName { get; set; }
         [DataType(DataType.Date)]
-        [Display(Name = "Borrower Expiry Date")][DisplayFormat(DataFormatString="{0:dd/mm/yy}")]
+        [Display(Name = "Borrower Expiry Date")][DisplayFormat(DataFormatString="{0:dd/mm/yy}")][DateValidation]
         public DateTime? BorrowerExpiryDate { get; set; }
         public string Email { get; set; }
         [Display(Name = "Phone Number")]
