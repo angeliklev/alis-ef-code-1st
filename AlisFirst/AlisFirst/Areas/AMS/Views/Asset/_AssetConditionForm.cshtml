@@ -1,0 +1,39 @@
+﻿@* Views\Asset\_AssetConditionForm.cshtml *@
+@model AlisFirst.Areas.AMS.ViewModels.AssetConditionsModel
+
+<div class="column">
+    @Html.Partial("_AssetConditionCreate", Model.ConditionToCreate)
+</div>
+
+<div class="column">
+    <h2>Condition History</h2>
+    <table>
+        <tr>
+            <th>Date
+            </th>
+            <th>Condition Description
+            </th>
+        </tr>
+
+        @foreach (var item in Model.ConditionHistory)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IssuedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div class="clear"></div>
+
+
+
+
+
+
+

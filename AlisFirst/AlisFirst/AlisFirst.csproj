@@ -107,12 +107,15 @@
     <Compile Include="Areas\AMS\Controllers\AssetListController.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Areas\AMS\Controllers\AssignedLocationController.cs" />
+    <Compile Include="Areas\AMS\ViewModels\AssetCheckListEditModel.cs" />
+    <Compile Include="Areas\AMS\ViewModels\AssetConditionCreateModel.cs" />
+    <Compile Include="Areas\AMS\ViewModels\AssetEditModel.cs" />
     <Compile Include="Areas\AMS\ViewModels\AssetMaintainModel.cs" />
     <Compile Include="Areas\AMS\ViewModels\AssetRepairCreateModel.cs" />
     <Compile Include="Areas\AMS\Controllers\DashboardController.cs" />
     <Compile Include="Areas\AMS\ViewModels\AssetsViewModel.cs" />
     <Compile Include="Areas\AMS\ViewModels\AssignedLocationCreateModel.cs" />
+    <Compile Include="Areas\AMS\ViewModels\AssignedStatusCreateModel.cs" />
     <Compile Include="Areas\AMS\ViewModels\DashboardViewModel.cs" />
     <Compile Include="Areas\AMS\ViewModels\_AssetListViewModel.cs" />
     <Compile Include="Areas\LMS\Controllers\BorrowersController.cs" />
@@ -127,7 +130,6 @@
     <Compile Include="Controllers\AssignedLocationsController.cs" />
     <Compile Include="Controllers\AssignedStatusController.cs" />
     <Compile Include="Controllers\AssignedToesController.cs" />
-    <Compile Include="Controllers\BorrowersController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CheckListItemsController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
@@ -266,25 +268,29 @@
     <Content Include="Areas\AMS\Views\Employee\Edit.cshtml" />
     <Content Include="Areas\AMS\Views\Employee\DeleteConfirmed.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\Index.cshtml" />
-    <Content Include="Areas\AMS\Views\Asset\Edit.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\Create.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\_CreateOrEdit.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\_AssetEdit.cshtml" />
-    <Content Include="Areas\AMS\Views\Asset\_AssetRepairHistory.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\_AssetRepairForm.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\_AssetRepairCreate.cshtml" />
     <Content Include="Areas\AMS\Views\Dashboard\Index.cshtml" />
     <Content Include="Areas\LMS\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\Maintain.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\_AssignedLocationCreate.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\_AssignedLocationForm.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\_AssignedStatusCreate.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\_AssignedStatusForm.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\_AssetConditionCreate.cshtml" />
+    <Content Include="Areas\AMS\Views\Asset\_AssetConditionForm.cshtml" />
     <None Include="Scripts\jquery-2.0.0.intellisense.js" />
     <Content Include="Scripts\EditorHookup.js" />
     <Content Include="Scripts\GoBack.js" />
     <Content Include="Scripts\jquery-ui-1.10.2.js" />
     <Content Include="Scripts\jquery-ui-1.10.2.min.js" />
-    <Content Include="Areas\AMS\Views\Asset\_AssetCheckListItems.cshtml" />
-    <Content Include="Areas\AMS\Views\AssignedLocation\_Create.cshtml" />
-    <Content Include="Areas\AMS\Views\AssignedLocation\_AssetLocationCreate.cshtml" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Areas\AMS\Views\Asset\_AssetCheckListItemsEdit.cshtml" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -334,12 +340,6 @@
     <Content Include="Views\AssetConditions\Details.cshtml" />
     <Content Include="Views\AssetConditions\Index.cshtml" />
     <Content Include="Views\AssetConditions\_CreateOrEdit.cshtml" />
-    <Content Include="Views\Borrowers\Create.cshtml" />
-    <Content Include="Views\Borrowers\Edit.cshtml" />
-    <Content Include="Views\Borrowers\Delete.cshtml" />
-    <Content Include="Views\Borrowers\Details.cshtml" />
-    <Content Include="Views\Borrowers\Index.cshtml" />
-    <Content Include="Views\Borrowers\_CreateOrEdit.cshtml" />
     <Content Include="Views\AssetStatus\Create.cshtml" />
     <Content Include="Views\AssetStatus\Edit.cshtml" />
     <Content Include="Views\AssetStatus\Delete.cshtml" />
@@ -413,7 +413,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\AMS\Models\" />    <Folder Include="Areas\AMS\Views\Shared\" />
+    <Folder Include="Areas\AMS\Models\" />
+    <Folder Include="Areas\AMS\Views\Shared\" />
     <Folder Include="Areas\LMS\Models\" />
     <Folder Include="Areas\LMS\Views\Shared\" />
   </ItemGroup>
