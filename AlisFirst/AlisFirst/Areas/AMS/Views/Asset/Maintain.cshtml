@@ -1,15 +1,17 @@
-﻿@* Views\Asset\Edit.cshtml *@
+﻿@* Views\Asset\Maintain.cshtml *@
 @model AlisFirst.Areas.AMS.ViewModels.AssetMaintainModel
 @{
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit Asset @Model.AssetToEdit.BarCode </h2>
+<h2>Edit Asset  -  @Model.AssetToEdit.Name ( @Model.AssetToEdit.BarCode )</h2>
 <div id="tabs">
     <ul>
         <li><a href="#edit-asset">Asset</a></li>
         <li><a href="#location-history">Location</a></li>
+        <li><a href="#status-history">Status</a></li>
         <li><a href="#repair-history">Repair</a></li>
+        <li><a href="#condition-history">Condition</a></li>
         <li><a href="#check-list">Check List</a></li>
     </ul>
     <div id="edit-asset" class="related-items">
@@ -17,15 +19,23 @@
     </div>
 
     <div id="location-history" class="related-items">
-        @Html.Partial("../AssignedLocation/_Create", Model.AssetLocations)
+        @Html.Partial("_AssignedLocationForm", Model.AssetLocations)
+    </div>
+
+    <div id="status-history" class="related-items">
+        @Html.Partial("_AssignedStatusForm", Model.AssetAssignedStatus)
     </div>
 
     <div id="repair-history" class="related-items">
-        @Html.Partial("_AssetRepairHistory", Model.AssetRepairs)
+        @Html.Partial("_AssetRepairForm", Model.AssetRepairs)   
+    </div>
+
+        <div id="condition-history" class="related-items">
+        @Html.Partial("_AssetConditionForm", Model.AssetConditions)   
     </div>
 
     <div id="check-list" class="related-items">
-        @Html.Partial("_AssetCheckListItems", Model.AssetCheckListView)
+        @Html.Partial("_AssetCheckListItemsEdit", Model.AssetCheckListView)
     </div>
 
     <div>

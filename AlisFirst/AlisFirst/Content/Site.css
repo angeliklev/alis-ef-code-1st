@@ -300,7 +300,7 @@ div#title {
 }
 
 /* Styles for editor and display helpers
-----------------------------------------------------------*/
+/*----------------------------------------------------------
 .display-label, 
 .editor-label {
     margin: 1em 0 0 0;
@@ -309,7 +309,42 @@ div#title {
 .display-field, 
 .editor-field {
     margin: 0.5em 0 0 0;
+}*/
+
+/* Styles for editor and display helpers
+----------------------------------------------------------*/
+/* changed styles*/
+.display-label{
+    margin: 1em 0 0 0;
+    clear:left;
+    float:left;
+    min-width: 160px;
+    vertical-align:middle;
 }
+
+.display-field {
+    margin: 1em 0 0 0;
+    float:left;
+}
+
+/* Styles for showing label and field in one line */
+.editor-label 
+{
+    margin: 1.5em 0 0 0;
+    clear:left;
+    float:left;
+    min-width: 130px;
+    vertical-align:middle;
+}
+
+.editor-field 
+{
+    
+    margin: 1em 0 0 0;
+    min-width:100px;
+    float:left;
+}
+/* Styles end for showing label and field in one line  */
 
 .text-box {
     width: 30em;
@@ -328,10 +363,20 @@ div#title {
     margin: 0.5em 0 0 0;
 }
 
-div.column 
+div.column
 {
     float:left;
     width:auto;
+    min-width:360px;
+    margin: 0 0.2em 0 0.2em;
+}
+
+div.narrowcolumn 
+{
+    float:left;
+    width:auto;
+    min-width:150px;
     margin: 0 0.5em 0 0.5em;
 }
+
 /* end of styles for asset maintain*/
