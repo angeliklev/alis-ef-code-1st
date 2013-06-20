@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AlisFirst.DAL;
+using AlisFirst.Models;
 
 namespace AlisFirst.Areas.AMS.Controllers
 {
@@ -39,55 +40,48 @@ namespace AlisFirst.Areas.AMS.Controllers
         public ActionResult Index(AlisFirst.Areas.AMS.ViewModels.DashboardViewModel v)
         {
 
+            if (String.IsNullOrEmpty(v.Barcode))
+                return RedirectToAction("Index");
+
+            Asset asset = assetRepository.All.FirstOrDefault(bar => bar.BarCode == v.Barcode);
+
+            if (asset == null)
+                return RedirectToAction("Index");           
+
             if (HttpContext.Request.Form["Maintain"] != null)
-                return Maintain(v);
+                return Maintain(asset);
 
             else if (HttpContext.Request.Form["Employee"] != null)
-                return Employee(v);
+                return Employee(asset);
 
             else if (HttpContext.Request.Form["Location"] != null)
-                return Location(v);
+                return Location(asset);
 
             else if (HttpContext.Request.Form["Status"] != null)
-                return Status(v);
+                return Status(asset);
             else
                 return RedirectToAction("Index");
             
         }
         
-        public ActionResult Maintain(AlisFirst.Areas.AMS.ViewModels.DashboardViewModel v)
+        public ActionResult Maintain(Asset asset)
         {
-             String s = HttpContext.Request.Form["Search"];
-            
-            if (String.IsNullOrEmpty(v.Barcode))
-                return RedirectToAction("Index");
-
-            
-
-            var i = from a in assetRepository.All
-                    where a.BarCode == v.Barcode
-                    select a;
-
-            if (i.Count() == 0)
-                return RedirectToAction("Index");
-
-            return RedirectToAction("Edit/"+i.First().AssetID.ToString(), "Assets");
-                    
+            return RedirectToAction("Edit", "Asset", new { id = asset.AssetID, area = "AMS" });
         }
 
-        public ActionResult Location(AlisFirst.Areas.AMS.ViewModels.DashboardViewModel v)
+        public ActionResult Location(Asset asset)
         {
-            return null;
+            return RedirectToAction("Edit", "Asset", new { id = asset.AssetID, area = "AMS" });
         }
 
-        public ActionResult Employee(AlisFirst.Areas.AMS.ViewModels.DashboardViewModel v)
+        public ActionResult Employee(Asset asset)
         {
-            return null;
+            return RedirectToAction("Index");
         }
 
-        public ActionResult Status (AlisFirst.Areas.AMS.ViewModels.DashboardViewModel v)
+        public ActionResult Status (Asset asset)
         {
-            return null;
+            return RedirectToAction("Index");
         }
 
     }

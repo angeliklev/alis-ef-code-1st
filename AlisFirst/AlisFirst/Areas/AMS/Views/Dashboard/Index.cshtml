@@ -20,8 +20,9 @@
 </div>
 
 <div style="display:inline-block">
+    <p>with an asset barcode:</p>
     @using (Html.BeginForm())
-    {
+    {        
         @Html.TextBoxFor(i => i.Barcode)<br />
    
         <input type="submit" name="Maintain" value="Maintain" /><br />            

@@ -45,26 +45,26 @@ namespace AlisFirst.Areas.AMS.Controllers
 
         //
         // GET: /Asset/
-
+        
         public ActionResult Index()
-        {
-            
-
+        {            
+            //Creates the ViewModel for the Index Page
             ViewModels.AssetsIndexViewModel AssetListIndexViewModel = new ViewModels.AssetsIndexViewModel();
-
+            //Set the current page for pagination to 0
             int currentpageindex = 0;
+            //Place all assets into a list
             var Assets = assetRepo.All.ToList();
-
+            //Create new Viewmodel for partial page
             AssetListIndexViewModel.listViewModel = new ViewModels._AssetListViewModel();
-
+            //Set the assets to be shown
             AssetListIndexViewModel.listViewModel.Assets = Assets.ToPagedList(currentpageindex, 5);
-
+            //Goto the view
             return View(AssetListIndexViewModel);
         }
-
+        //Partial Result for ajax pagination
         public ActionResult AjaxIndex(int? page)
         {
-
+            //Sets the new page to show
             int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
 
             AlisFirst.Areas.AMS.ViewModels._AssetListViewModel ViewModel = new ViewModels._AssetListViewModel();
