@@ -327,21 +327,37 @@ namespace AlisFirst.Areas.AMS.Controllers
         // POST: /Asset/Edit/5
 
         [HttpPost]
-        public ActionResult AssetEdit(Asset asset, string[] selectedCheckListItems)
+        public ActionResult AssetEdit(AssetEditModel assetToEdit)
         {
 
             if (ModelState.IsValid)
             {
-                assetRepo.InsertOrUpdate(asset);
+                assetRepo.InsertOrUpdate(AutoMapper.Mapper.Map<AssetEditModel, Asset>(assetToEdit));
                 assetRepo.Save();
-                return RedirectToAction("Index");
+                if (Request.IsAjaxRequest())
+                {          
+                    return PartialView("_AssetEdit", assetToEdit);
+                }
+                    else
+	            {
+                    return RedirectToAction("Edit", new { id = assetToEdit.AssetID});
+	            }
             }
             else
             {
                 ViewBag.PossibleSuppliers = supplierRepository.All;
                 ViewBag.PossibleCategories = categoryRepository.All;
                 ViewBag.PossibleAssetModels = assetmodelRepository.All;
-                return View();
+                if (Request.IsAjaxRequest())
+                {
+                    return PartialView("_AssetEdit", assetToEdit);
+                }
+                else
+                {
+                    AssetMaintainModel viewModel = new AssetMaintainModel(assetToEdit.AssetID);
+                    viewModel.AssetToEdit = assetToEdit;
+                    return View("Maintain", viewModel);
+                }
             }
         }
 

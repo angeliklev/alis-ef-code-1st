@@ -1,7 +1,9 @@
 ﻿@* Views\Asset\_AssetEdit.cshtml *@
 @model AlisFirst.Areas.AMS.ViewModels.AssetEditModel
 
-@using (Html.BeginForm()) {
+@using (Ajax.BeginForm("AssetEdit", new AjaxOptions { UpdateTargetId = "edit-asset" }))
+
+{
     @Html.ValidationSummary(true)
     <fieldset>
         <legend> Edit Asset Properties </legend>
