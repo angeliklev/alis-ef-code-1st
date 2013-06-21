@@ -251,11 +251,6 @@
     <Content Include="Areas\LMS\Views\Borrowers\_Edit.cshtml" />
     <Content Include="Areas\LMS\Views\Borrowers\_Create.cshtml" />
     <Content Include="Areas\AMS\Views\Employee\Index.cshtml" />
-    <Content Include="Areas\AMS\Views\AssetList\Create.cshtml" />
-    <Content Include="Areas\AMS\Views\AssetList\Delete.cshtml" />
-    <Content Include="Areas\AMS\Views\AssetList\Details.cshtml" />
-    <Content Include="Areas\AMS\Views\AssetList\Edit.cshtml" />
-    <Content Include="Areas\AMS\Views\AssetList\Index.cshtml" />
     <Content Include="Areas\AMS\Views\Employee\Create.cshtml" />
     <Content Include="Areas\AMS\Views\Employee\Edit.cshtml" />
     <Content Include="Areas\AMS\Views\Employee\DeleteConfirmed.cshtml" />

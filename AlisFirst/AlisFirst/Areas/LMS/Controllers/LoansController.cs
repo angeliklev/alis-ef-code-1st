@@ -41,7 +41,7 @@ namespace AlisFirst.Areas.LMS.Controllers
 
             return View(viewOnLoans);
             //return View(loanRepository.AllIncluding(loan => loan.Asset, loan => loan.Borrower));
-        }
+        }        
 
         [HttpPost]
         public ActionResult Index(string SearchKey)
@@ -60,6 +60,8 @@ namespace AlisFirst.Areas.LMS.Controllers
             return View(viewLoan);
         }
 
+
+
         //
         // GET: /Loans/Details/5
 
@@ -77,10 +79,9 @@ namespace AlisFirst.Areas.LMS.Controllers
 
             newLoan.LoanDate = DateTime.Now;
             newLoan.DueDate = DateTime.Now.AddDays(7);
+            
             return View(AutoMapper.Mapper.Map<Loan, CreateLoanViewModel>(newLoan));
-        } 
-
-        //
+        }        
         // POST: /Loans/Create
 
         [HttpPost]

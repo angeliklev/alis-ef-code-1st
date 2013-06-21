@@ -32,15 +32,16 @@ namespace AlisFirst.Areas.LMS.Controllers
         public ActionResult Index()
         {
             return View();
-        }
 
+        }
+        
         //TODO: finish actions for following button presses
         [HttpPost]
         public ActionResult Asset(AlisFirst.Areas.LMS.ViewModels.DashboardViewModel v)
         {
+            TempData["BorrowerBarcode"] = "alva-0001";
 
-            
-                return RedirectToAction("Index");
+            return RedirectToAction("Create", "Loans");
             
         }
 
