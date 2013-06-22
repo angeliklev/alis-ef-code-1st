@@ -7,7 +7,7 @@ using AlisFirst.Models;
 using AlisFirst.DAL;
 using AlisFirst.Validation;
 using AlisFirst.Areas.LMS.ViewModels;
-using System.Reflection;
+using AlisFirst.Utils;
 
 namespace AlisFirst.Areas.LMS.Controllers
 {   
@@ -86,14 +86,19 @@ namespace AlisFirst.Areas.LMS.Controllers
         
 
         [ActionName("Create"), RequireRequestValue("AssetBarcode")]
-        public ActionResult CreateWihAssetBarcode(string id)
+        public ActionResult CreateWihAssetBarcode(string AssetBarcode)
         {
+            Loan newLoan = new Loan();
 
-            CreateLoanViewModel viewModel = new CreateLoanViewModel();
-            viewModel.AssetBarcode = id;
+            newLoan.LoanDate = DateTime.Now;
+            newLoan.DueDate = DateTime.Now.AddDays(7);
 
-            return View(viewModel)
+            return View(AutoMapper.Mapper.Map<Loan, CreateLoanViewModel>(newLoan));
+        }
 
+        [ActionName("Create"), RequireRequestValue("BorrowerBarcode")]
+        public ActionResult CreateWithBorrowerBarcode(string BorrowerBarcode)
+        {
             Loan newLoan = new Loan();
 
             newLoan.LoanDate = DateTime.Now;

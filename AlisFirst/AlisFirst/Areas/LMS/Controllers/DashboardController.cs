@@ -47,7 +47,7 @@ namespace AlisFirst.Areas.LMS.Controllers
         {
 
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Create", "Loans", new { BorrowerBarcode = v.Barcode }); 
 
         }
         
