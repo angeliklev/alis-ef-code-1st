@@ -39,10 +39,7 @@ namespace AlisFirst.Areas.LMS.Controllers
         [HttpPost]
         public ActionResult Asset(AlisFirst.Areas.LMS.ViewModels.DashboardViewModel v)
         {
-            TempData["BorrowerBarcode"] = "alva-0001";
-
-            return RedirectToAction("Create", "Loans");
-            
+            return RedirectToAction("Create", "Loans");            
         }
 
         [HttpPost]
