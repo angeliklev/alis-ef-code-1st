@@ -39,7 +39,7 @@ namespace AlisFirst.Areas.LMS.Controllers
         [HttpPost]
         public ActionResult Asset(AlisFirst.Areas.LMS.ViewModels.DashboardViewModel v)
         {
-            return RedirectToAction("Create", "Loans");            
+            return RedirectToAction("Create", "Loans", new { AssetBarcode = v.Barcode });        
         }
 
         [HttpPost]

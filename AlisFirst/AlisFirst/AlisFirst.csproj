@@ -104,6 +104,7 @@
     <Compile Include="Areas\AMS\AMSAreaRegistration.cs" />
     <Compile Include="Areas\AMS\Controllers\EmployeeController.cs" />
     <Compile Include="Areas\AMS\Controllers\AssetController.cs" />
+    <Compile Include="Areas\AMS\Controllers\ReportController.cs" />
     <Compile Include="Areas\AMS\ViewModels\AssetCheckListEditModel.cs" />
     <Compile Include="Areas\AMS\ViewModels\AssetConditionCreateModel.cs" />
     <Compile Include="Areas\AMS\ViewModels\AssetEditModel.cs" />
@@ -175,6 +176,7 @@
     <Compile Include="DAL\SupplierRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Areas\AMS\ViewModels\EmployeeModel.cs" />
+    <Compile Include="Utils\RequrieRequestValue.cs" />
     <Compile Include="Validation\LoanValidation.cs" />
     <Compile Include="Validation\BorrowerValidation.cs" />
     <Compile Include="Areas\LMS\ViewModels\BorrowerModel.cs" />
@@ -273,6 +275,9 @@
     <Content Include="Areas\AMS\Views\Asset\_AssignedStatusForm.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\_AssetConditionCreate.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\_AssetConditionForm.cshtml" />
+    <Content Include="Areas\AMS\Views\Report\Index.cshtml" />
+    <Content Include="Areas\AMS\Views\Shared\Menu.cshtml" />
+    <Content Include="Areas\AMS\Views\Shared\_AssetList.cshtml" />
     <None Include="Scripts\jquery-2.0.0.intellisense.js" />
     <Content Include="Scripts\EditorHookup.js" />
     <Content Include="Scripts\GoBack.js" />
@@ -406,7 +411,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\AMS\Models\" />
-    <Folder Include="Areas\AMS\Views\Shared\" />
     <Folder Include="Areas\LMS\Models\" />
   </ItemGroup>
   <ItemGroup>
