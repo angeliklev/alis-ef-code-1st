@@ -1,0 +1,28 @@
+﻿@* Views\Asset\_AssignedStatusForm.cshtml *@
+@model AlisFirst.Areas.AMS.ViewModels.AssetAssignedStatusModel
+<div class="column">
+    @Html.Partial("_AssignedStatusCreate", Model.StatusToCreate)
+</div>
+
+<div class="column">
+    <h2>Status History</h2>
+
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+
+        @foreach (var item in Model.StatusHistory)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.AssignedDate)
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.AssetStatusAssetStatusName)
+                </td>
+            </tr>    
+        }
+
+    </table>
+</div>
+<div class="clear"></div>

@@ -22,7 +22,7 @@ namespace AlisFirst.Validation
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             if (value == null)
-                return new ValidationResult("Please input Asset Barcode");
+                return new ValidationResult("Please input Borrower Barcode");
 
             string BorrowerBarcode = (string)value;
 

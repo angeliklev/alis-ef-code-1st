@@ -1,0 +1,16 @@
+﻿@* Views\Asset\_AssetConditionCreate.cshtml *@
+@model AlisFirst.Areas.AMS.ViewModels.AssetConditionCreateModel
+
+@using (Ajax.BeginForm("CreateCondition", new AjaxOptions { UpdateTargetId = "condition-history" }))
+
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Add Condition </legend>
+        @Html.EditorForModel()
+            <div class="clear"></div>
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
