@@ -124,7 +124,7 @@ namespace AlisFirst.DAL
 
         public IQueryable<Loan> OverdueLoans
         {
-            get { return context.Loans.Where(odl => odl.DueDate <= DateTime.Now); }
+            get { return context.Loans.Where(odl => odl.DueDate < DateTime.Now); }
         }
 
 
