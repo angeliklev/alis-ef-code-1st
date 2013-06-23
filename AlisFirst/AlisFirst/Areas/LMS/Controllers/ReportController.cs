@@ -19,8 +19,9 @@ namespace AlisFirst.Areas.LMS.Controllers
 
         public ReportController(ILoanRepository loanRepository)
         {
-			this.loanRepository = loanRepository;
+            this.loanRepository = loanRepository;
         }
+
         //
         //Get:/OverDueReport
         [HttpGet]
@@ -32,19 +33,12 @@ namespace AlisFirst.Areas.LMS.Controllers
             return View(odr);
         }
 
-        [HttpPost]
-        public ActionResult Index()
-        {
-            //return RedirectToAction("Edit", "Loans");
-            return View();
-        }
-
-        //public ActionResult Index()
+        //[HttpPost]
+        //public ActionResult Index(int id)
         //{
-        //    return View();
+        //    return RedirectToAction("Edit", "Loans", new { LoanID = id });
         //}
 
-       
 
     }
 }
