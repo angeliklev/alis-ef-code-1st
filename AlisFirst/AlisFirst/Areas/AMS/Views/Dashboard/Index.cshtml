@@ -13,14 +13,14 @@
     <ul>
 
     <li>@Html.ActionLink("Create Asset", "Create","Asset")</li>
-    <li>@Html.ActionLink("Create Employee", null)</li>
+    <li>@Html.ActionLink("Create Employee", "Create", "Employee")</li>
     <li>@Html.ActionLink("Update Lookup Tables", null)</li>
-    <li>@Html.ActionLink("Warranty Expire Report", null)</li>
+    <li>@Html.ActionLink("Warranty Expire Report", "WarrantyExpireReport", "Report")</li>
     </ul>
 </div>
 
 <div style="display:inline-block">
-    <p>with an asset barcode:</p>
+    <p>With an Asset (Enter Barcode)</p>
     @using (Html.BeginForm())
     {        
         @Html.TextBoxFor(i => i.Barcode)<br />

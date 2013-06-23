@@ -122,7 +122,7 @@
     <Compile Include="Areas\LMS\ViewModels\DashboardViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AssetConditionsController.cs" />
-    <Compile Include="Controllers\AssetModelsController.cs" />
+    <Compile Include="Areas\AMS\Controllers\AssetModelsController.cs" />
     <Compile Include="Controllers\AssetsController.cs" />
     <Compile Include="Controllers\AssetStatusController.cs" />
     <Compile Include="Controllers\AssignedLocationsController.cs" />
@@ -325,12 +325,12 @@
     <Content Include="Areas\AMS\Views\Asset\Details.cshtml" />
     <Content Include="Views\Assets\Index.cshtml" />
     <Content Include="Views\Assets\_CreateOrEdit.cshtml" />
-    <Content Include="Views\AssetModels\Create.cshtml" />
-    <Content Include="Views\AssetModels\Edit.cshtml" />
-    <Content Include="Views\AssetModels\Delete.cshtml" />
-    <Content Include="Views\AssetModels\Details.cshtml" />
-    <Content Include="Views\AssetModels\Index.cshtml" />
-    <Content Include="Views\AssetModels\_CreateOrEdit.cshtml" />
+    <Content Include="Areas\AMS\Views\AssetModels\Create.cshtml" />
+    <Content Include="Areas\AMS\Views\AssetModels\Edit.cshtml" />
+    <Content Include="Areas\AMS\Views\AssetModels\Delete.cshtml" />
+    <Content Include="Areas\AMS\Views\AssetModels\Details.cshtml" />
+    <Content Include="Areas\AMS\Views\AssetModels\Index.cshtml" />
+    <Content Include="Areas\AMS\Views\AssetModels\_CreateOrEdit.cshtml" />
     <Content Include="Views\AssetConditions\Create.cshtml" />
     <Content Include="Views\AssetConditions\Edit.cshtml" />
     <Content Include="Views\AssetConditions\Delete.cshtml" />
