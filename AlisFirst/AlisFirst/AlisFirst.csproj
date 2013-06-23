@@ -120,8 +120,10 @@
     <Compile Include="Areas\AMS\ViewModels\_AssetListViewModel.cs" />
     <Compile Include="Areas\LMS\Controllers\BorrowersController.cs" />
     <Compile Include="Areas\LMS\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\LMS\Controllers\ReportController.cs" />
     <Compile Include="Areas\LMS\LMSAreaRegistration.cs" />
     <Compile Include="Areas\LMS\ViewModels\DashboardViewModel.cs" />
+    <Compile Include="Areas\LMS\ViewModels\ReportModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AssetConditionsController.cs" />
     <Compile Include="Controllers\AssetModelsController.cs" />
@@ -282,7 +284,7 @@
     <Content Include="Areas\AMS\Views\Asset\_AssignedStatusForm.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\_AssetConditionCreate.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\_AssetConditionForm.cshtml" />
-    <Content Include="Areas\LMS\Views\Loans\OverdueReport.cshtml" />
+    <Content Include="Areas\LMS\Views\Report\Index.cshtml" />
     <None Include="Scripts\jquery-2.0.0.intellisense.js" />
     <Content Include="Scripts\EditorHookup.js" />
     <Content Include="Scripts\GoBack.js" />
