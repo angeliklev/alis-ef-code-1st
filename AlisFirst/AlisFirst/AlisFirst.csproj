@@ -282,6 +282,7 @@
     <Content Include="Areas\AMS\Views\Asset\_AssignedStatusForm.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\_AssetConditionCreate.cshtml" />
     <Content Include="Areas\AMS\Views\Asset\_AssetConditionForm.cshtml" />
+    <Content Include="Areas\LMS\Views\Loans\OverdueReport.cshtml" />
     <None Include="Scripts\jquery-2.0.0.intellisense.js" />
     <Content Include="Scripts\EditorHookup.js" />
     <Content Include="Scripts\GoBack.js" />

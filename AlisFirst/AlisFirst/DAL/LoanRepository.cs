@@ -29,28 +29,6 @@ namespace AlisFirst.DAL
             return query;
         }
 
-        //public IQueryable<Loan> AllOnLoans(params Expression<Func<Loan, object>>[] includeProperties)
-        //{
-        //    IQueryable<Loan> query = context.Loans.Where(ol => ol.ReturnDate == null);
-
-        //    foreach (var includeProperty in includeProperties)
-        //    {
-        //        query = query.Include(includeProperty);
-        //    }
-        //    return query();
-
-
-        //}
-
-        //public IList<Loan> AllOnLoans()
-        //{
-        //    var onLoans = from ol in context.Loans
-        //                  where ol.ReturnDate == null
-        //                  select All;
-
-        //    return (Loan)onLoans.ToList();
-        //}
-
         public Loan Find(int id)
         {
             return context.Loans.Find(id);
@@ -144,6 +122,10 @@ namespace AlisFirst.DAL
             
         }
 
+        public IQueryable<Loan> OverdueLoans
+        {
+            get { return context.Loans.Where(odl => odl.DueDate <= DateTime.Now); }
+        }
 
 
     }
@@ -161,6 +143,7 @@ namespace AlisFirst.DAL
         Boolean IsOnLoan(int assetID);
         Boolean IsLoanable(int assetID);
         IQueryable<Loan> AllOnLoans{get;}
+        IQueryable<Loan> OverdueLoans{ get; }
 
     }
 }

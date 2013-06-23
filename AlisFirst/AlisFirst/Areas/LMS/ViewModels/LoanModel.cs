@@ -52,4 +52,9 @@ namespace AlisFirst.Areas.LMS.ViewModels
         //Return Date error
         public string SearchKey = "";
     }
+
+    public class OverDueReport
+    {
+        public IEnumerable<EditLoanViewModel> OverDues;
+    }
 }

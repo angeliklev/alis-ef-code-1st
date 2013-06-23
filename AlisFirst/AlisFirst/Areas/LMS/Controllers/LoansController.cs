@@ -29,6 +29,16 @@ namespace AlisFirst.Areas.LMS.Controllers
             this.assetConditionRepository = assetConditionRepository;
         }
 
+        //Get:/OverDueReport
+        [HttpGet]
+        public ViewResult OverdueReport()
+        {
+            IEnumerable<Loan> OverdueLoans = loanRepository.OverdueLoans;
+            OverDueReport odr = new OverDueReport();
+            odr.OverDues = AutoMapper.Mapper.Map<IEnumerable<Loan>, IEnumerable<EditLoanViewModel>>(loanRepository.OverdueLoans);
+            return View(odr);
+        }
+
         //
         // GET: /Loans/
 

@@ -1,0 +1,56 @@
+﻿@model AlisFirst.Areas.LMS.ViewModels.OverDueReport
+
+@{
+    ViewBag.Title = "Report";
+}
+
+<h2>Overdue Report</h2>
+
+<table>
+    <tr>
+        <th></th>
+        <th>
+            LoanDate
+        </th>
+        <th>
+            DueDate
+        </th>
+        <th>
+            Asset
+        </th>
+        <th>
+            Borrower
+        </th>
+    </tr>
+
+@foreach (var item in Model.OverDues) {
+    <tr>
+
+        <td>
+            @Html.ActionLink("Return Loan", "Edit", new { id=item.LoanID })
+         </td>
+       
+
+            @Html.HiddenFor(modelItem => item.LoanID)
+        <td>
+            
+            @Html.DisplayFor(modelItem => item.LoanDate)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.DueDate)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.AssetBarcode)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.BorrowerBarcode)
+        </td>
+    </tr>
+}
+
+</table>
+
+
