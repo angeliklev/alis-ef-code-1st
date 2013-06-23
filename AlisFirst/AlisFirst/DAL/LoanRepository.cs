@@ -125,7 +125,18 @@ namespace AlisFirst.DAL
         public IQueryable<Loan> OverdueLoans
         {
             //I think it is up to client to decide, but this will work for now
-            get { return context.Loans.Where(odl => odl.DueDate < DateTime.Now); }
+            get { return context.Loans.Where(odl => odl.DueDate <= DateTime.Now); }
+        }
+
+        public int getLoanID(string assetBarcode)
+        {
+            var loanID = from l in context.Loans
+                          where l.Asset.BarCode == assetBarcode.Trim() && l.ReturnDate == null
+                          select l.LoanID;
+
+            if (loanID.FirstOrDefault() != 0)
+                return Convert.ToInt16(loanID.FirstOrDefault());
+            return -1;
         }
 
 
@@ -145,6 +156,7 @@ namespace AlisFirst.DAL
         Boolean IsLoanable(int assetID);
         IQueryable<Loan> AllOnLoans{get;}
         IQueryable<Loan> OverdueLoans{ get; }
+        int getLoanID(string assetBarcode);
 
     }
 }

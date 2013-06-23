@@ -318,7 +318,7 @@ namespace AlisFirst.DAL
             var loan = new List<Loan>
             {
                 
-                new Loan{LoanID =1, BorrowerID =1, AssetID = 9, LoanDate = DateTime.Now, DueDate = DateTime.Now.AddDays(7)}
+                new Loan{LoanID =1, BorrowerID =1, AssetID = 9, LoanDate = DateTime.Now, DueDate = DateTime.Now.AddDays(0)}
             };
             loan.ForEach(l => context.Loans.Add(l));
             context.SaveChanges();

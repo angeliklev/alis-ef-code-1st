@@ -43,11 +43,13 @@
     <tr>
 
         <td>
-            @Html.ActionLink("Return Loan", "Edit", new { id=item.LoanID })
+            @Html.ActionLink("Return Loan", "Edit", new { item.AssetBarcode })
+            @*@Html.ActionLink("Return Loan", "Edit", new { id = item.LoanID })*@
          </td>
        
 
             @Html.HiddenFor(modelItem => item.LoanID)
+            @Html.HiddenFor(modelItem => item.AssetBarcode)
         <td>
             
             @Html.DisplayFor(modelItem => item.LoanDate)
