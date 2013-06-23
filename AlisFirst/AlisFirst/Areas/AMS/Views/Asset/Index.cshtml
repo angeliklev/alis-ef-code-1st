@@ -1,6 +1,8 @@
 ﻿@model AlisFirst.Areas.AMS.ViewModels.AssetsIndexViewModel
+
 @{
     ViewBag.Title = "Index";
+    var routeData = new RouteValueDictionary(this.ViewContext.RouteData.Values);
     
 }
 
@@ -26,7 +28,9 @@
     
       @Html.Partial("_AssetList", Model.listViewModel)
     
+
 </div>
+
 
 
 

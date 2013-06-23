@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using AlisFirst.DAL;
 using AlisFirst.Models;
+using AlisFirst.Utils;
 
 namespace AlisFirst.Areas.AMS.Controllers
 {
@@ -33,53 +34,39 @@ namespace AlisFirst.Areas.AMS.Controllers
         public ActionResult Index()
         {
             return View();
-        }
+        }        
 
-        //TODO: finish actions for following button presses
         [HttpPost]
-        public ActionResult Index(AlisFirst.Areas.AMS.ViewModels.DashboardViewModel v)
+        [AcceptButton("Maintain")]
+        [ActionName("Index")]
+        public ActionResult MaintainButtonPress(AlisFirst.Areas.AMS.ViewModels.DashboardViewModel v)
         {
-
-            if (String.IsNullOrEmpty(v.Barcode))
-                return RedirectToAction("Index");
-
-            Asset asset = assetRepository.All.FirstOrDefault(bar => bar.BarCode == v.Barcode);
-
-            if (asset == null)
-                return RedirectToAction("Index");           
-
-            if (HttpContext.Request.Form["Maintain"] != null)
-                return Maintain(asset);
-
-            else if (HttpContext.Request.Form["Employee"] != null)
-                return Employee(asset);
-
-            else if (HttpContext.Request.Form["Location"] != null)
-                return Location(asset);
-
-            else if (HttpContext.Request.Form["Status"] != null)
-                return Status(asset);
-            else
-                return RedirectToAction("Index");
-            
-        }
-        
-        public ActionResult Maintain(Asset asset)
-        {
+            //Needs validation to make sure that the barcode exists
+            Asset asset = assetRepository.FindByBarcode(v.Barcode);
             return RedirectToAction("Edit", "Asset", new { id = asset.AssetID, area = "AMS" });
         }
 
-        public ActionResult Location(Asset asset)
+        [HttpPost]
+        [AcceptButton("Location")]
+        [ActionName("Index")]
+        public ActionResult Location(AlisFirst.Areas.AMS.ViewModels.DashboardViewModel v)
         {
+            Asset asset = assetRepository.FindByBarcode(v.Barcode);
             return RedirectToAction("Edit", "Asset", new { id = asset.AssetID, area = "AMS" });
         }
 
-        public ActionResult Employee(Asset asset)
+        [HttpPost]
+        [AcceptButton("Employee")]
+        [ActionName("Index")]
+        public ActionResult Employee(AlisFirst.Areas.AMS.ViewModels.DashboardViewModel v)
         {
             return RedirectToAction("Index");
         }
 
-        public ActionResult Status (Asset asset)
+        [HttpPost]
+        [AcceptButton("Status")]
+        [ActionName("Index")]
+        public ActionResult Status(AlisFirst.Areas.AMS.ViewModels.DashboardViewModel v)
         {
             return RedirectToAction("Index");
         }
