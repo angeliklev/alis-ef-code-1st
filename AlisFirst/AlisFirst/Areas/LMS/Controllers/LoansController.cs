@@ -83,8 +83,8 @@ namespace AlisFirst.Areas.LMS.Controllers
             
             return View(AutoMapper.Mapper.Map<Loan, CreateLoanViewModel>(newLoan));
         }
-        
 
+        [HttpGet]
         [ActionName("Create"), RequireRequestValue("AssetBarcode")]
         public ActionResult CreateWihAssetBarcode(string AssetBarcode)
         {
@@ -95,7 +95,7 @@ namespace AlisFirst.Areas.LMS.Controllers
 
             return View(AutoMapper.Mapper.Map<Loan, CreateLoanViewModel>(newLoan));
         }
-
+        [HttpGet]
         [ActionName("Create"), RequireRequestValue("BorrowerBarcode")]
         public ActionResult CreateWithBorrowerBarcode(string BorrowerBarcode)
         {
