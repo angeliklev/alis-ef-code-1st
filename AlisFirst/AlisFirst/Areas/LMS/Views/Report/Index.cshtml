@@ -27,7 +27,8 @@
     <tr>
 
         <td>
-            @Html.ActionLink("Return Loan", "Edit", "Loans",new { id = item.LoanID },new { Area = "LMS" })
+            @*@Html.ActionLink("Return Loan", "Edit", "Loans",new { id = item.LoanID },new { Area = "LMS" })*@
+            @Html.ActionLink("Return Loan", "Edit", "Loans",new {item.AssetBarcode },new { Area = "LMS" })
          </td>
        
 
