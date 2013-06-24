@@ -140,6 +140,7 @@ namespace AlisFirst.DAL
         }
 
 
+
     }
 
     public interface ILoanRepository : IDisposable
