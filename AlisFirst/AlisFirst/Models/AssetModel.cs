@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using System.ComponentModel.DataAnnotations;
 
 namespace AlisFirst.Models
 {
@@ -14,6 +15,8 @@ namespace AlisFirst.Models
         }
 
         public int AssetModelID { get; set; }
+        
+        [Required]
         public string AssetModelName { get; set; }
 
         public int ManufacturerID { get; set; }

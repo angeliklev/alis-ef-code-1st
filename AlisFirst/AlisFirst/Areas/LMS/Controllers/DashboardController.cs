@@ -32,16 +32,14 @@ namespace AlisFirst.Areas.LMS.Controllers
         public ActionResult Index()
         {
             return View();
-        }
 
+        }
+        
         //TODO: finish actions for following button presses
         [HttpPost]
         public ActionResult Asset(AlisFirst.Areas.LMS.ViewModels.DashboardViewModel v)
         {
-
-            
-                return RedirectToAction("Index");
-            
+            return RedirectToAction("Create", "Loans", new { AssetBarcode = v.Barcode });        
         }
 
         [HttpPost]
@@ -49,7 +47,7 @@ namespace AlisFirst.Areas.LMS.Controllers
         {
 
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Create", "Loans", new { BorrowerBarcode = v.Barcode }); 
 
         }
         
