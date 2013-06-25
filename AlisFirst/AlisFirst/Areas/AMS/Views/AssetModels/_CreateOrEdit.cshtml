@@ -1,0 +1,23 @@
+@model AlisFirst.Models.AssetModel
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.AssetModelName)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.AssetModelName)
+    @Html.ValidationMessageFor(model => model.AssetModelName)
+</div>
+
+<div class="editor-label">
+    Manufacturer
+</div>
+<div class="editor-field">
+    @Html.DropDownListFor(model => model.ManufacturerID, ((IEnumerable<AlisFirst.Models.Manufacturer>)ViewBag.PossibleManufacturers).Select(option => new SelectListItem {
+        Text = Html.DisplayTextFor(_ => option).ToString(), 
+        Value = option.ManufacturerID.ToString(),
+        Selected = (Model != null) && (option.ManufacturerID == Model.ManufacturerID)
+    }), "Choose...")
+    @Html.ValidationMessageFor(model => model.ManufacturerID)
+</div>

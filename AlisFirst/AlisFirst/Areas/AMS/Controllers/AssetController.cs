@@ -4,6 +4,8 @@ using System.Web.Mvc;
 using AlisFirst.Areas.AMS.ViewModels;
 using AlisFirst.DAL;
 using AlisFirst.Models;
+using MvcPaging;
+using System;
 
 namespace AlisFirst.Areas.AMS.Controllers
 {
@@ -49,15 +51,91 @@ namespace AlisFirst.Areas.AMS.Controllers
 
         //
         // GET: /Asset/
-
+        
         public ActionResult Index()
+        {            
+            //Creates the ViewModel for the Index Page
+            ViewModels.AssetsIndexViewModel AssetListIndexViewModel = new ViewModels.AssetsIndexViewModel();
+            //Set the current page for pagination to 0
+            int currentpageindex = 0;
+            //Place all assets into a list
+            var Assets = assetRepo.All.ToList();
+            //Create new Viewmodel for partial page
+            AssetListIndexViewModel.listViewModel = new ViewModels._AssetListViewModel();
+            //Set the assets to be shown
+            AssetListIndexViewModel.listViewModel.Assets = Assets.ToPagedList(currentpageindex, 5);
+            //Goto the view
+            return View(AssetListIndexViewModel);
+        }
+        //Partial Result for ajax pagination
+        public ActionResult AjaxIndex(int? page)
         {
-            //this return is to work with my index until dashboard is ready
-            var assets = assetRepo.All;
-            return View(assets);
+            
+            //Sets the new page to show
+            int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
 
-            //// this 'return' is to work with AMS dashboard when it is ready
-            //return RedirectToAction("Index", "AssetList");
+
+            AlisFirst.Areas.AMS.ViewModels._AssetListViewModel ViewModel = new ViewModels._AssetListViewModel();
+
+
+            var Assets = assetRepo.All.ToList();
+            ViewModel.Assets = Assets.ToPagedList<AlisFirst.Models.Asset>(currentPageIndex, 5);
+
+            return PartialView("_AssetList", ViewModel);
+
+        }
+
+        public ActionResult noJSIndex(int? page)
+        {
+            ViewModels.AssetsIndexViewModel AssetListIndexViewModel = new ViewModels.AssetsIndexViewModel();
+
+            int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
+            var Assets = assetRepo.All.ToList();
+
+            AssetListIndexViewModel.listViewModel = new ViewModels._AssetListViewModel();
+
+            AssetListIndexViewModel.listViewModel.Assets = Assets.ToPagedList(currentPageIndex, 5);
+
+
+            return View("Index", AssetListIndexViewModel);
+
+        }
+
+
+        [HttpPost]
+        public ActionResult Index(ViewModels.AssetsIndexViewModel v)
+        {
+            //This is just a silly peice of code to allow MVC 3 to redirect here as home page.
+            if (!this.ControllerContext.RouteData.DataTokens.ContainsKey("area"))
+            {
+                this.ControllerContext.RouteData.DataTokens.Add("area", "AMS");
+            }
+
+
+            if (String.IsNullOrEmpty(v.searchKey))
+                return RedirectToAction("Index");
+
+
+
+            var assets = from Models.Asset a in assetRepo.All
+                         where a.AssetModel.AssetModelName.Contains(v.searchKey.Trim()) || a.BarCode.Contains(v.searchKey.Trim())
+                         || a.SerialNum.Contains(v.searchKey.Trim()) || a.Supplier.SupplierName.Contains(v.searchKey.Trim())
+                         select a;
+
+
+
+
+
+            if (assets.ToList().Count == 1)
+            {
+                AlisFirst.Models.Asset a = assets.ToList()[0];
+
+                return RedirectToAction("Edit", new { id = a.AssetID.ToString() });
+            }
+            v.listViewModel = new ViewModels._AssetListViewModel();
+            v.listViewModel.Assets = assets.ToList().ToPagedList(0, 5);
+
+            return View(v);
         }
 
         //

@@ -18,19 +18,15 @@
     <div class="page">
         <div id="header">
             <div id="title">
-                <h1>My MVC Application</h1>
+                <h1>ALIS</h1>
             </div>
             <div id="logindisplay">
                 @Html.Partial("_LogOnPartial")
             </div>
             <div id="menucontainer">
-                <ul id="menu">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("Assets", "Index", "Asset", new { area = "AMS" }, null)</li>
-                    <li>@Html.ActionLink("Loans", "Index", "Loans", new { area = "LMS" }, null)</li>
-                    <li>@Html.ActionLink("Borrowers", "Index", "Borrowers", new { area = "LMS" }, null)</li>
-                </ul>
+
+                
+             @Html.Partial("Menu")
             </div>
         </div>
         <div id="main">

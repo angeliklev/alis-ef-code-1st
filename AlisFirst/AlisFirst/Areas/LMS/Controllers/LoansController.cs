@@ -7,6 +7,7 @@ using AlisFirst.Models;
 using AlisFirst.DAL;
 using AlisFirst.Validation;
 using AlisFirst.Areas.LMS.ViewModels;
+using AlisFirst.Utils;
 
 namespace AlisFirst.Areas.LMS.Controllers
 {   
@@ -41,7 +42,7 @@ namespace AlisFirst.Areas.LMS.Controllers
 
             return View(viewOnLoans);
             //return View(loanRepository.AllIncluding(loan => loan.Asset, loan => loan.Borrower));
-        }
+        }        
 
         [HttpPost]
         public ActionResult Index(string SearchKey)
@@ -60,6 +61,8 @@ namespace AlisFirst.Areas.LMS.Controllers
             return View(viewLoan);
         }
 
+
+
         //
         // GET: /Loans/Details/5
 
@@ -77,10 +80,32 @@ namespace AlisFirst.Areas.LMS.Controllers
 
             newLoan.LoanDate = DateTime.Now;
             newLoan.DueDate = DateTime.Now.AddDays(7);
+            
             return View(AutoMapper.Mapper.Map<Loan, CreateLoanViewModel>(newLoan));
-        } 
+        }
 
-        //
+        [HttpGet]
+        [ActionName("Create"), RequireRequestValue("AssetBarcode")]
+        public ActionResult CreateWihAssetBarcode(string AssetBarcode)
+        {
+            Loan newLoan = new Loan();
+
+            newLoan.LoanDate = DateTime.Now;
+            newLoan.DueDate = DateTime.Now.AddDays(7);
+
+            return View(AutoMapper.Mapper.Map<Loan, CreateLoanViewModel>(newLoan));
+        }
+        [HttpGet]
+        [ActionName("Create"), RequireRequestValue("BorrowerBarcode")]
+        public ActionResult CreateWithBorrowerBarcode(string BorrowerBarcode)
+        {
+            Loan newLoan = new Loan();
+
+            newLoan.LoanDate = DateTime.Now;
+            newLoan.DueDate = DateTime.Now.AddDays(7);
+
+            return View(AutoMapper.Mapper.Map<Loan, CreateLoanViewModel>(newLoan));
+        }
         // POST: /Loans/Create
 
         [HttpPost]
