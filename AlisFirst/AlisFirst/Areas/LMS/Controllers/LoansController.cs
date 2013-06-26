@@ -30,6 +30,8 @@ namespace AlisFirst.Areas.LMS.Controllers
             this.assetConditionRepository = assetConditionRepository;
         }
 
+       
+
         //
         // GET: /Loans/
 
@@ -130,12 +132,20 @@ namespace AlisFirst.Areas.LMS.Controllers
         
         //
         // GET: /Loans/Edit/5
- 
-        public ActionResult Edit(int id)
+
+        //public ActionResult Edit(int id)
+        //{
+        //    Loan returnLoan = loanRepository.Find(id);
+        //    returnLoan.ReturnDate = DateTime.Now;
+        //    return View(AutoMapper.Mapper.Map<Loan, EditLoanViewModel>(returnLoan));
+        //}
+
+        public ActionResult Edit(string assetBarcode)
         {
+            int id = loanRepository.getLoanID(assetBarcode.Trim());
+            if (id == -1)
+                return View();
             Loan returnLoan = loanRepository.Find(id);
-            //DateTime loandate = returnLoan.DueDate;
-            //returnLoan.LoanDate = returnLoan.LoanDate;
             returnLoan.ReturnDate = DateTime.Now;
             return View(AutoMapper.Mapper.Map<Loan, EditLoanViewModel>(returnLoan));
         }
