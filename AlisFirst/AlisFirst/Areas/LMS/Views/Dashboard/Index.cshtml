@@ -1,10 +1,10 @@
 ﻿@model AlisFirst.Areas.LMS.ViewModels.DashboardViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Loan Management Dashboard";
 }
 
-<h2>Index</h2>
+<h2>LMS Dashboard</h2>
 
 <div id="left">
 </div>
@@ -36,9 +36,8 @@
         @Html.Label("With a Borrower (Enter Barcode)")<br />
         @Html.TextBoxFor(i => i.Barcode)<br />
    
-        <input type="submit" name="Register Loan" value="Register" /><br />               
-        <input type="submit" name="Return From Loan" value="Return" /><br /> 
-        <input type="submit" name="Edit Borrower" value="Edit_Borrower" /><br />
-        <input type="submit" name="Active Loans by Borrower Report" value="Loans" /><br />
+        <input type="submit" name="Register Loan" value="Register" /><br />        
+        <input type="submit" name="Edit_Borrower" value="Edit Borrower" /><br />
+        <input type="submit" name="Loans" value="Active Loans by Borrower Report" /><br />
     }
 </div>

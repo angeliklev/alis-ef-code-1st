@@ -17,7 +17,7 @@ namespace AlisFirst.Areas.LMS
             context.MapRoute(
                 "LMS_default",
                 "LMS/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional },
+                new { controller = "Dashboard", action = "Index", id = UrlParameter.Optional },
                 new[] { "AlisFirst.Areas.LMS.Controllers" }
                 );
         }

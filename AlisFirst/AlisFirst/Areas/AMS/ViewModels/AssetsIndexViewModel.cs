@@ -6,7 +6,7 @@ using MvcPaging;
 
 namespace AlisFirst.Areas.AMS.ViewModels
 {
-    public class AssetsViewModel
+    public class AssetsIndexViewModel
     {
         public IPagedList<AlisFirst.Models.Asset> Assets { get; set; }        
 
