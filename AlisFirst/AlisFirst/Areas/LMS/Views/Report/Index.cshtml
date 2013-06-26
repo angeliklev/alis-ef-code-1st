@@ -1,7 +1,17 @@
 ﻿@model AlisFirst.Areas.LMS.ViewModels.OverDueReport
 
 @{
-    ViewBag.Title = "Report";
+    ViewBag.Title = "Report of Overdue Loans";
+}
+<p>
+    Search by Asset Barcode
+</p>
+@using(Html.BeginForm())
+{
+    <p>
+    @Html.TextBox("SearchKey")
+    <input type="submit" value="Search" />
+    </p>
 }
 
 <h2>Overdue Report</h2>

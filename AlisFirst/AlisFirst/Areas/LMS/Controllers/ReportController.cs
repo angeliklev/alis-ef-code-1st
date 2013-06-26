@@ -33,6 +33,25 @@ namespace AlisFirst.Areas.LMS.Controllers
             return View(odr);
         }
 
+
+        [HttpPost]
+        public ActionResult Index(string SearchKey)
+        {
+            
+            OverDueReport odr = new OverDueReport();
+
+            if (ModelState.IsValid)
+                if (String.IsNullOrEmpty(SearchKey))
+                {
+                    odr.Overdues = AutoMapper.Mapper.Map<IEnumerable<Loan>, IEnumerable<EditLoanViewModel>>(loanRepository.OverdueLoans);
+                }
+                else
+                {
+                    odr.Overdues = AutoMapper.Mapper.Map<IEnumerable<Loan>, IEnumerable<EditLoanViewModel>>(loanRepository.All.Where(ol => ol.Asset.BarCode == SearchKey && ol.DueDate < DateTime.Now));
+                }
+            return View(odr);
+        }
+
         //[HttpPost]
         //public ActionResult Index(int id)
         //{

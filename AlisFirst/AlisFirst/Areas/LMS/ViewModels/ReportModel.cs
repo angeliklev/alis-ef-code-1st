@@ -12,5 +12,6 @@ namespace AlisFirst.Areas.LMS.ViewModels
     public class OverDueReport
     {
         public IEnumerable<EditLoanViewModel> Overdues;
+        public string SearchKey = "";
     }
 }
