@@ -49,10 +49,7 @@ namespace AlisFirst
             AutoMapperBootstrapper.Initialize();
 
             //Mapping information for viewmodel/model conversion (discuss where to move this junk to, it certainly shouldn't be in here)
-            AutoMapper.Mapper.CreateMap<CreateLoanViewModel,Loan>();
-            AutoMapper.Mapper.CreateMap<Loan, CreateLoanViewModel>();
-            AutoMapper.Mapper.CreateMap<EditLoanViewModel, Loan>();
-            AutoMapper.Mapper.CreateMap<Loan, EditLoanViewModel>();
+           
         }
     }
 }
