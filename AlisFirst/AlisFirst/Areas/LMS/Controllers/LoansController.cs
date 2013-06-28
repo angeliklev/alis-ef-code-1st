@@ -142,9 +142,10 @@ namespace AlisFirst.Areas.LMS.Controllers
 
         public ActionResult Edit(string assetBarcode)
         {
+            assetBarcode = "";
             int id = loanRepository.getLoanID(assetBarcode.Trim());
             if (id == -1)
-                return View();
+                return View("NotFoundLoan");
             Loan returnLoan = loanRepository.Find(id);
             returnLoan.ReturnDate = DateTime.Now;
             return View(AutoMapper.Mapper.Map<Loan, EditLoanViewModel>(returnLoan));

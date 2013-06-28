@@ -282,6 +282,7 @@
     <Content Include="Areas\AMS\Views\Shared\_AssetList.cshtml" />
     <Content Include="Areas\LMS\Views\Shared\Menu.cshtml" />
     <Content Include="Areas\LMS\Views\Report\Index.cshtml" />
+    <Content Include="Areas\LMS\Views\Loans\NotFoundLoan.cshtml" />
     <None Include="Scripts\jquery-2.0.0.intellisense.js" />
     <Content Include="Scripts\EditorHookup.js" />
     <Content Include="Scripts\GoBack.js" />
