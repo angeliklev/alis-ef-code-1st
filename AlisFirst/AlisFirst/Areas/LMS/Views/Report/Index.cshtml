@@ -1,0 +1,67 @@
+﻿@model AlisFirst.Areas.LMS.ViewModels.OverDueReport
+
+@{
+    ViewBag.Title = "Report of Overdue Loans";
+}
+<p>
+    Search by Asset Barcode
+</p>
+@using(Html.BeginForm())
+{
+    <p>
+    @Html.TextBox("SearchKey")
+    <input type="submit" value="Search" />
+    </p>
+}
+
+<h2>Overdue Report</h2>
+
+<table>
+    <tr>
+        <th></th>
+        <th>
+            LoanDate
+        </th>
+        <th>
+            DueDate
+        </th>
+        <th>
+            Asset
+        </th>
+        <th>
+            Borrower
+        </th>
+    </tr>
+
+@foreach (var item in Model.Overdues) {
+    <tr>
+
+        <td>
+            @*@Html.ActionLink("Return Loan", "Edit", "Loans",new { id = item.LoanID },new { Area = "LMS" })*@
+            @Html.ActionLink("Return Loan", "Edit", "Loans",new {item.AssetBarcode },new { Area = "LMS" })
+         </td>
+       
+
+            @Html.HiddenFor(modelItem => item.LoanID)
+        <td>
+            
+            @Html.DisplayFor(modelItem => item.LoanDate)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.DueDate)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.AssetBarcode)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.BorrowerBarcode)
+        </td>
+    </tr>
+}
+
+</table>
+
+

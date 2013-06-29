@@ -52,4 +52,6 @@ namespace AlisFirst.Areas.LMS.ViewModels
         //Return Date error
         public string SearchKey = "";
     }
+
+    
 }
