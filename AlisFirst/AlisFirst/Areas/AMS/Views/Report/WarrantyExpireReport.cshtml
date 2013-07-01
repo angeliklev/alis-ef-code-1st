@@ -25,27 +25,24 @@
         <tr>
             <th>BarCode
             </th>
-            <th>SerialNum
-            </th>
-            <th>SupplierID
-            </th>
-            <th>CategoryID
-            </th>
-            <th>AssetModelID
-            </th>
-            <th>DateRecieved
-            </th>
-            <th>WarrantyExpires
-            </th>
-            <th>PurchaseCost
-            </th>
-            <th>IsLoanable
-            </th>
-            <th>Notes
-            </th>
             <th>Name
             </th>
+            <th>SerialNum
+            </th>
+            <th>Supplier
+            </th>
+            <th>Category
+            </th>
+            <th>Asset Model
+            </th>
+            <th>Date Recieved
+            </th>
+            <th>Warranty Expires
+            </th>
+           
+            
             <th></th>
+            
         </tr>
 
         @foreach (var item in Model)
@@ -55,16 +52,19 @@
                     @Html.DisplayFor(modelItem => item.BarCode)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.SerialNum)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.SupplierID)
+                    @Html.DisplayFor(modelItem => item.Supplier.SupplierName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CategoryID)
+                    @Html.DisplayFor(modelItem => item.Category.CategoryName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.AssetModelID)
+                    @Html.DisplayFor(modelItem => item.AssetModel.AssetModelName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DateRecieved)
@@ -72,23 +72,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.WarrantyExpires)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PurchaseCost)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsLoanable)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Notes)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.AssetID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.AssetID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.AssetID })
-                </td>
+                
+               
+                <td>@Html.ActionLink("Go To Asset", "Edit", "Asset", new { id=item.AssetID }, null)</td>
             </tr>
         }
 
