@@ -142,7 +142,7 @@ namespace AlisFirst.Areas.LMS.Controllers
 
         public ActionResult Edit(string assetBarcode)
         {
-            assetBarcode = "";
+            
             int id = loanRepository.getLoanID(assetBarcode.Trim());
             if (id == -1)
                 return View("NotFoundLoan");
