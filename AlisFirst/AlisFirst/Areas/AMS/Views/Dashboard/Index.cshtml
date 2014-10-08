@@ -23,7 +23,10 @@
     <p>With an Asset (Enter Barcode)</p>
     @using (Html.BeginForm())
     {        
-        @Html.TextBoxFor(i => i.Barcode)<br />
+        @Html.ValidationSummary(true)
+        
+        @Html.EditorFor(i => i.Barcode)<br />
+        @Html.ValidationMessageFor(i => i.Barcode)<br />
    
         <input type="submit" name="Maintain" value="Maintain" /><br />            
         <input type="submit" name="Employee" value="Employee" /><br />

@@ -17,6 +17,11 @@ namespace AlisFirst.DAL
             get { return context.Assets; }
         }
 
+        public Asset FindByBarcode(string Barcode)
+        {
+            return All.FirstOrDefault(asset => asset.BarCode == Barcode);
+        }
+
         public IQueryable<Asset> AllIncluding(params Expression<Func<Asset, object>>[] includeProperties)
         {
             IQueryable<Asset> query = context.Assets;
@@ -67,6 +72,7 @@ namespace AlisFirst.DAL
     public interface IAssetRepository : IDisposable
     {
         IQueryable<Asset> All { get; }
+        Asset FindByBarcode(string Barcode);
         IQueryable<Asset> AllIncluding(params Expression<Func<Asset, object>>[] includeProperties);
         Asset Find(int id);
         void InsertOrUpdate(Asset asset);

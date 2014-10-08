@@ -59,8 +59,13 @@
     <div class="display-field">@(Model.AssignedLocations == null ? "None" : Model.AssignedLocations.Count.ToString())</div>
 </fieldset>
 @using (Html.BeginForm()) {
+    
+    @Html.HttpMethodOverride(HttpVerbs.Delete)
+    
     <p>
-        <input type="submit" value="Delete" /> |
+        lll
+        <input type="submit" value="Delete"/> 
+        
         @Html.ActionLink("Back to List", "Index")
     </p>
 }

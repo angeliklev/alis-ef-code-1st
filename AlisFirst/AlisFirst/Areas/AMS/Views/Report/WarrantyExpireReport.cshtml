@@ -1,0 +1,83 @@
+﻿@model IEnumerable<AlisFirst.Models.Asset>
+@{
+    ViewBag.Title = "WarrantyExpireReport";
+}
+
+<h2>Warranty Expire Report</h2>
+
+<p>Showing assets that will come out of warranty in @ViewBag.months month(s)</p>
+<div style="display:inline-block">
+    @Html.ActionLink("1 Month", "WarrantyExpireReport", new { months = 1 })
+    <br />
+    @Html.ActionLink("2 Month", "WarrantyExpireReport", new { months = 2 })
+    <br />
+    @Html.ActionLink("3 Month", "WarrantyExpireReport", new { months = 3 })
+    <br />
+    @Html.ActionLink("6 Months", "WarrantyExpireReport", new { months = 6 })
+    <br />
+    @Html.ActionLink("9 Month", "WarrantyExpireReport", new { months = 9 })
+    <br />
+    @Html.ActionLink("1 Year", "WarrantyExpireReport", new { months = 12 })
+    <br />
+</div>
+<div style="display:inline-block">
+    <table>
+        <tr>
+            <th>BarCode
+            </th>
+            <th>Name
+            </th>
+            <th>SerialNum
+            </th>
+            <th>Supplier
+            </th>
+            <th>Category
+            </th>
+            <th>Asset Model
+            </th>
+            <th>Date Recieved
+            </th>
+            <th>Warranty Expires
+            </th>
+           
+            
+            <th></th>
+            
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BarCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SerialNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Supplier.SupplierName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssetModel.AssetModelName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateRecieved)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WarrantyExpires)
+                </td>
+                
+               
+                <td>@Html.ActionLink("Go To Asset", "Edit", "Asset", new { id=item.AssetID }, null)</td>
+            </tr>
+        }
+
+    </table>
+
+</div>
